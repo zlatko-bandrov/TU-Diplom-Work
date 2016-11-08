@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace LottoDemo.LottoGeneratorService
 {
-    public partial class Service1 : ServiceBase
+    public partial class LottoGenerator : ServiceBase
     {
-        public Service1()
+        public LottoGenerator()
         {
             InitializeComponent();
         }

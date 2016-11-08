@@ -1,6 +1,6 @@
 ﻿namespace LottoDemo.LottoGeneratorService
 {
-    partial class Service1
+    partial class LottoGenerator
     {
         /// <summary> 
         /// Required designer variable.

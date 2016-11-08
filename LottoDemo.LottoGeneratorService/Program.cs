@@ -17,7 +17,7 @@ namespace LottoDemo.LottoGeneratorService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
             { 
-                new Service1() 
+                new LottoGenerator() 
             };
             ServiceBase.Run(ServicesToRun);
         }
