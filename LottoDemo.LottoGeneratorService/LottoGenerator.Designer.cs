@@ -2,10 +2,11 @@
 {
     partial class LottoGenerator
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Diagnostics.EventLog eventLog;
+
+        private string EventLogName = "LottoDemoEventLog";
+        private string EventLogSourceName = "LottoDemoEventSource";
 
         /// <summary>
         /// Clean up any resources being used.
@@ -17,6 +18,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -28,8 +30,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ServiceName = "LottoDemoService";
+
             components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+
+            this.eventLog = new System.Diagnostics.EventLog();
+            if (!System.Diagnostics.EventLog.SourceExists(this.EventLogSourceName))
+            {
+                System.Diagnostics.EventLog.CreateEventSource(this.EventLogSourceName, this.EventLogName);
+            }
+            this.eventLog.Source = this.EventLogSourceName;
+            this.eventLog.Log = this.EventLogName;
         }
 
         #endregion

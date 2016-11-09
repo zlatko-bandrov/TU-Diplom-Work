@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LottoDemo.BusinessLogic.LotteryLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +20,15 @@ namespace LottoDemo.LottoGeneratorService
 
         protected override void OnStart(string[] args)
         {
+            this.eventLog.WriteEntry("LottoDemo Service OnStart");
+
+            NumbersGenerator generator = new NumbersGenerator();
+            generator.Next(1, 49);
         }
 
         protected override void OnStop()
         {
+            this.eventLog.WriteEntry("LottoDemo Service OnStop");
         }
     }
 }
