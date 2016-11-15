@@ -17,7 +17,7 @@ namespace LottoDemo.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.LottoTicket = new HashSet<LottoTicket>();
+            this.LottoTickets = new HashSet<LottoTicket>();
         }
     
         public int ID { get; set; }
@@ -26,9 +26,10 @@ namespace LottoDemo.DataAccess
         public string Password { get; set; }
         public int BalanceID { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         public virtual Balance Balance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoTicket> LottoTicket { get; set; }
+        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace LottoDemo.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Currency()
         {
-            this.Balance = new HashSet<Balance>();
+            this.Balances = new HashSet<Balance>();
         }
     
         public int ID { get; set; }
@@ -25,8 +25,9 @@ namespace LottoDemo.DataAccess
         public string Code { get; set; }
         public string Symbol { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Balance> Balance { get; set; }
+        public virtual ICollection<Balance> Balances { get; set; }
     }
 }

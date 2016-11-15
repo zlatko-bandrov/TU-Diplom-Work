@@ -51,69 +51,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balance.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Currency.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DrawingNumbers.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+    <Compile Include="DrawingNumber.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Jackpot.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LotteryGame.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="LottoDemoContext.Context.cs">
+    <Compile Include="LottoDemoDBContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LottoDemoContext.Context.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="LottoDemoContext.cs">
+    <Compile Include="LottoDemoDBContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="LottoDemoContext.Designer.cs">
+    <Compile Include="LottoDemoDBContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LottoDemoContext.edmx</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="LottoDrawing.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LottoTicket.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
-      <DependentUpon>LottoDemoContext.tt</DependentUpon>
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="LottoDemoContext.edmx">
+    <EntityDeploy Include="LottoDemoDBContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LottoDemoContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>LottoDemoDBContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="LottoDemoContext.Context.tt">
+    <None Include="LottoDemoDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LottoDemoContext.edmx</DependentUpon>
-      <LastGenOutput>LottoDemoContext.Context.cs</LastGenOutput>
+      <DependentUpon>LottoDemoDBContext.edmx</DependentUpon>
+      <LastGenOutput>LottoDemoDBContext.Context.cs</LastGenOutput>
     </None>
-    <None Include="LottoDemoContext.edmx.diagram">
-      <DependentUpon>LottoDemoContext.edmx</DependentUpon>
+    <None Include="LottoDemoDBContext.edmx.diagram">
+      <DependentUpon>LottoDemoDBContext.edmx</DependentUpon>
     </None>
-    <None Include="LottoDemoContext.tt">
+    <None Include="LottoDemoDBContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LottoDemoContext.edmx</DependentUpon>
-      <LastGenOutput>LottoDemoContext.cs</LastGenOutput>
+      <DependentUpon>LottoDemoDBContext.edmx</DependentUpon>
+      <LastGenOutput>LottoDemoDBContext.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

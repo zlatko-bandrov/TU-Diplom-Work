@@ -12,13 +12,13 @@ namespace LottoDemo.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class DrawingNumbers
+    public partial class DrawingNumber
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DrawingNumbers()
+        public DrawingNumber()
         {
-            this.LottoDrawing = new HashSet<LottoDrawing>();
-            this.LottoTicket = new HashSet<LottoTicket>();
+            this.LottoDrawings = new HashSet<LottoDrawing>();
+            this.LottoTickets = new HashSet<LottoTicket>();
         }
     
         public int ID { get; set; }
@@ -30,10 +30,11 @@ namespace LottoDemo.DataAccess
         public Nullable<byte> Six { get; set; }
         public Nullable<byte> Seven { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoDrawing> LottoDrawing { get; set; }
+        public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoTicket> LottoTicket { get; set; }
+        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
     }
 }

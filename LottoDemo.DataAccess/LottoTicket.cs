@@ -20,8 +20,9 @@ namespace LottoDemo.DataAccess
         public int DrawingNumbersID { get; set; }
         public System.DateTime InputTime { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
-        public virtual DrawingNumbers DrawingNumbers { get; set; }
+        public virtual DrawingNumber DrawingNumber { get; set; }
         public virtual LotteryGame LotteryGame { get; set; }
         public virtual User User { get; set; }
     }

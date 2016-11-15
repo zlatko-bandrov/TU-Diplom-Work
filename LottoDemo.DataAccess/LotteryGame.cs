@@ -17,19 +17,20 @@ namespace LottoDemo.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LotteryGame()
         {
-            this.LottoDrawing = new HashSet<LottoDrawing>();
-            this.LottoTicket = new HashSet<LottoTicket>();
+            this.LottoDrawings = new HashSet<LottoDrawing>();
+            this.LottoTickets = new HashSet<LottoTicket>();
         }
     
         public int ID { get; set; }
         public int CountryID { get; set; }
         public string Name { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoDrawing> LottoDrawing { get; set; }
+        public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoTicket> LottoTicket { get; set; }
+        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
     }
 }

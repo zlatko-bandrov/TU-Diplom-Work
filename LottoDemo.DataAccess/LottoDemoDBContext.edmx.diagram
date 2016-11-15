@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a0058a039eb4a449f6e28025e77770c" Name="Diagram1">
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Balance" Width="1.5" PointX="1.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Country" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Currency" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.DrawingNumber" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Jackpot" Width="1.5" PointX="3.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGame" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawing" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicket" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.User" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Balance_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Jackpot_Balance" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_User_Balance" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LotteryGame_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoDrawing_DrawingNumbers" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_DrawingNumbers" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" ManuallyRouted="false" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

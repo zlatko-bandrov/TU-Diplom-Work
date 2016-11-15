@@ -17,19 +17,20 @@ namespace LottoDemo.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Balance()
         {
-            this.Jackpot = new HashSet<Jackpot>();
-            this.User = new HashSet<User>();
+            this.Jackpots = new HashSet<Jackpot>();
+            this.Users = new HashSet<User>();
         }
     
         public int ID { get; set; }
         public int CurrencyID { get; set; }
         public decimal Value { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Jackpot> Jackpot { get; set; }
+        public virtual ICollection<Jackpot> Jackpots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace LottoDemo.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LotteryDemoDBEntities : DbContext
+    public partial class LotteryDemoDBEntities1 : DbContext
     {
-        public LotteryDemoDBEntities()
-            : base("name=LotteryDemoDBEntities")
+        public LotteryDemoDBEntities1()
+            : base("name=LotteryDemoDBEntities1")
         {
         }
     
@@ -25,14 +25,14 @@ namespace LottoDemo.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Balance> Balance { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Currency> Currency { get; set; }
-        public virtual DbSet<DrawingNumbers> DrawingNumbers { get; set; }
-        public virtual DbSet<Jackpot> Jackpot { get; set; }
-        public virtual DbSet<LotteryGame> LotteryGame { get; set; }
-        public virtual DbSet<LottoDrawing> LottoDrawing { get; set; }
-        public virtual DbSet<LottoTicket> LottoTicket { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Balance> Balances { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<DrawingNumber> DrawingNumbers { get; set; }
+        public virtual DbSet<Jackpot> Jackpots { get; set; }
+        public virtual DbSet<LotteryGame> LotteryGames { get; set; }
+        public virtual DbSet<LottoDrawing> LottoDrawings { get; set; }
+        public virtual DbSet<LottoTicket> LottoTickets { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

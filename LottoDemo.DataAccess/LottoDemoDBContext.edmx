@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LotteryDemoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LotteryDemoEFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Balance">
           <Key>
             <PropertyRef Name="ID" />
@@ -13,6 +13,7 @@
           <Property Name="CurrencyID" Type="int" Nullable="false" />
           <Property Name="Value" Type="money" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -22,6 +23,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Code" Type="nchar" MaxLength="3" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -32,6 +34,7 @@
           <Property Name="Code" Type="nchar" MaxLength="3" Nullable="false" />
           <Property Name="Symbol" Type="nchar" MaxLength="1" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DrawingNumbers">
           <Key>
@@ -46,6 +49,7 @@
           <Property Name="Six" Type="tinyint" />
           <Property Name="Seven" Type="tinyint" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Jackpot">
           <Key>
@@ -54,6 +58,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BalanceID" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LotteryGame">
           <Key>
@@ -63,6 +68,7 @@
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoDrawing">
           <Key>
@@ -73,6 +79,7 @@
           <Property Name="DrawingNumbersID" Type="int" Nullable="false" />
           <Property Name="DrawTime" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoTicket">
           <Key>
@@ -84,6 +91,7 @@
           <Property Name="DrawingNumbersID" Type="int" Nullable="false" />
           <Property Name="InputTime" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -95,6 +103,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BalanceID" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Balance_Currency">
           <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
@@ -204,7 +213,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LotteryDemoDBModelStoreContainer">
+        <EntityContainer Name="LotteryDemoEFModelStoreContainer">
           <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
@@ -255,7 +264,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LotteryDemoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LotteryDemoEFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Balance">
           <Key>
             <PropertyRef Name="ID" />
@@ -264,9 +273,10 @@
           <Property Name="CurrencyID" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_Balance_Currency" FromRole="Balance" ToRole="Currency" />
-          <NavigationProperty Name="Jackpot" Relationship="Self.FK_Jackpot_Balance" FromRole="Balance" ToRole="Jackpot" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Balance" FromRole="Balance" ToRole="User" />
+          <NavigationProperty Name="Jackpots" Relationship="Self.FK_Jackpot_Balance" FromRole="Balance" ToRole="Jackpot" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Balance" FromRole="Balance" ToRole="User" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -276,7 +286,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="LotteryGame" Relationship="Self.FK_LotteryGame_Country" FromRole="Country" ToRole="LotteryGame" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LotteryGames" Relationship="Self.FK_LotteryGame_Country" FromRole="Country" ToRole="LotteryGame" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -287,9 +298,10 @@
           <Property Name="Code" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Symbol" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Balance" Relationship="Self.FK_Balance_Currency" FromRole="Currency" ToRole="Balance" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Balances" Relationship="Self.FK_Balance_Currency" FromRole="Currency" ToRole="Balance" />
         </EntityType>
-        <EntityType Name="DrawingNumbers">
+        <EntityType Name="DrawingNumber">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -302,8 +314,9 @@
           <Property Name="Six" Type="Byte" />
           <Property Name="Seven" Type="Byte" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="LottoDrawing" Relationship="Self.FK_LottoDrawing_DrawingNumbers" FromRole="DrawingNumbers" ToRole="LottoDrawing" />
-          <NavigationProperty Name="LottoTicket" Relationship="Self.FK_LottoTicket_DrawingNumbers" FromRole="DrawingNumbers" ToRole="LottoTicket" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LottoDrawings" Relationship="Self.FK_LottoDrawing_DrawingNumbers" FromRole="DrawingNumbers" ToRole="LottoDrawing" />
+          <NavigationProperty Name="LottoTickets" Relationship="Self.FK_LottoTicket_DrawingNumbers" FromRole="DrawingNumbers" ToRole="LottoTicket" />
         </EntityType>
         <EntityType Name="Jackpot">
           <Key>
@@ -312,6 +325,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BalanceID" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Balance" Relationship="Self.FK_Jackpot_Balance" FromRole="Jackpot" ToRole="Balance" />
         </EntityType>
         <EntityType Name="LotteryGame">
@@ -322,9 +336,10 @@
           <Property Name="CountryID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Country" Relationship="Self.FK_LotteryGame_Country" FromRole="LotteryGame" ToRole="Country" />
-          <NavigationProperty Name="LottoDrawing" Relationship="Self.FK_LottoDrawing_LotteryGame" FromRole="LotteryGame" ToRole="LottoDrawing" />
-          <NavigationProperty Name="LottoTicket" Relationship="Self.FK_LottoTicket_LotteryGame" FromRole="LotteryGame" ToRole="LottoTicket" />
+          <NavigationProperty Name="LottoDrawings" Relationship="Self.FK_LottoDrawing_LotteryGame" FromRole="LotteryGame" ToRole="LottoDrawing" />
+          <NavigationProperty Name="LottoTickets" Relationship="Self.FK_LottoTicket_LotteryGame" FromRole="LotteryGame" ToRole="LottoTicket" />
         </EntityType>
         <EntityType Name="LottoDrawing">
           <Key>
@@ -335,7 +350,8 @@
           <Property Name="DrawingNumbersID" Type="Int32" Nullable="false" />
           <Property Name="DrawTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DrawingNumbers" Relationship="Self.FK_LottoDrawing_DrawingNumbers" FromRole="LottoDrawing" ToRole="DrawingNumbers" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DrawingNumber" Relationship="Self.FK_LottoDrawing_DrawingNumbers" FromRole="LottoDrawing" ToRole="DrawingNumbers" />
           <NavigationProperty Name="LotteryGame" Relationship="Self.FK_LottoDrawing_LotteryGame" FromRole="LottoDrawing" ToRole="LotteryGame" />
         </EntityType>
         <EntityType Name="LottoTicket">
@@ -348,7 +364,8 @@
           <Property Name="DrawingNumbersID" Type="Int32" Nullable="false" />
           <Property Name="InputTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DrawingNumbers" Relationship="Self.FK_LottoTicket_DrawingNumbers" FromRole="LottoTicket" ToRole="DrawingNumbers" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DrawingNumber" Relationship="Self.FK_LottoTicket_DrawingNumbers" FromRole="LottoTicket" ToRole="DrawingNumbers" />
           <NavigationProperty Name="LotteryGame" Relationship="Self.FK_LottoTicket_LotteryGame" FromRole="LottoTicket" ToRole="LotteryGame" />
           <NavigationProperty Name="User" Relationship="Self.FK_LottoTicket_User" FromRole="LottoTicket" ToRole="User" />
         </EntityType>
@@ -362,8 +379,9 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BalanceID" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Balance" Relationship="Self.FK_User_Balance" FromRole="User" ToRole="Balance" />
-          <NavigationProperty Name="LottoTicket" Relationship="Self.FK_LottoTicket_User" FromRole="User" ToRole="LottoTicket" />
+          <NavigationProperty Name="LottoTickets" Relationship="Self.FK_LottoTicket_User" FromRole="User" ToRole="LottoTicket" />
         </EntityType>
         <Association Name="FK_Balance_Currency">
           <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
@@ -414,7 +432,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LottoDrawing_DrawingNumbers">
-          <End Role="DrawingNumbers" Type="Self.DrawingNumbers" Multiplicity="1" />
+          <End Role="DrawingNumbers" Type="Self.DrawingNumber" Multiplicity="1" />
           <End Role="LottoDrawing" Type="Self.LottoDrawing" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DrawingNumbers">
@@ -426,7 +444,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LottoTicket_DrawingNumbers">
-          <End Role="DrawingNumbers" Type="Self.DrawingNumbers" Multiplicity="1" />
+          <End Role="DrawingNumbers" Type="Self.DrawingNumber" Multiplicity="1" />
           <End Role="LottoTicket" Type="Self.LottoTicket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DrawingNumbers">
@@ -473,51 +491,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LotteryDemoDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Balance" EntityType="Self.Balance" />
-          <EntitySet Name="Country" EntityType="Self.Country" />
-          <EntitySet Name="Currency" EntityType="Self.Currency" />
-          <EntitySet Name="DrawingNumbers" EntityType="Self.DrawingNumbers" />
-          <EntitySet Name="Jackpot" EntityType="Self.Jackpot" />
-          <EntitySet Name="LotteryGame" EntityType="Self.LotteryGame" />
-          <EntitySet Name="LottoDrawing" EntityType="Self.LottoDrawing" />
-          <EntitySet Name="LottoTicket" EntityType="Self.LottoTicket" />
-          <EntitySet Name="User" EntityType="Self.User" />
+        <EntityContainer Name="LotteryDemoDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Balances" EntityType="Self.Balance" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="DrawingNumbers" EntityType="Self.DrawingNumber" />
+          <EntitySet Name="Jackpots" EntityType="Self.Jackpot" />
+          <EntitySet Name="LotteryGames" EntityType="Self.LotteryGame" />
+          <EntitySet Name="LottoDrawings" EntityType="Self.LottoDrawing" />
+          <EntitySet Name="LottoTickets" EntityType="Self.LottoTicket" />
+          <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Balance_Currency" Association="Self.FK_Balance_Currency">
-            <End Role="Currency" EntitySet="Currency" />
-            <End Role="Balance" EntitySet="Balance" />
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Balance" EntitySet="Balances" />
           </AssociationSet>
           <AssociationSet Name="FK_Jackpot_Balance" Association="Self.FK_Jackpot_Balance">
-            <End Role="Balance" EntitySet="Balance" />
-            <End Role="Jackpot" EntitySet="Jackpot" />
+            <End Role="Balance" EntitySet="Balances" />
+            <End Role="Jackpot" EntitySet="Jackpots" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Balance" Association="Self.FK_User_Balance">
-            <End Role="Balance" EntitySet="Balance" />
-            <End Role="User" EntitySet="User" />
+            <End Role="Balance" EntitySet="Balances" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_LotteryGame_Country" Association="Self.FK_LotteryGame_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="LotteryGame" EntitySet="LotteryGame" />
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="LotteryGame" EntitySet="LotteryGames" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoDrawing_DrawingNumbers" Association="Self.FK_LottoDrawing_DrawingNumbers">
             <End Role="DrawingNumbers" EntitySet="DrawingNumbers" />
-            <End Role="LottoDrawing" EntitySet="LottoDrawing" />
+            <End Role="LottoDrawing" EntitySet="LottoDrawings" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoTicket_DrawingNumbers" Association="Self.FK_LottoTicket_DrawingNumbers">
             <End Role="DrawingNumbers" EntitySet="DrawingNumbers" />
-            <End Role="LottoTicket" EntitySet="LottoTicket" />
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoDrawing_LotteryGame" Association="Self.FK_LottoDrawing_LotteryGame">
-            <End Role="LotteryGame" EntitySet="LotteryGame" />
-            <End Role="LottoDrawing" EntitySet="LottoDrawing" />
+            <End Role="LotteryGame" EntitySet="LotteryGames" />
+            <End Role="LottoDrawing" EntitySet="LottoDrawings" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoTicket_LotteryGame" Association="Self.FK_LottoTicket_LotteryGame">
-            <End Role="LotteryGame" EntitySet="LotteryGame" />
-            <End Role="LottoTicket" EntitySet="LottoTicket" />
+            <End Role="LotteryGame" EntitySet="LotteryGames" />
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoTicket_User" Association="Self.FK_LottoTicket_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LottoTicket" EntitySet="LottoTicket" />
+            <End Role="User" EntitySet="Users" />
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -525,40 +543,43 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LotteryDemoDBModelStoreContainer" CdmEntityContainer="LotteryDemoDBEntities">
-          <EntitySetMapping Name="Balance">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.Balance">
+        <EntityContainerMapping StorageEntityContainer="LotteryDemoEFModelStoreContainer" CdmEntityContainer="LotteryDemoDBEntities1">
+          <EntitySetMapping Name="Balances">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.Balance">
               <MappingFragment StoreEntitySet="Balance">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Country">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.Country">
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Currency">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.Currency">
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.Currency">
               <MappingFragment StoreEntitySet="Currency">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Symbol" ColumnName="Symbol" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrawingNumbers">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.DrawingNumbers">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.DrawingNumber">
               <MappingFragment StoreEntitySet="DrawingNumbers">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="One" ColumnName="One" />
@@ -569,41 +590,45 @@
                 <ScalarProperty Name="Six" ColumnName="Six" />
                 <ScalarProperty Name="Seven" ColumnName="Seven" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Jackpot">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.Jackpot">
+          <EntitySetMapping Name="Jackpots">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.Jackpot">
               <MappingFragment StoreEntitySet="Jackpot">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BalanceID" ColumnName="BalanceID" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LotteryGame">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.LotteryGame">
+          <EntitySetMapping Name="LotteryGames">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.LotteryGame">
               <MappingFragment StoreEntitySet="LotteryGame">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LottoDrawing">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.LottoDrawing">
+          <EntitySetMapping Name="LottoDrawings">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoDrawing">
               <MappingFragment StoreEntitySet="LottoDrawing">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LotteryGameID" ColumnName="LotteryGameID" />
                 <ScalarProperty Name="DrawingNumbersID" ColumnName="DrawingNumbersID" />
                 <ScalarProperty Name="DrawTime" ColumnName="DrawTime" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LottoTicket">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.LottoTicket">
+          <EntitySetMapping Name="LottoTickets">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoTicket">
               <MappingFragment StoreEntitySet="LottoTicket">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -611,11 +636,12 @@
                 <ScalarProperty Name="DrawingNumbersID" ColumnName="DrawingNumbersID" />
                 <ScalarProperty Name="InputTime" ColumnName="InputTime" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="LotteryDemoDBModel.User">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -623,6 +649,7 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="BalanceID" ColumnName="BalanceID" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -640,7 +667,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
