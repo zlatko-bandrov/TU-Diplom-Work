@@ -90,6 +90,8 @@
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Generic\GenericDataRepository.cs" />
+    <Compile Include="Repositories\Generic\IGenericDataRepository.cs" />
     <Compile Include="User.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>

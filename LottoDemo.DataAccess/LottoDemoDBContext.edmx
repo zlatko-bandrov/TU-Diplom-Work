@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LotteryDemoEFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LotteryDemoEFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Balance">
           <Key>
             <PropertyRef Name="ID" />
@@ -213,6 +213,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CreateNewLottoDrawing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LotteryGame" Type="int" Mode="In" />
+          <Parameter Name="DrawTime" Type="datetime" Mode="In" />
+          <Parameter Name="NumberOne" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberTwo" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberThree" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberFour" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberFive" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberSix" Type="tinyint" Mode="In" />
+          <Parameter Name="NumberSeven" Type="tinyint" Mode="In" />
+        </Function>
         <EntityContainer Name="LotteryDemoEFModelStoreContainer">
           <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
@@ -260,8 +271,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LotteryDemoEFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -491,7 +501,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LotteryDemoDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LotteryDemoDBEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Balances" EntityType="Self.Balance" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Currencies" EntityType="Self.Currency" />
@@ -537,13 +547,24 @@
             <End Role="User" EntitySet="Users" />
             <End Role="LottoTicket" EntitySet="LottoTickets" />
           </AssociationSet>
+          <FunctionImport Name="CreateNewLottoDrawing">
+            <Parameter Name="LotteryGame" Mode="In" Type="Int32" />
+            <Parameter Name="DrawTime" Mode="In" Type="DateTime" />
+            <Parameter Name="NumberOne" Mode="In" Type="Byte" />
+            <Parameter Name="NumberTwo" Mode="In" Type="Byte" />
+            <Parameter Name="NumberThree" Mode="In" Type="Byte" />
+            <Parameter Name="NumberFour" Mode="In" Type="Byte" />
+            <Parameter Name="NumberFive" Mode="In" Type="Byte" />
+            <Parameter Name="NumberSix" Mode="In" Type="Byte" />
+            <Parameter Name="NumberSeven" Mode="In" Type="Byte" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LotteryDemoEFModelStoreContainer" CdmEntityContainer="LotteryDemoDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="LotteryDemoEFModelStoreContainer" CdmEntityContainer="LotteryDemoDBEntities">
           <EntitySetMapping Name="Balances">
             <EntityTypeMapping TypeName="LotteryDemoEFModel.Balance">
               <MappingFragment StoreEntitySet="Balance">
@@ -653,6 +674,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateNewLottoDrawing" FunctionName="LotteryDemoEFModel.Store.CreateNewLottoDrawing" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
