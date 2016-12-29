@@ -7,30 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LottoDemo.DataAccess
+namespace LottoDemo.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class LotteryGame
+    public partial class Balance
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LotteryGame()
+        public Balance()
         {
-            this.LottoDrawings = new HashSet<LottoDrawing>();
-            this.LottoTickets = new HashSet<LottoTicket>();
+            this.Jackpots = new HashSet<Jackpot>();
+            this.Users = new HashSet<User>();
         }
     
         public int ID { get; set; }
-        public int CountryID { get; set; }
-        public string Name { get; set; }
+        public int CurrencyID { get; set; }
+        public decimal Value { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
     
-        public virtual Country Country { get; set; }
+        public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
+        public virtual ICollection<Jackpot> Jackpots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

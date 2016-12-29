@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LottoDemo.DataAccess.Repositories.Generic
 {
-    public interface IGenericDataRepository<T> where T : class
+    public interface IGenericDataRepository<T> : IDisposable where T : class
     {
         IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties);
         IList<T> GetList(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);

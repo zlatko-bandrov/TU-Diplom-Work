@@ -7,30 +7,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LottoDemo.DataAccess
+namespace LottoDemo.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Balance
+    public partial class DrawingNumber
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Balance()
+        public DrawingNumber()
         {
-            this.Jackpots = new HashSet<Jackpot>();
-            this.Users = new HashSet<User>();
+            this.LottoDrawings = new HashSet<LottoDrawing>();
+            this.LottoTickets = new HashSet<LottoTicket>();
         }
     
         public int ID { get; set; }
-        public int CurrencyID { get; set; }
-        public decimal Value { get; set; }
+        public byte One { get; set; }
+        public byte Two { get; set; }
+        public byte Three { get; set; }
+        public Nullable<byte> Four { get; set; }
+        public Nullable<byte> Five { get; set; }
+        public Nullable<byte> Six { get; set; }
+        public Nullable<byte> Seven { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
     
-        public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Jackpot> Jackpots { get; set; }
+        public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
     }
 }

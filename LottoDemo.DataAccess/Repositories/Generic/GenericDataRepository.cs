@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using LottoDemo.Data;
 
 namespace LottoDemo.DataAccess.Repositories.Generic
 {
-    public class GenericDataRepository<T> : IGenericDataRepository<T> where T : class
+    public class GenericDataRepository<T> : IGenericDataRepository<T>, IDisposable where T : class
     {
+        private LotteryDemoDBEntities _context;
+
+        private bool _disposed = false;
+
+        public GenericDataRepository()
+            : this(new LotteryDemoDBEntities())
+        {
+        }
+
+        public GenericDataRepository(LotteryDemoDBEntities context)
+        {
+            this._context = context;
+        }
+
         public virtual IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
@@ -91,6 +106,26 @@ namespace LottoDemo.DataAccess.Repositories.Generic
         public void Add(params T[] items)
         {
             dbSet.Add(entity);
+        }
+
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    this._context.Dispose();
+                }
+            }
+
+            this._disposed = true;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
