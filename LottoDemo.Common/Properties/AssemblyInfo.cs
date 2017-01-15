@@ -5,14 +5,17 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LottoDemo.DataAccess")]
+[assembly: AssemblyTitle("LottoDemo.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LottoDemo.DataAccess")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("LottoDemo.Common")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+// Let log4net know that it can look for configuration in the default application config file
+[assembly: log4net.Config.XmlConfigurator(Watch = true)] 
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -20,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a3997f6d-d2cc-42a8-9998-a2a6fd646da3")]
+[assembly: Guid("182b6e89-6d93-42f0-83f2-f3b74baf2bd8")]
 
 // Version information for an assembly consists of the following four values:
 //

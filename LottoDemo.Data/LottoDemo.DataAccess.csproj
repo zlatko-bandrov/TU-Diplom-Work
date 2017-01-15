@@ -7,8 +7,8 @@
     <ProjectGuid>{88575736-0028-4191-A7E2-3B82BDCFCA0F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LottoDemo.Data</RootNamespace>
-    <AssemblyName>LottoDemo.Data</AssemblyName>
+    <RootNamespace>LottoDemo.DataAccess</RootNamespace>
+    <AssemblyName>LottoDemo.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
