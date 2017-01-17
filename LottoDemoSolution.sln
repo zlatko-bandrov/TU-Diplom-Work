@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Repositories", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Common", "LottoDemo.Common\LottoDemo.Common.csproj", "{0980D765-7748-4C1B-B361-C5998479D4BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Entities", "LottoDemo.Entities\LottoDemo.Entities.csproj", "{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,16 @@ Global
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Release|x64.ActiveCfg = Release|Any CPU
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

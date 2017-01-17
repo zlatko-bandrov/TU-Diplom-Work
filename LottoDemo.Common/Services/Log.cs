@@ -40,9 +40,14 @@ namespace LottoDemo.Common.Services
             GetLogger(loggerType).Debug(message, error);
         }
 
-        private static ILog GetLogger(Type loggerType)
+        internal static ILog GetLogger(Type loggerType)
         {
             return LogManager.GetLogger(loggerType);
+        }
+
+        internal static ILog GetLogger(string loggerName)
+        {
+            return LogManager.GetLogger(loggerName);
         }
     }
 }

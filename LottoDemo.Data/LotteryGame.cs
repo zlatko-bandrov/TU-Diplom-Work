@@ -19,6 +19,7 @@ namespace LottoDemo.DataAccess
         {
             this.LottoDrawings = new HashSet<LottoDrawing>();
             this.LottoTickets = new HashSet<LottoTicket>();
+            this.LotteryGameSettings = new HashSet<LotteryGameSetting>();
         }
     
         public int ID { get; set; }
@@ -26,11 +27,14 @@ namespace LottoDemo.DataAccess
         public string Name { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
+        public string Headline { get; set; }
     
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoTicket> LottoTickets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LotteryGameSetting> LotteryGameSettings { get; set; }
     }
 }

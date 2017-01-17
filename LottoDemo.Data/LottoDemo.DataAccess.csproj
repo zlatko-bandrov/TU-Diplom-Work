@@ -68,6 +68,9 @@
     <Compile Include="LotteryGame.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="LotteryGameSetting.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="LottoDemoDBContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -12,17 +12,15 @@ namespace LottoDemo.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class LottoDrawing
+    public partial class LotteryGameSetting
     {
         public int ID { get; set; }
         public int LotteryGameID { get; set; }
-        public int DrawingNumbersID { get; set; }
-        public System.DateTime DrawTime { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
-        public System.DateTime CreationDate { get; set; }
-        public bool IsCalculated { get; set; }
+        public int MinimalBallNumber { get; set; }
+        public int MaximalBallNumber { get; set; }
+        public double DrawingTimeInterval { get; set; }
+        public int DrawingBallsCount { get; set; }
     
-        public virtual DrawingNumber DrawingNumber { get; set; }
         public virtual LotteryGame LotteryGame { get; set; }
     }
 }

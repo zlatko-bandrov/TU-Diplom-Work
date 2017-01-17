@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B00C3B98-B344-4BBB-BB94-B021FEEABD2D}</ProjectGuid>
+    <ProjectGuid>{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LottoDemo.BusinessLogic</RootNamespace>
-    <AssemblyName>LottoDemo.BusinessLogic</AssemblyName>
+    <RootNamespace>LottoDemo.Entities</RootNamespace>
+    <AssemblyName>LottoDemo.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,31 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Extensions\DrawingNumberExtensions.cs" />
-    <Compile Include="LotteryLogic\NumbersGenerator.cs" />
+    <Compile Include="Helpers\DataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\GameDrawingService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LotteryGames\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LottoDemo.Common\LottoDemo.Common.csproj">
-      <Project>{0980d765-7748-4c1b-b361-c5998479d4ba}</Project>
-      <Name>LottoDemo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LottoDemo.DataAccess\LottoDemo.Repositories.csproj">
-      <Project>{a925baf8-1822-40a2-86e3-f0144719bd0c}</Project>
-      <Name>LottoDemo.Repositories</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LottoDemo.Data\LottoDemo.DataAccess.csproj">
       <Project>{88575736-0028-4191-a7e2-3b82bdcfca0f}</Project>
       <Name>LottoDemo.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LottoDemo.Entities\LottoDemo.Entities.csproj">
-      <Project>{0420d004-6f81-45a8-9bbd-5b04ebd3faac}</Project>
-      <Name>LottoDemo.Entities</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

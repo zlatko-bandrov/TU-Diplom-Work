@@ -50,15 +50,17 @@
   <ItemGroup>
     <Compile Include="UnitsOfWork\Base\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\DrawingNumbersRepository.cs" />
     <Compile Include="Repositories\Generic\GenericRepository.cs" />
     <Compile Include="Repositories\Generic\IGenericRepository.cs" />
     <Compile Include="Repositories\LotteryGameRepository.cs" />
-    <Compile Include="Repositories\LottoDrawingRepository.cs" />
     <Compile Include="UnitsOfWork\Base\BaseUnitOfWork.cs" />
     <Compile Include="UnitsOfWork\GameDrawingUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LottoDemo.Common\LottoDemo.Common.csproj">
+      <Project>{0980d765-7748-4c1b-b361-c5998479d4ba}</Project>
+      <Name>LottoDemo.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LottoDemo.Data\LottoDemo.DataAccess.csproj">
       <Project>{88575736-0028-4191-a7e2-3b82bdcfca0f}</Project>
       <Name>LottoDemo.DataAccess</Name>

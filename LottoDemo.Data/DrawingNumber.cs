@@ -22,15 +22,15 @@ namespace LottoDemo.DataAccess
         }
     
         public int ID { get; set; }
-        public byte One { get; set; }
-        public byte Two { get; set; }
-        public byte Three { get; set; }
-        public Nullable<byte> Four { get; set; }
-        public Nullable<byte> Five { get; set; }
-        public Nullable<byte> Six { get; set; }
-        public Nullable<byte> Seven { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
+        public byte First { get; set; }
+        public byte Second { get; set; }
+        public byte Third { get; set; }
+        public byte Fourth { get; set; }
+        public Nullable<byte> Fifth { get; set; }
+        public Nullable<byte> Sixth { get; set; }
+        public Nullable<byte> Seventh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }

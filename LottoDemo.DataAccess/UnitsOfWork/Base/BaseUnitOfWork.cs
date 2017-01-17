@@ -1,7 +1,9 @@
-﻿using LottoDemo.DataAccess;
+﻿using LottoDemo.Common.Services;
+using LottoDemo.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +15,15 @@ namespace LottoDemo.Repositories.UnitsOfWork.Base
 
         public void CommitChanges()
         {
-            this.Context.SaveChanges();
+            try
+            {
+                this.Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                this.Dispose(true);
+                Log.Error(MethodBase.GetCurrentMethod().DeclaringType, ex.Message, ex);
+            }
         }
 
         public void Rollback()
