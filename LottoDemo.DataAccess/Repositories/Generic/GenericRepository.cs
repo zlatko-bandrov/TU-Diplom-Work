@@ -18,19 +18,19 @@ namespace LottoDemo.Repositories.Generic
             this.Table = context.Set<T>();
         }
 
-        public virtual IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+        public virtual IQueryable<T> GetAsQuery(Expression<Func<T, bool>> predicate)
         {
             return this.Table.AsNoTracking().Where(predicate);
         }
 
-        public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> GetAsList(Expression<Func<T, bool>> predicate)
         {
-            return this.GetAll(predicate).ToList();
+            return this.GetAsQuery(predicate).ToList();
         }
 
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
-            return this.GetAll(predicate).FirstOrDefault<T>();
+            return this.GetAsQuery(predicate).FirstOrDefault<T>();
         }
 
         public virtual void Update(T item)

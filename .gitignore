@@ -251,3 +251,10 @@ paket-files/
 .idea/
 *.sln.iml
 packages
+Umbraco
+Umbraco_Client
+Logs
+TEMP
+NuGetBackup
+packages
+preview

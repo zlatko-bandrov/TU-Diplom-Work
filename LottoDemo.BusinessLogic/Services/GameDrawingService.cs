@@ -45,23 +45,29 @@ namespace LottoDemo.BusinessLogic.Services
 
             var drawNumbersTask = Task.Run(() =>
             {
+                // Generate lottery game drawing numbers
                 List<byte> numbers = this.RunLottoDrawing();
-                return numbers;
-            });
-            var calculateWinningsTask = drawNumbersTask.ContinueWith((antecedent) =>
-            {
-                string infoMessage = string.Format("Drawing at {0}: {1}", lottoDrawTime.ToString("HH:mm:ss"), string.Join(", ", antecedent.Result));
+                string infoMessage = string.Format("Drawing at {0}: {1}", lottoDrawTime.ToString("HH:mm:ss"), string.Join(", ", numbers));
+
+                // Write some messages in the log files and in the Console
                 Log.Info(MethodBase.GetCurrentMethod().DeclaringType, infoMessage);
                 Console.WriteLine(infoMessage);
-                this.CreateAndSaveTheDrawing(lottoDrawTime, antecedent.Result);
+
+                // Create and save the lottery drawing in the database
+                LottoDrawing lotteryDrawing = this.CreateAndSaveDrawing(lottoDrawTime, numbers);
+
+                return lotteryDrawing;
+            });
+            drawNumbersTask.ContinueWith((antecedent) =>
+            {
+                LottoDrawing drawing = antecedent.Result;
+                this.CalculateGameWinnings(drawing);
             },
             TaskContinuationOptions.OnlyOnRanToCompletion);
 
             try
             {
                 drawNumbersTask.Wait();
-                calculateWinningsTask.Wait();
-
                 if (this.iterationIndex == this.maxIterationsCount)
                 {
                     // Reset the counter and signal the waiting thread.
@@ -75,24 +81,6 @@ namespace LottoDemo.BusinessLogic.Services
                 this.iterationIndex = 0;
                 autoEvent.Set();
             }
-        }
-
-        private void CreateAndSaveTheDrawing(DateTime drawingDate, List<byte> numbers)
-        {
-            var drawingNumbers = DataHelper.CreateNewDrawingNumber(numbers);
-
-            var newDrawing = new LottoDrawing()
-            {
-                LotteryGameID = this.GameSettings.LotteryGameID,
-                DrawingNumber = drawingNumbers,
-                IsCalculated = false,
-                DrawTime = drawingDate,
-                CreationDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
-            };
-
-            this.UnitOfWork.LottoDrawingRepository.Add(newDrawing);
-            this.UnitOfWork.CommitChanges();
         }
 
         private List<byte> RunLottoDrawing()
@@ -111,6 +99,31 @@ namespace LottoDemo.BusinessLogic.Services
             while (draw.Count < this.GameSettings.DrawingBallsCount);
 
             return draw;
+        }
+
+        private LottoDrawing CreateAndSaveDrawing(DateTime drawingDate, List<byte> numbers)
+        {
+            var drawingNumbers = DataHelper.CreateNewDrawingNumber(numbers);
+
+            var newDrawing = new LottoDrawing()
+            {
+                LotteryGameID = this.GameSettings.LotteryGameID,
+                DrawingNumber = drawingNumbers,
+                IsCalculated = false,
+                DrawTime = drawingDate,
+                CreationDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            this.UnitOfWork.LottoDrawingRepository.Add(newDrawing);
+            this.UnitOfWork.CommitChanges();
+
+            return newDrawing;
+        }
+
+        private void CalculateGameWinnings(LottoDrawing drawing)
+        {
+            // TODO:
         }
     }
 }
