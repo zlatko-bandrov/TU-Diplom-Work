@@ -461,6 +461,14 @@
     <Content Include="Views\Partials\HomePageBanner.cshtml" />
     <Content Include="Views\Partials\LottoGamesList.cshtml" />
     <Content Include="Views\Partials\LatestNewsList.cshtml" />
+    <Content Include="Views\ContactUsPage.cshtml" />
+    <Content Include="Views\FAQPage.cshtml" />
+    <Content Include="Views\HowToPlay.cshtml" />
+    <Content Include="Views\NewsItem.cshtml" />
+    <Content Include="Views\NewsList.cshtml" />
+    <Content Include="Views\PlayNowPage.cshtml" />
+    <Content Include="Views\ResultsAndWinningsPage.cshtml" />
+    <Content Include="Views\WithRightSidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

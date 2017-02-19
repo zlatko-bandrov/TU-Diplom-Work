@@ -1,6 +1,8 @@
-﻿
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
 <div class="container">
     <div id="topRow">
+
         <div class="container LogoWrapper hidden-xs">
             <div class="col-lg-6 col-sm-6">
                 <div class="gohome">
@@ -10,16 +12,24 @@
             </div>
             <div class="col-lg-6 col-sm-6" style="height: 60px;"><div>&nbsp;</div></div>
         </div>
-        <div class="container navbar-main hidden-smart  ">
+
+        @{ var home = CurrentPage.AncestorOrSelf(1); }
+        <div class="container navbar-main hidden-smart">
             <div id="mainNav">
                 <ul class="nav navbar-nav">
-                    <li><a class="active" href="/"><span data-icon="e" class="icon"></span></a></li>
-                    <li class="playnow"><a href="https://www.playusalotteries.com/en/play-the-lottery.html">Play now!</a></li>
-                    <li><a href="https://www.playusalotteries.com/en/how-to-play-the-lottery.html">How to play</a></li>
-                    <li><a href="https://www.playusalotteries.com/en/lotto-results-and-winning-numbers.html">Results &amp; winnings</a></li>
-                    <li><a href="https://www.playusalotteries.com/en/lottery-news.html">News</a></li>
-                    <li><a href="https://www.playusalotteries.com/en/faq.html">FAQ</a></li>
-                    <li><a rel="nofollow" class="" href="https://www.playusalotteries.com/en/contact.html">Contact us</a></li>
+                    <li><a class="@(CurrentPage.IsAncestorOrSelf(home) ? "active" : null)" href="/"><span data-icon="e" class="icon"></span></a></li>
+                    @{
+                        string cssClass = null;
+                        foreach (var page in home.Children.Where("showInMainNavigation"))
+                        {
+                            cssClass = null;
+                            if (page.IsAncestorOrSelf(CurrentPage))
+                            {
+                                cssClass = "active";
+                            }
+                            <li class="@(page.Name == "Play now" ? "playnow" : null)"><a class="@cssClass" href="@page.Url">@page.navigationTitle</a></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>

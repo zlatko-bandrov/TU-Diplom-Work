@@ -59,17 +59,16 @@
     @RenderSection("head", false)
 </head>
 <body>
-    @RenderBody()
-
     @{ Html.RenderPartial("~/Views/Partials/MainMenu.cshtml"); }
 
     <div id="content" class="snap-content">
 
+        @*Top Navigation Bar*@
         @{ Html.RenderPartial("MainNavigation"); }
 
-        <div class="container">
-            <div style="height: 450px;">
-            </div>
+        <div class="container white-bg">
+            @RenderBody()
+            <div id="clearFooter"><!-- --></div>
         </div>
 
         @{
