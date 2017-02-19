@@ -317,7 +317,33 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\angular-animate.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\custom-styles.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\Images\Awards\18.svg" />
+    <Content Include="Content\Images\Awards\antilles.svg" />
+    <Content Include="Content\Images\Awards\comodo_logo.svg" />
+    <Content Include="Content\Images\Awards\src.svg" />
+    <Content Include="Content\Images\Awards\support_rating.svg" />
+    <Content Include="Content\Images\en.svg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\Payments\banktransfer_logo.svg" />
+    <Content Include="Content\Images\Payments\entropay_logo.svg" />
+    <Content Include="Content\Images\Payments\epro.svg" />
+    <Content Include="Content\Images\Payments\mastercard_logo.svg" />
+    <Content Include="Content\Images\Payments\neteller_logo.svg" />
+    <Content Include="Content\Images\Payments\paysafecard %281%29.svg" />
+    <Content Include="Content\Images\Payments\paysafecard.svg" />
+    <Content Include="Content\Images\Payments\postpay_logo.svg" />
+    <Content Include="Content\Images\Payments\skrill_logo.svg" />
+    <Content Include="Content\Images\Payments\visa_logo.svg" />
+    <Content Include="css\angular-animate.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom-styles.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -332,6 +358,11 @@
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\playnow_bg-en-2017.jpg" />
+    <Content Include="images\signup_hero_image.png" />
+    <Content Include="img\wink.svg" />
     <Content Include="Media\Web.config" />
     <Content Include="config\UrlRewriting.config" />
     <Content Include="config\umbracoSettings.config" />
@@ -350,9 +381,37 @@
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
+    <Content Include="css\fonts\untitled-font-4.woff" />
+    <Content Include="Content\fonts\untitled-font-4.woff" />
+    <Content Include="fonts\untitled-font-4.woff" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\components\angular-animate.js" />
+    <Content Include="Scripts\components\angular-carousel.min.js" />
+    <Content Include="Scripts\components\angular-local-storage.min.js" />
+    <Content Include="Scripts\components\angular-route.min.js" />
+    <Content Include="Scripts\components\angular-sanitize.min.js" />
+    <Content Include="Scripts\components\angular-timer.min.js" />
+    <Content Include="Scripts\components\angular-touch.min.js" />
+    <Content Include="Scripts\components\angular.min.js" />
+    <Content Include="Scripts\components\app.js" />
+    <Content Include="Scripts\components\basket.js" />
+    <Content Include="Scripts\components\bootstrap.min.js" />
+    <Content Include="Scripts\components\chat_popup.js" />
+    <Content Include="Scripts\components\crypto.js" />
+    <Content Include="Scripts\components\hideShowPassword.js" />
+    <Content Include="Scripts\components\home.js" />
+    <Content Include="Scripts\components\homepagepixel.js" />
+    <Content Include="Scripts\components\jquery.common.js" />
+    <Content Include="Scripts\components\jquery.facybox.js" />
+    <Content Include="Scripts\components\jquery.json-2.2.min.js" />
+    <Content Include="Scripts\components\jquery.min.js" />
+    <Content Include="Scripts\components\jquery.popup_window.js" />
+    <Content Include="Scripts\components\jquery.simplemodal.js" />
+    <Content Include="Scripts\components\layout_scripts.js" />
+    <Content Include="Scripts\components\services.js" />
+    <Content Include="Scripts\components\snap.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -386,6 +445,22 @@
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Views\Home\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Partials\MainMenu.cshtml" />
+    <Content Include="Views\BaseTemplate.cshtml" />
+    <Content Include="Views\HomePage.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Partials\LoginForm.cshtml" />
+    <Content Include="Views\Partials\Footer.cshtml" />
+    <Content Include="Views\Partials\PaymentMethodsList.cshtml" />
+    <Content Include="Views\Partials\BodyBottomScripts.cshtml" />
+    <Content Include="Views\Partials\MainNavigation.cshtml" />
+    <Content Include="Views\Partials\HomePageBanner.cshtml" />
+    <Content Include="Views\Partials\LottoGamesList.cshtml" />
+    <Content Include="Views\Partials\LatestNewsList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -397,6 +472,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\MacroPartials\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LottoDemo.BusinessLogic\LottoDemo.BusinessLogic.csproj">

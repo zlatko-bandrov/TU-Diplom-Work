@@ -1,0 +1,86 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+<head>
+    @*<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">*@
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+        @@charset "UTF-8";
+
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }
+
+        .ng-animate-block-transitions {
+            transition: 0s all !important;
+            -webkit-transition: 0s all !important;
+        }
+
+        .ng-hide-add-active, .ng-hide-remove {
+            display: block !important;
+        }
+    </style>
+
+    <title>@Model.Content.Name</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="language" content="en">
+    <meta id="ogUrl" property="og:url" content="http://lottodemo-dev.zb.local/">
+    <meta id="ogSite_name" property="og:site_name" content="LottoDemo.zb.local">
+
+    <link rel="SHORTCUT ICON" href="http://lottodemo-dev.zb.local/favicon.ico?v=3.9">
+    <link rel="canonical" href="http://lottodemo-dev.zb.local/">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/custom-styles.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/angular-animate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="~/Scripts/components/jquery.min.js"></script>
+    <script>var $j = jQuery.noConflict();</script>
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/iefixes.css" />
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("head", false)
+</head>
+<body>
+    @RenderBody()
+
+    @{ Html.RenderPartial("~/Views/Partials/MainMenu.cshtml"); }
+
+    <div id="content" class="snap-content">
+
+        @{ Html.RenderPartial("MainNavigation"); }
+
+        <div class="container">
+            <div style="height: 450px;">
+            </div>
+        </div>
+
+        @{
+            Html.RenderPartial("~/Views/Partials/PaymentMethodsList.cshtml");
+            Html.RenderPartial("~/Views/Partials/Footer.cshtml");
+        }
+    </div>
+
+    @{ Html.RenderPartial("BodyBottomScripts"); }
+
+    @*Create the login form html*@
+    @{ Html.RenderPartial("~/Views/Partials/LoginForm.cshtml"); }
+</body>
+</html>

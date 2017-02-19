@@ -1,0 +1,55 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{ var selection = CurrentPage.Site().Children.Where("Visible"); }
+
+@*Renders the website top blue bar*@ 
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" id="open-left" class="navbar-toggle hidden-md hidden-lg" data-toggle="" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand hidden-lg hidden-md" href="/"><img width="200" height="27" alt="http://lottodemo-dev.zb.local/" src="~/Content/Images/en.svg"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="display-smart"><a href="/">Home</a></li>
+                <li class="display-smart"><a href="#">Play now!</a></li>
+                <li class="display-smart"><a href="#">How to play</a></li>
+                <li class="display-smart"><a href="#">Results &amp; winnings</a></li>
+                <li class="display-smart"><a href="#">News</a></li>
+                <li class="display-smart"><a href="#">FAQ</a></li>
+                <li class="display-smart"><a rel="nofollow" href="#">Contact us</a></li>
+                <li class="display-smart"><hr class="hr-navbar display-smart"></li>
+                <li class="nodrop">
+                    <span data-icon="y" class="nav-icon"></span><a id="Login" data-toggle="modal" data-target="#myModal" href="#">Login</a>
+                </li>
+                <li class="nodrop"><span data-icon="D" class="nav-icon"></span><a class="access" data-toggle="modal" data-target="#myModal" href="#">Register</a></li>
+                <li class="dropdown menu-large">
+                    <span data-icon="n" class="nav-icon"></span><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Cart ( <span class="cart_counter" id="cart_counter">0</span> )</a>
+                    <ul class="dropdown-menu megamenu row">
+                        <li>
+                            <div class="container">
+
+                                <div id="myShoppingBasket" class="myShoppingBasket basket playusalotteries">
+
+                                    <div class="megamenu-wrap">
+                                        <div class="col-md-7">
+                                            Your cart is currently empty.
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="right">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>   
