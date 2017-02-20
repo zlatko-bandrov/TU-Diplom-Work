@@ -1,5 +1,184 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ContactUsPage>
 @using ContentModels = Umbraco.Web.PublishedContentModels;
+
 @{
-	Layout = "WithRightSidebar.cshtml";
+    Layout = "WithRightSidebar.cshtml";
 }
+
+<div class="row">
+    <div class="twoColWrapper col-lg-12">
+
+        <div class="pageHeader ">
+            <h1>Contact Us</h1>
+        </div>
+
+        <div class="pageContent">
+            <div class="basket-entry-head">
+                <img onclick="return callme();" style="cursor:pointer;" align="left" src="~/images/call_me_back.svg" alt="Call_me_back">
+                <div id="send-call-me-back" class="col-sm-9"><br><b>Would you like us to call you back via telephone?</b></div>
+            </div>
+
+            <script type="text/javascript">
+                function callme() {
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: "/en/call-me-back.html",
+                        success: function (data) {
+                            jQuery.facybox(data);
+                        }
+                    });
+                }
+            </script>
+            <div style="text-align: center;" class="col-lg-12">
+                <script language="javascript">
+<!--
+        $j(document).ready(function(){
+            $j("#aLiveSupport img").attr('class', 'imgLiveSupport contact-images');
+            checkOnlineOperators();
+        });
+// --></script>
+
+                <div class="row spacing-fix">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div style="background-color: #EFEFEF; margin-left: 10px">
+                                <a id="aLiveSupport">
+                                    <div style="height: 200px; width: 100%; padding-top: 20px;"><img class="imgLiveSupport contact-images" src="~/images/live-support-offline-chat.svg" border="0" alt="Click for Live Support!" style="width: 180px;"></div>
+                                </a>
+                                <div style="height: 175px;">
+                                    <div class="basket-entry-head">
+                                        <h2 style="margin: 0px;padding: 0px; text-transform: uppercase;font-size: 20px;font-weight: bold; margin-bottom: 20px">Live Support is <span id="status-colour" style="color: red;">Offline</span></h2>
+                                        <p style="font-size: 18px">Click here for live Support</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div style="background-color: #EFEFEF; margin-right: 10px">
+                                <a href="https://www.playhugelottos.com/en/faq.html">
+                                    <div style="height: 200px; width: 100%; padding-top: 30px;"><img class="contact-images" src="~/images/faq.svg" border="0" alt="Knowledge_base" style="width: 180px;"></div>
+                                </a>
+                                <div style="height: 175px;">
+                                    <div class="basket-entry-head">
+                                        <h2 style="margin: 0px;padding: 0px; text-transform: uppercase;font-size: 20px;font-weight: bold; margin-bottom: 20px">Frequently Asked Questions</h2>
+                                        <p style="font-size: 18px">Consult our FAQ page to find answers to common questions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div style="background-color: #EFEFEF; margin-right: 10px">
+                                <a href="https://www.playhugelottos.com/en/support/edit.html">
+                                    <div style="height: 200px; width: 100%; padding-top: 30px;"><img class="contact-images" src="~/images/customer-support.svg" border="0" alt="Support_ticket" style="width: 180px;"></div>
+                                </a>
+                                <div style="height: 175px;">
+                                    <div class="basket-entry-head">
+                                        <h2 style="margin: 0px;padding: 0px; text-transform: uppercase;font-size: 20px;font-weight: bold; margin-bottom: 20px">Customer Support</h2>
+                                        <p style="font-size: 18px">Click here for customer support options</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="row">
+                    <div class="basket-entry-head"><strong>International Contact Numbers </strong><br> <i>Please state your name and email address when calling, in order for us to better assist you with your query.</i></div>
+                </div>
+
+                <div class="row spacing-fix">
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/en.svg" border="0" width="30"> English</h5>
+                            Tel. +44 8704 601788<br>Fax. +44 8704 580264
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/pl.svg" border="0" width="30"> Polish</h5>
+                            Tel. +48 2248 53383<br>Fax. +48 2248 53475
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/sv.svg" border="0" width="30"> Swedish</h5>
+                            Tel. +46 (0)8 501 09557<br>Fax. +46 (0)8 501 09677
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/es.svg" border="0" width="30"> Spanish</h5>
+                            Tel. +34 (0)93 550 7037<br>Fax. +34 (0)93 550 7045
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/ar.svg" border="0" width="30"> Spanish - Argentina</h5>
+                            Tel. +54 (0)11 4032 0535<br>Fax. +54 (0)11 4032 1163
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/pt.svg" border="0" width="30"> Brazil</h5>
+                            Tel. +55 (0)11 395 85014<br>Fax. +55 (0)11 395 85012
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/fr.svg" border="0" width="30"> French</h5>
+                            Tel. +33 172 703 078<br>Fax. +33 172 703 176
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/ro.svg" border="0" width="30"> Romania</h5>
+                            Tel. +40 (0)31 710 7058<br>Fax. +40 (0)31 710 7064
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 number-main-wrap">
+                        <div class="number-content row">
+                            <h5><img src="~/images/hu.svg" border="0" width="30"> Hungary</h5>
+                            Tel. +36 (06)1 577 2039<br>Fax. +36 (06)1 577 2025
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 number-main-wrap">
+                    <div class="number-content row">
+                        <h5><img src="~/images/cz.svg" border="0" width="30"> Czech</h5>
+                        Tel. &nbsp;+420 227 204 510<br>Fax. +420 227 204 526
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="basket-entry-head">Head office Contact Numbers</div>
+            </div>
+
+            <div class="row spacing-fix fullwidth">
+                <div class="col-md-6 col-sm-6 number-main-wrap">
+                    <div class="number-content row">
+                        <h5>General Enquiries</h5>
+                    </div>
+                    <br>
+                    <div><a href="mailto:info@playukinternet.com"> info@playukinternet.com</a></div>
+                    <div class="col-md-6 col-sm-6 number-main-wrap"></div>
+                    <div class="col-md-6 col-sm-6 number-main-wrap"></div>
+                    <div class="number-content row">
+                        <h5></h5>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 number-main-wrap">
+                    <div class="number-content row">PlayUKinternet NV<br>2 Lansdowne Row<br>Berkeley Square<br>London W1J 6HL<br>United Kingdom</div>
+                </div>
+            </div>
+
+            <p style="text-align: center;">
+                <script src="~/images/jquery-migrate-1.2.1.js.download"></script>
+            </p>
+
+            <input type="hidden" name="server_time" id="server_time" value="2017-02-19" />
+        </div>
+    </div>
+</div>

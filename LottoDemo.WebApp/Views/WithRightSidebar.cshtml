@@ -1,7 +1,56 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
-	Layout = "BaseTemplate.cshtml";
+    Layout = "BaseTemplate.cshtml";
 }
 
-@RenderBody()
+<div class="col-lg-9 pageLeft">
+    @RenderBody()
+</div>
+<div class="col-lg-3 pageRight hidden-sm hidden-md hidden-xs">
+    <div id="rightCol">
+
+        <script type="text/javascript">
+            (function ($) {
+                //----------------------------------------------------------------
+                // ready
+                //----------------------------------------------------------------
+                $(document).ready(function () {
+
+                    $('.ajax-poll-form').each(function () {
+                        var obj = new CAjaxPoll(this);
+                        obj.run();
+                    });
+
+                    $('.ajax-poll-item').click(function () {
+
+                        $('.ajax-poll-item').removeClass("ajax-poll-item-sel");
+                        $(this).addClass("ajax-poll-item-sel");
+
+                        var id = $(this).attr('id');
+                        $('#check_' + id).attr('checked', 'checked');
+                        $('#ajax-poll-btn-vote').attr('disabled', false);
+                    });
+
+                });
+
+            }(jQuery));
+        </script>
+
+        <div class="adWrapper">
+            <div id="pollWrapper">
+            </div>
+            <br class="Hide">
+            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
+                <a href="https://www.playhugelottos.com/en/support-and-service-excellence.html"><img border="0" alt="Support and service excellence" src="~/images/160x148-hugelottos_en_english.jpg"></a>
+            </div>
+            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
+                <a href="https://www.webutations.net/go/review/playhugelottos.com"><img border="0" alt="Webutation_PlayHugeLottos" src="~/images/160x148-hugelottos_de_160x148-playhugelottos_en_webutation.jpg"></a>
+            </div>
+            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
+                <a href="https://www.playhugelottos.com/en/tell-a-friend.html"><img border="0" alt="Tell a Friend and earn free lottery tickets" src="~/images/160x300-hugelottos_en_tell-afriend-banner-en.gif"></a>
+            </div>
+        </div>
+
+    </div>
+</div>
