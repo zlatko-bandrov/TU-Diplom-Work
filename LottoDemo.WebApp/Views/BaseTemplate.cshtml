@@ -46,7 +46,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="~/css/custom-styles.css">
     <link rel="stylesheet" type="text/css" media="screen" href="~/css/angular-animate.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/css/font-awesome.min.css">
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/css/font-awesome.min.css">*@
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="~/Scripts/components/jquery.min.js"></script>
     <script>var $j = jQuery.noConflict();</script>
@@ -80,6 +81,6 @@
     @{ Html.RenderPartial("BodyBottomScripts"); }
 
     @*Create the login form html*@
-    @{ Html.RenderPartial("~/Views/Partials/LoginForm.cshtml"); }
+    @{ Html.RenderAction("RenderLoginDialog", "MemberLogin"); }
 </body>
 </html>

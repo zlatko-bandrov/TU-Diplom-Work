@@ -317,6 +317,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\Awards\18.svg" />
     <Content Include="Content\Images\Awards\antilles.svg" />
     <Content Include="Content\Images\Awards\comodo_logo.svg" />
@@ -337,9 +339,9 @@
     <Content Include="css\angular-animate.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\custom-styles.css" />
-    <Content Include="css\font-awesome.min.css" />
     <Content Include="default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -406,6 +408,11 @@
     <Content Include="css\fonts\untitled-font-4.woff" />
     <Content Include="Content\fonts\untitled-font-4.woff" />
     <Content Include="fonts\untitled-font-4.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -446,9 +453,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Membership\LoginFromViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -475,7 +484,6 @@
     <Content Include="Views\HomePage.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Partials\LoginForm.cshtml" />
     <Content Include="Views\Partials\Footer.cshtml" />
     <Content Include="Views\Partials\PaymentMethodsList.cshtml" />
     <Content Include="Views\Partials\BodyBottomScripts.cshtml" />
@@ -491,6 +499,9 @@
     <Content Include="Views\PlayNowPage.cshtml" />
     <Content Include="Views\ResultsAndWinningsPage.cshtml" />
     <Content Include="Views\WithRightSidebar.cshtml" />
+    <Content Include="Views\Shared\LoginForm\_LoginFormDialog.cshtml" />
+    <Content Include="Views\Shared\LoginForm\_RegisterNewMember.cshtml" />
+    <Content Include="Views\Shared\LoginForm\_SignUpMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -500,10 +511,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\MacroPartials\" />
-    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\MemberLoginSurface\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LottoDemo.BusinessLogic\LottoDemo.BusinessLogic.csproj">

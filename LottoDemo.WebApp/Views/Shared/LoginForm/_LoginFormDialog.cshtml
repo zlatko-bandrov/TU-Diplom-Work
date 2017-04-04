@@ -1,0 +1,39 @@
+﻿@using LottoDemo.WebApp.Models.Membership
+@using Umbraco.Web
+
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<LoginFromViewModel>
+
+@if (Umbraco.MemberIsLoggedOn())
+{
+}
+
+<span id="simplemodal-placeholder" style="display: none;"></span>
+<div id="simplemodal-overlay" class="simplemodal-overlay" style="opacity: 0.5; height: 4215px; width: 1903px; position: fixed; left: 0px; top: 0px; z-index: 1001; display: none;"></div>
+
+<div id="simplemodal-container" class="simplemodal-container" style="position: fixed; z-index: 1002; height: 927px; width: 700px; left: 601.5px; top: 488px;">
+
+    <a class="modalCloseImg simplemodal-close" title="Close"></a>
+
+    <div tabindex="-1" class="simplemodal-wrap" style="height: 100%; outline: 0px; width: 100%; overflow: auto;">
+        <div class="modal fade simplemodal-data" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row regModal-content">
+                            @{
+                                Html.RenderPartial("LoginForm/_RegisterNewMember", Model);
+                                Html.RenderPartial("LoginForm/_SignUpMember", Model);
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
