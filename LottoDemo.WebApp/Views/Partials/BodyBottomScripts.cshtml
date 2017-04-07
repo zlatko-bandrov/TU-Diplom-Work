@@ -8,12 +8,12 @@
 <script type="text/javascript" src="~/Scripts/components/angular-timer.min.js"></script>
 <script type="text/javascript" src="~/Scripts/components/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="~/Scripts/components/app.js"></script>
-<script type="text/javascript" src="~/Scripts/components/services.js"></script>
+@*<script type="text/javascript" src="~/Scripts/components/services.js"></script>*@
 <script type="text/javascript" src="~/Scripts/components/home.js"></script>
 <script type="text/javascript" src="~/Scripts/components/bootstrap.min.js"></script>
 <script type="text/javascript" src="~/Scripts/components/hideShowPassword.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.popup_window.js"></script>
-<script type="text/javascript" src="~/Scripts/components/chat_popup.js"></script>
+@*<script type="text/javascript" src="~/Scripts/components/chat_popup.js"></script>*@
 <script type="text/javascript" src="~/Scripts/components/jquery.simplemodal.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.json-2.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/components/basket.js"></script>
@@ -25,51 +25,40 @@
 <script type="text/javascript" src="~/Scripts/components/crypto.js"></script>
 
 <script type="text/javascript">
-        jQuery(document).ready(function () {
+    jQuery(document).ready(function () {
 
-            jQuery('#myModal').on('show.bs.modal', function (e) {
-                jQuery('#myModal').appendTo('body').modal('show');
-            });
-
-            jQuery('#myModal').on('hidden.bs.modal', function (e) {
-                jQuery('#simplemodal-overlay').hide();
-            });
-
-            jQuery('#customer_registration_lead_password').hidePassword(true);
-            jQuery('#password-2').hidePassword(true);
-            jQuery("#spinning1").hide();
-
-            jQuery(function () {
-                jQuery('#login_button').on('click', function (event) {
-
-                    jQuery("#spinning1").show();
-                    jQuery("#login_button").hide();
-
-
-                });
-            });
-            jQuery(function () {
-                jQuery('#register_button').on('submit', function (event) {
-                    jQuery("#spinning").show();
-                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
-                });
-            });
-
+        jQuery('#myModal').on('show.bs.modal', function (e) {
+            jQuery('#myModal').appendTo('body').modal('show');
         });
+
+        jQuery('#myModal').on('hidden.bs.modal', function (e) {
+            jQuery('#simplemodal-overlay').hide();
+        });
+
+        jQuery('#customer_registration_lead_password').hidePassword(true);
+        jQuery('#password-2').hidePassword(true);
+        jQuery("#spinning1").hide();
+
+        jQuery(function () {
+            jQuery('#login_button').on('click', function (event) {
+                jQuery("#spinning1").show();
+                jQuery("#login_button").hide();
+            });
+        });
+
+        jQuery(function () {
+            jQuery('#register_button').on('submit', function (event) {
+                jQuery("#spinning").show();
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+            });
+        });
+    });
 
 </script>
 
 <script type="text/javascript">
     //modify code below when promotion ends
     jQuery(document).ready(function () {
-        /*$j("object").css("display", "none");
-    $j("embed").css("display", "none");
-    $j.ajax({
-    url: "/welcome/promotion.html",
-    success: function(data){
-    $j.facybox(data);
-    }
-    });*/
 
         try {
             // log every unique visit
@@ -90,7 +79,6 @@
             }
         }
         catch (e) {
-
         }
     });
 
@@ -128,57 +116,55 @@
         element: document.getElementById('content'),
         disable: 'right'
     });
+
     var addEvent = function addEvent(element, eventName, func) {
         if (element.addEventListener) {
             return element.addEventListener(eventName, func, false);
-        } else if (element.attachEvent) {
+        }
+        else if (element.attachEvent) {
             return element.attachEvent("on" + eventName, func);
         }
     };
 
-
     var myToggleButton = document.getElementById('open-left')
 
-
     myToggleButton.addEventListener('click', function () {
-
         if (snapper.state().state == "left") {
             snapper.close();
-        } else {
+        }
+        else {
             snapper.open('left');
         }
     });
     /* Responsive side nav */
 
 
-
-
     /* home page prize ticker */
-    jQuery.getJSON("/ajax/prize/winners/list.html", function (response) {
-        var i = 0;
-        setInterval(function () {
-            var removeArr = [], len = response.length;
-            removeArr[len + 1] = [];
-            if (response.hasOwnProperty(i)) {
-                var html = [], str_len = 0, w = 0;
-                jQuery.each(response[i], function (index, val) {
-                    w += 1;
-                    str_len += parseInt(val.length, 10);
-                    var winner_str = val;
-                    winner_str += (w === 4 ? "" : "&nbsp;&nbsp;&nbsp;");
-                    html.push(winner_str);
-                });
-                if (str_len > 200) {
-                    html.pop();
-                }
-                jQuery("#innerNewsTickerRight").html(html.join(' '));
+    //jQuery.getJSON("/ajax/prize/winners/list.html", function (response) {
+    //    var i = 0;
+    //    setInterval(function () {
+    //        var removeArr = [], len = response.length;
+    //        removeArr[len + 1] = [];
+    //        if (response.hasOwnProperty(i)) {
+    //            var html = [], str_len = 0, w = 0;
+    //            jQuery.each(response[i], function (index, val) {
+    //                w += 1;
+    //                str_len += parseInt(val.length, 10);
+    //                var winner_str = val;
+    //                winner_str += (w === 4 ? "" : "&nbsp;&nbsp;&nbsp;");
+    //                html.push(winner_str);
+    //            });
+    //            if (str_len > 200) {
+    //                html.pop();
+    //            }
+    //            jQuery("#innerNewsTickerRight").html(html.join(' '));
 
-            } else {
-                i = -1;
-            }
-            i += 1;
-        }, 3000);
-    });
+    //        } else {
+    //            i = -1;
+    //        }
+    //        i += 1;
+    //    }, 3000);
+    //});
     /* home page prize ticker */
 
     //If there is one slider, hide navigation.
@@ -203,17 +189,18 @@
         }
     });
 
+    //jQuery(document).ready(function ($) {
 
+    //    $.ajaxSetup({ cache: false });
 
-    jQuery(document).ready(function ($) {
-        $.ajaxSetup({ cache: false });
-        $.post("/en/checkout/basket.html", {
-            route_name: 'homepage'
-        }, function (response) {
-            $(".myShoppingBasket").replaceWith(response);
-        });
+    //    $.post("/en/checkout/basket.html", {
+    //        route_name: 'homepage'
+    //    }, function (response) {
+    //        $(".myShoppingBasket").replaceWith(response);
+    //    });
 
-    });
+    //});
+
     function resetPlay() {
         var lottery_counter = $j('#lottery_ballgrid_count').val();
         for (var i = 0; i < lottery_counter; i++) {

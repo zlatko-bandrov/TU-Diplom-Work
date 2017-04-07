@@ -7,52 +7,56 @@
     <section class="Register-block col-sm-6">
 
         <div class="regModal-header">
-            Already a member
+            @Umbraco.GetDictionaryValue("loginFormMemberHeadline")
         </div>
 
         <div class="regModal-body">
-            <form onsubmit="$.ajax({type:&#39;POST&#39;,dataType:&#39;html&#39;,data:$(this).serialize(),success:function(i){$(&#39;#loginModal&#39;).html(i);},url:&#39;/en/ajaxlogin.html&#39;}); return false;" action="https://www.playusalotteries.com/en/ajaxlogin.html" method="post">
+            @using (Html.BeginUmbracoForm("MemberLogin", "MemberLogin", null, new { id = "memberLoginForm" }))
+            {
+                @Html.AntiForgeryToken()
 
-                <label>Your email</label>
+                <label>@Umbraco.GetDictionaryValue("loginFormYourEmailLabel")</label>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span><i class="fa fa-envelope-o"></i></span>
                         </div>
                         <input type="hidden" name="login[modal]" id="login_modal" value="true">
-                        <input type="email" name="login[email]" id="login_email" value="" maxlength="80" tabindex="9" placeholder="Email" class="form-control" style="">
+                        <input type="email" name="MemberEmail" id="login_email" value="" maxlength="80" tabindex="9"
+                               placeholder="@Umbraco.GetDictionaryValue("loginFormEmailHint")" class="form-control" style="">
                     </div>
                 </div>
 
-                <label>Your Password</label>
+                <label>@Umbraco.GetDictionaryValue("loginFormYourPasswordLabel")</label>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span><i class="fa fa-lock"></i></span>
                         </div>
                         <div class="hideShowPassword-wrapper" style="position: relative; display: inline-block; vertical-align: baseline; margin: 0px;">
-                            <input type="password" name="login[password]" id="password-2" value="" maxlength="50" tabindex="10" placeholder="Password" class="login-field  login-field-password hideShowPassword-field" style="margin: 0px; padding-right: 46px;" />
-                            <button type="button" role="button" aria-label="Show Password" tabindex="0" class="hideShowPassword-toggle hideShowPassword-toggle-show" aria-pressed="false" style="position: absolute; right: 0px; top: 50%; margin-top: -22px;">Show</button>
+                            <input type="password" name="MemberPassword" id="password-2" value="" maxlength="50" tabindex="10" style="margin: 0px; padding-right: 46px;"
+                                   placeholder="@Umbraco.GetDictionaryValue("loginFormPasswortTextHint")" class="login-field  login-field-password hideShowPassword-field" />
+                            <button type="button" role="button" aria-label="Show Password" tabindex="0" class="hideShowPassword-toggle hideShowPassword-toggle-show"
+                                    aria-pressed="false" style="position: absolute; right: 0px; top: 50%; margin-top: -22px;">
+                                Show
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div id="message_element_id"></div>
 
+                <div id="message_element_id"></div>
                 <div id="spinning1" class="spinning" style="display:none"></div>
                 <input type="submit" name="commit" value="Login" id="login_button" alt="Login" title="Login" tabindex="11" class="btn btn-block btn-lg">
                 <br class="Hide">
                 <br class="Hide">
                 <p><a href="https://www.playusalotteries.com/en/forgot/password.html">Forgot password?</a></p>
-            </form>
-
+            }
             <div class="registrationTeaser gradient-blue-radial center-block">
                 <img class="registrationWinners centered img-responsive" src="~/images/signup_hero_image.png">
                 <p class="teaserText">
                     <span class="teaserTextDark">542,368 players have cashed out <br> over €31,000,000  <br> at Playhugelottos so far!</span>
                 </p>
             </div>
-
         </div>
     </section>
-
 </div>

@@ -7,6 +7,8 @@ namespace LottoDemo.WebApp.Models.Membership
 {
     public class LoginFromViewModel
     {
+        public string Title { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -20,5 +22,11 @@ namespace LottoDemo.WebApp.Models.Membership
         public string MemberEmail { get; set; }
 
         public string MemberPassword { get; set; }
+
+        public int BirthDateDay { get; set; }
+
+        public int BirthDateMonth { get; set; }
+
+        public int BirthDateYear { get; set; }
     }
 }
