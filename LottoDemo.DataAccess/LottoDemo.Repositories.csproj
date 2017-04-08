@@ -55,6 +55,7 @@
     <Compile Include="Repositories\LotteryGameRepository.cs" />
     <Compile Include="UnitsOfWork\Base\BaseUnitOfWork.cs" />
     <Compile Include="UnitsOfWork\GameDrawingUnitOfWork.cs" />
+    <Compile Include="UnitsOfWork\UsersUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LottoDemo.Common\LottoDemo.Common.csproj">

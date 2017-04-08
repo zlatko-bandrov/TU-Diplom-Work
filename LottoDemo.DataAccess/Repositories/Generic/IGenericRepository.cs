@@ -9,8 +9,8 @@ namespace LottoDemo.Repositories.Generic
 {
     public interface IGenericRepository<T> where T : class
     {
-        IQueryable<T> GetAsQuery(Expression<Func<T, bool>> predicate);
-        IEnumerable<T> GetAsList(Expression<Func<T, bool>> predicate);
+        IQueryable<T> AsQuery(Expression<Func<T, bool>> predicate);
+        IEnumerable<T> AsList(Expression<Func<T, bool>> predicate);
         T Get(Expression<Func<T, bool>> predicate);
         void Add(params T[] items);
         void Add(T item);
