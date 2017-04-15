@@ -461,10 +461,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LotteryGamesListController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ItemHelper.cs" />
     <Compile Include="Models\Membership\LoginFromViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -510,6 +512,8 @@
     <Content Include="Views\Shared\LoginForm\_LoginFormDialog.cshtml" />
     <Content Include="Views\Shared\LoginForm\_RegisterNewMember.cshtml" />
     <Content Include="Views\Shared\LoginForm\_SignUpMember.cshtml" />
+    <Content Include="Views\LotteryGameDetails.cshtml" />
+    <Content Include="Views\Shared\Games\_LotteryGamesList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -519,6 +523,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\LotteryGamesList\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>
