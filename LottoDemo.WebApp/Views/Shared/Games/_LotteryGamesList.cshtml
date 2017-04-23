@@ -21,9 +21,10 @@
                                     <div class="pb-holder">
 
                                         <div class="pb-logo">
-                                            <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle" class="single" id="lotto_id_4">
+                                            <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle">
                                                 <span class="pending">
-                                                    <img alt="Powerball" class="lottery-logo-img" width="232" height="82" src="./HomePage_files/powerball.svg">
+                                                    <img src="@Umbraco.Media(lotteryGame.LotteryLogo).umbracoFile.src" alt="Lottery Logo" 
+                                                         class="lottery-logo-img" style="width: 150px;" />
                                                 </span>
                                             </a>
                                             <h2 class="lottos">
@@ -51,7 +52,7 @@
 
                                         <div class="pb-btn">
                                             <div>
-                                                <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle" class="single" id="lotto_id_4">
+                                                <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle" class="single">
                                                     @Umbraco.GetDictionaryValue("lotteryGamesGameDetailLinkText")
                                                 </a>
                                             </div>

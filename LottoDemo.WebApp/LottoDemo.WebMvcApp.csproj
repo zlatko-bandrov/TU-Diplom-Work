@@ -514,6 +514,7 @@
     <Content Include="Views\Shared\LoginForm\_SignUpMember.cshtml" />
     <Content Include="Views\LotteryGameDetails.cshtml" />
     <Content Include="Views\Shared\Games\_LotteryGamesList.cshtml" />
+    <Content Include="Views\Shared\GameDetails\_GameTicketBlank.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
