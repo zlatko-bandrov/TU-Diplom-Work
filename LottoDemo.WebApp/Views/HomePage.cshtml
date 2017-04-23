@@ -94,128 +94,30 @@
                 </div>
             </div>
 
-            @{ Html.RenderAction("RenderLotteryList", "LotteryGamesList"); }
+            @{
+                Html.RenderAction("RenderLotteryList", "LotteryGamesList");
+
+                var settingItem = LottoDemo.WebApp.Helpers.ItemHelper.SettingsItem;
+                var newsListRootId = settingItem.GetValue<int>("newsListRoot");
+                var newsListPage = this.Umbraco.TypedContent(newsListRootId);
+                int newsCount = settingItem.GetValue<int>("homeLatestNewsCount");
+            }
 
             @*Latest News*@
             <div class="col-lg-12 ">
-                <hr><br>
+                <hr /><br />
                 <div class="basket-entry-head">
-                    <h3 class="News-Sub-Heading">
-                        Latest news&nbsp;&nbsp;
-                    </h3>
+                    <h3 class="News-Sub-Heading">@Umbraco.GetDictionaryValue("newsLatestNewsListTitle")</h3>
                 </div>
                 <br><br>
 
-                <section class="post-list">
-                    <article class="post post type-post hentry hreview post short clearfix">
-                        <!-- \\ ARTICLE \\ -->
-                        <div class="col-lg-12 blog-main-wrap panelWhite">
-
-                            <div class="col-md-2 col-sm-2 blog-preview-image-holder">
-                                <div class="row rowL247">
-                                    <a title="International Lottery News" href="https://www.playusalotteries.com/en/lottery-news/article/9854/powerball-rockets-up-to-285-million.html">
-                                        <img alt="International Lottery News" class="blog-pre-img img-responsive" src="./HomePage_files/1486646756.jpg">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="blog-preview-content-wrap">
-                                    <h3>
-                                        <a title="Powerball Rockets Up To $285 Million" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9854/powerball-rockets-up-to-285-million.html">Powerball Rockets Up To $285 Million</a>
-                                    </h3>
-                                    <span class="post-date">
-                                        <time datetime="2017-02-09" title="2017-02-09" class="date dtreviewed">09-02-2017</time>
-                                        <!--                            <time class="date"><a rel="author" title="--><!--" href="--><!--">--><!--</a></time>-->
-                                        <span class="text-primary">
-                                            |
-
-                                            <a title="Powerball Rockets Up To $285 Million" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9854/powerball-rockets-up-to-285-million.html#comments">Be the first to comment</a>
-                                        </span>
-                                    </span>
-                                    <br class="Hide">
-                                    <span class=" labels label-defaults" style="text-decoration: underline"><a rel="tag" href="https://www.playusalotteries.com/en/lottery-news-category/14/powerball-results.html" class="post_channel tech" title="Powerball Results"> Powerball Results</a></span><br class="Hide">
-                                    The US Powerball jackpot has once again rolled over, this time to a jaw-dropping $285 million after Wednesday night’s draw resulted in no jackpot winner. Read further to find out all the juicy American lotto results that will ultimately make one usa lotto ticket holder a huge amount of money!
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- \\ ARTICLE \\ -->
-                    </article>
-                </section>
-
-                <section class="post-list">
-                    <article class="post post type-post hentry hreview post short clearfix">
-                        <!-- \\ ARTICLE \\ -->
-                        <div class="col-lg-12 blog-main-wrap panelWhite">
-
-                            <div class="col-md-2 col-sm-2 blog-preview-image-holder">
-                                <div class="row rowL247">
-                                    <a title="International Lottery News" href="https://www.playusalotteries.com/en/lottery-news/article/9844/powerball-win-thanks-to-going-to-the-comic-book-store.html">
-                                        <img alt="International Lottery News" class="blog-pre-img img-responsive" src="./HomePage_files/1486383798.png">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="blog-preview-content-wrap">
-                                    <h3>
-                                        <a title="Powerball Win Thanks To Going To The Comic Book Store" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9844/powerball-win-thanks-to-going-to-the-comic-book-store.html">Powerball Win Thanks To Going To The Comic Book Store</a>
-                                    </h3>
-                                    <span class="post-date">
-                                        <time datetime="2017-02-06" title="2017-02-06" class="date dtreviewed">06-02-2017</time>
-                                        <!--                            <time class="date"><a rel="author" title="--><!--" href="--><!--">--><!--</a></time>-->
-                                        <span class="text-primary">
-                                            |
-
-                                            <a title="Powerball Win Thanks To Going To The Comic Book Store" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9844/powerball-win-thanks-to-going-to-the-comic-book-store.html#comments">Be the first to comment</a>
-                                        </span>
-                                    </span>
-                                    <br class="Hide">
-                                    <span class=" labels label-defaults" style="text-decoration: underline"><a rel="tag" href="https://www.playusalotteries.com/en/lottery-news-category/6/lottery-winners-stories.html" class="post_channel tech" title="Lottery Winners Stories"> Lottery Winners Stories</a></span><br class="Hide">
-                                    Kent Li loves comic books, and it was during a trip to the comic book store that he decided to also buy a Powerball lottery ticket. It’s a good thing the comic books where calling him that day, as he won $1.5 million.
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- \\ ARTICLE \\ -->
-                    </article>
-                </section>
-
-                <section class="post-list">
-                    <article class="post post type-post hentry hreview post short clearfix">
-                        <!-- \\ ARTICLE \\ -->
-                        <div class="col-lg-12 blog-main-wrap panelWhite">
-
-                            <div class="col-md-2 col-sm-2 blog-preview-image-holder">
-                                <div class="row rowL247">
-                                    <a title="International Lottery News" href="https://www.playusalotteries.com/en/lottery-news/article/9839/powerball-rolls-up-to-255-million.html">
-                                        <img alt="International Lottery News" class="blog-pre-img img-responsive" src="./HomePage_files/1486306105.png">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="blog-preview-content-wrap">
-                                    <h3>
-                                        <a title="Powerball Rolls Up To $255 million" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9839/powerball-rolls-up-to-255-million.html">Powerball Rolls Up To $255 million</a>
-                                    </h3>
-                                    <span class="post-date">
-                                        <time datetime="2017-02-05" title="2017-02-05" class="date dtreviewed">05-02-2017</time>
-                                        <!--                            <time class="date"><a rel="author" title="--><!--" href="--><!--">--><!--</a></time>-->
-                                        <span class="text-primary">
-                                            |
-
-                                            <a title="Powerball Rolls Up To $255 million" class="headline" href="https://www.playusalotteries.com/en/lottery-news/article/9839/powerball-rolls-up-to-255-million.html#comments">Be the first to comment</a>
-                                        </span>
-                                    </span>
-                                    <br class="Hide">
-                                    <span class=" labels label-defaults" style="text-decoration: underline"><a rel="tag" href="https://www.playusalotteries.com/en/lottery-news-category/14/powerball-results.html" class="post_channel tech" title="Powerball Results"> Powerball Results</a></span><br class="Hide">
-                                    The US Powerball lottery has done it again – and rolled over to yet another massive rollover jackpot. This time online usa lotto players have $255 million to play for!
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- \\ ARTICLE \\ -->
-                    </article>
-                </section>
+                @if (newsListPage != null && newsListPage.Children.Any())
+                {
+                    foreach (ContentModels.NewsItem article in newsListPage.Children.Take(newsCount))
+                    {
+                        Html.RenderPartial("News/_NewsListPartial", article);
+                    }
+                }
             </div>
         </div>
     </div>

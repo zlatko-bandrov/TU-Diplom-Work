@@ -515,6 +515,8 @@
     <Content Include="Views\LotteryGameDetails.cshtml" />
     <Content Include="Views\Shared\Games\_LotteryGamesList.cshtml" />
     <Content Include="Views\Shared\GameDetails\_GameTicketBlank.cshtml" />
+    <Content Include="Views\Shared\HowToPlay\_ContentSection.cshtml" />
+    <Content Include="Views\Shared\News\_NewsListPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

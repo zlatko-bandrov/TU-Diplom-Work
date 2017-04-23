@@ -1,9 +1,8 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "BaseTemplate.cshtml";
 }
-
 <div class="col-lg-9 pageLeft">
     @RenderBody()
 </div>
@@ -38,18 +37,27 @@
         </script>
 
         <div class="adWrapper">
-            <div id="pollWrapper">
-            </div>
-            <br class="Hide">
-            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
-                <a href="https://www.playhugelottos.com/en/support-and-service-excellence.html"><img border="0" alt="Support and service excellence" src="~/images/160x148-hugelottos_en_english.jpg"></a>
-            </div>
-            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
-                <a href="https://www.webutations.net/go/review/playhugelottos.com"><img border="0" alt="Webutation_PlayHugeLottos" src="~/images/160x148-hugelottos_de_160x148-playhugelottos_en_webutation.jpg"></a>
-            </div>
-            <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
-                <a href="https://www.playhugelottos.com/en/tell-a-friend.html"><img border="0" alt="Tell a Friend and earn free lottery tickets" src="~/images/160x300-hugelottos_en_tell-afriend-banner-en.gif"></a>
-            </div>
+            <div id="pollWrapper"></div>
+            <br class="Hide" />
+
+            @{
+                var settingItem = LottoDemo.WebApp.Helpers.ItemHelper.SettingsItem;
+                int advertisesRootId = settingItem.GetValue<int>("advertises");
+                var advertisesRootPage = this.Umbraco.TypedContent(advertisesRootId);
+
+                if (advertisesRootPage != null && advertisesRootPage.Children.Any())
+                {
+                    foreach (ContentModels.RightColumnAdvertising advertise in advertisesRootPage.Children)
+                    {
+                        <div class="adContainer" style="padding-left:40px;padding-right:40px;padding-bottom:0px; background-color: #fff">
+                            <a href="#" onclick="return false;">
+                                <img border="0" alt="Support and service excellence" src="@Umbraco.Media(advertise.Image).umbracoFile.src" />
+                            </a>
+                        </div>
+                    }
+                }
+            }
+
         </div>
 
     </div>

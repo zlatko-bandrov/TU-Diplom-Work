@@ -1,0 +1,31 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.NewsItem>
+
+<section class="post-list">
+    <article class="post post type-post hentry hreview post short clearfix">
+        <div class="col-lg-12 blog-main-wrap panelWhite">
+
+            <div class="col-md-2 col-sm-2 blog-preview-image-holder">
+                <div class="row rowL247">
+                    <a title="@Model.Content.PageTitle" href="@Model.Content.Url">
+                        <img alt="@Model.Content.PageTitle" class="blog-pre-img img-responsive" src="@Umbraco.Media(Model.Content.TeaserImage).umbracoFile.src">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-10 col-sm-10">
+                <div class="blog-preview-content-wrap">
+                    <h3>
+                        <a title="@Model.Content.PageTitle" class="headline" href="@Model.Content.Url">@Model.Content.PageTitle</a>
+                    </h3>
+                    <span class="post-date">
+                        <time datetime="@Model.Content.UpdateDate.ToString("yyyy-MM-dd")" title="2017-02-16" class="date dtreviewed">@Model.Content.UpdateDate.ToString("yyyy-MM-dd")</time>
+                    </span>
+                    <br class="Hide" />
+                    @Model.Content.ShortDescription
+                </div>
+            </div>
+
+        </div>
+    </article>
+</section>

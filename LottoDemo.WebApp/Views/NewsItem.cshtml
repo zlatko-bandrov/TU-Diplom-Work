@@ -1,5 +1,43 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.NewsItem>
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
-	Layout = "WithRightSidebar.cshtml";
+    Layout = "WithRightSidebar.cshtml";
 }
+<style type="text/css">
+    .innerContent p {
+        text-align: justify;
+    }
+
+        .innerContent p > img,
+        .innerContent p a > img {
+            display: block;
+            margin: 0px auto;
+        }
+</style>
+<div class="row">
+    <div class="twoColWrapper col-lg-12">
+        <div class="rowL247">
+            <div class="pageContent siteComments">
+                <section class="post-list" id="add-rel">
+                    <div class="post post type-post hentry hreview post short clearfix" id="post">
+
+                        <div class="post_content">
+                            <div class="entry-title summary">
+                                <h2>
+                                    <a href="#" class="headline" rel="self bookmark" onclick="return false;" title="@Model.Content.PageTitle">@Model.Content.PageTitle</a>
+                                </h2>
+                            </div>
+                            <div class="short-description">
+                                <p>@Model.Content.ShortDescription</p>
+                            </div>
+                        </div>
+                        <div class="innerContent">
+                            @Model.Content.ContentText
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

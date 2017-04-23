@@ -12,14 +12,23 @@ namespace LottoDemo.WebApp.Controllers
     {
         public ActionResult RenderLotteryList()
         {
-            var settingItem = ItemHelper.SettingsItem;
-            var listPageId = settingItem.GetValue<int>("lotteryListPage");
-            var model = this.Umbraco.TypedContent(listPageId);
+            try
+            {
+                var settingItem = ItemHelper.SettingsItem;
+                var listPageId = settingItem.GetValue<int>("lotteryListPage");
+                var model = this.Umbraco.TypedContent(listPageId);
 
-            this.ViewBag.LastestJackpot = 1000000;
-            this.ViewBag.NextDraw = DateTime.Now.AddDays(5).ToLongTimeString();
+                this.ViewBag.LastestJackpot = 1000000;
+                this.ViewBag.NextDraw = DateTime.Now.AddDays(5).ToLongTimeString();
 
-            return PartialView("Games/_LotteryGamesList", model);
+                return PartialView("Games/_LotteryGamesList", model);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(typeof(LotteryGamesListController), ex.Message, ex);
+            }
+
+            return new EmptyResult();
         }
     }
 }

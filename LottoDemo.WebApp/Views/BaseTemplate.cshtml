@@ -1,9 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html xml:lang="en" lang="en">
 <head>
@@ -73,8 +71,8 @@
         </div>
 
         @{
-            Html.RenderPartial("~/Views/Partials/PaymentMethodsList.cshtml");
-            Html.RenderPartial("~/Views/Partials/Footer.cshtml");
+            Html.RenderPartial("PaymentMethodsList");
+            Html.RenderPartial("Footer");
         }
     </div>
 
