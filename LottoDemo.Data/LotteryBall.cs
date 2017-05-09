@@ -12,21 +12,23 @@ namespace LottoDemo.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Country
+    public partial class LotteryBall
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Country()
+        public LotteryBall()
         {
-            this.LotteryGames = new HashSet<LotteryGame>();
+            this.LottoDrawingBalls = new HashSet<LottoDrawingBall>();
+            this.LottoTicketBalls = new HashSet<LottoTicketBall>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
-        public System.DateTime CreationDate { get; set; }
+        public byte BallNumber { get; set; }
+        public byte Position { get; set; }
+        public bool IsBonusBall { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LotteryGame> LotteryGames { get; set; }
+        public virtual ICollection<LottoDrawingBall> LottoDrawingBalls { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LottoTicketBall> LottoTicketBalls { get; set; }
     }
 }

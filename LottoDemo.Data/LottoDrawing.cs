@@ -14,15 +14,21 @@ namespace LottoDemo.DataAccess
     
     public partial class LottoDrawing
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LottoDrawing()
+        {
+            this.LottoDrawingBalls = new HashSet<LottoDrawingBall>();
+        }
+    
         public int ID { get; set; }
         public int LotteryGameID { get; set; }
-        public int DrawingNumbersID { get; set; }
         public System.DateTime DrawTime { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
         public bool IsCalculated { get; set; }
     
-        public virtual DrawingNumber DrawingNumber { get; set; }
         public virtual LotteryGame LotteryGame { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LottoDrawingBall> LottoDrawingBalls { get; set; }
     }
 }

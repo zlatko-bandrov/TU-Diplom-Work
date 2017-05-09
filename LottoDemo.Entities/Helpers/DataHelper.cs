@@ -9,32 +9,33 @@ namespace LottoDemo.Entities.Helpers
 {
     public static class DataHelper
     {
-        public static DrawingNumber CreateNewDrawingNumber(List<byte> numbers)
-        {
-            var drawingNumbers = new DrawingNumber()
-            {
-                First = numbers[0],
-                Second = numbers[1],
-                Third = numbers[2],
-                Fourth = numbers[3],
-                CreationDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
-            };
+        // TODO: Fix the lottery draw numbers generator method
+        //public static DrawingNumber CreateNewDrawingNumber(List<byte> numbers)
+        //{
+        //    var drawingNumbers = new DrawingNumber()
+        //    {
+        //        First = numbers[0],
+        //        Second = numbers[1],
+        //        Third = numbers[2],
+        //        Fourth = numbers[3],
+        //        CreationDate = DateTime.Now,
+        //        ModifiedDate = DateTime.Now
+        //    };
 
-            if (numbers.Count > 4)
-            {
-                drawingNumbers.Fifth = numbers[4];
-                if (numbers.Count > 5)
-                {
-                    drawingNumbers.Sixth = numbers[5];
-                    if (numbers.Count > 6)
-                    {
-                        drawingNumbers.Seventh = numbers[6];
-                    }
-                }
-            }
+        //    if (numbers.Count > 4)
+        //    {
+        //        drawingNumbers.Fifth = numbers[4];
+        //        if (numbers.Count > 5)
+        //        {
+        //            drawingNumbers.Sixth = numbers[5];
+        //            if (numbers.Count > 6)
+        //            {
+        //                drawingNumbers.Seventh = numbers[6];
+        //            }
+        //        }
+        //    }
 
-            return drawingNumbers;
-        }
+        //    return drawingNumbers;
+        //}
     }
 }

@@ -4,25 +4,26 @@
 
 @{ Layout = "BaseTemplate.cshtml"; }
 
+@section head
+{
+    <script src="~/Scripts/custom/single-ticket-box.js"></script>
+}
+
 <div class="col-lg-12">
     <div class="row">
         <div class="twoColWrapper ng-scope" data-ng-app="playApp" data-ng-controller="playCtrl" style="background-color: #fff">
-            <!--  <div class="spinner" ng-show="loading">-->
-            <!--    --><!--  </div>-->
             <input type="hidden" name="culture" id="culture" value="en">
-
             <div class="playpage">
                 <div class="container">
-
-                    <div class="col-lg-12 progress-steps">
+                    @*<div class="col-lg-12 progress-steps">
                         <div class="wizard">
-                            <a href="https://www.playhugelottos.com/en/home.html" class="current">Add entries</a>
+                            <a href="/" class="current">Add entries</a>
                             <a>Order summary</a>
                             <a>Payment</a>
                             <a>Order complete</a>
                         </div>
-                    </div><br />
-
+                    </div>
+                    <br />*@
                     <!-- Page Top Header -->
                     <div class="col-lg-12 grey-bg lotto-logo-holder">
 

@@ -18,13 +18,12 @@ namespace LottoDemo.BusinessLogic.Services
 
         private int maxIterationsCount;
 
-        internal virtual LotteryGameSetting GameSettings { get; private set; }
-
         internal virtual GameDrawingUnitOfWork UnitOfWork { get; set; }
 
         public double DrawingTimeInterval
         {
-            get { return this.GameSettings.DrawingTimeInterval; }
+            // TODO: Fix the drawing time interval
+            get { return 5; }
         }
 
         public GameDrawingService(int maxNumberOfIterations = -1)
@@ -33,8 +32,7 @@ namespace LottoDemo.BusinessLogic.Services
             this.UnitOfWork = new GameDrawingUnitOfWork();
 
             string gameName = ConfigurationManager.AppSettings["LottoGameName"];
-            var lottoGame = this.UnitOfWork.LotteryGameRepository.GetByName(gameName);
-            this.GameSettings = this.UnitOfWork.GameSettingsRepository.Get(settings => settings.LotteryGameID == lottoGame.ID);
+            //var lottoGame = this.UnitOfWork.LotteryGameRepository.GetByCMSID(gameName);
         }
 
         public void ExecuteDrawing(Object stateInfo)
@@ -88,27 +86,29 @@ namespace LottoDemo.BusinessLogic.Services
             byte number = 0;
             List<byte> draw = new List<byte>();
             NumbersGenerator generator = new NumbersGenerator();
-            do
-            {
-                number = (byte)generator.Next(this.GameSettings.MinimalBallNumber, this.GameSettings.MaximalBallNumber);
-                if (!draw.Contains(number) && number > 0)
-                {
-                    draw.Add(number);
-                }
-            }
-            while (draw.Count < this.GameSettings.DrawingBallsCount);
+            // TODO: Fix the lottery drawing service
+            //do
+            //{
+            //    number = (byte)generator.Next(this.GameSettings.MinimalBallNumber, this.GameSettings.MaximalBallNumber);
+            //    if (!draw.Contains(number) && number > 0)
+            //    {
+            //        draw.Add(number);
+            //    }
+            //}
+            //while (draw.Count < this.GameSettings.DrawingBallsCount);
 
             return draw;
         }
 
         private LottoDrawing CreateAndSaveDrawing(DateTime drawingDate, List<byte> numbers)
         {
-            var drawingNumbers = DataHelper.CreateNewDrawingNumber(numbers);
+            //var drawingNumbers = DataHelper.CreateNewDrawingNumber(numbers);
 
             var newDrawing = new LottoDrawing()
             {
-                LotteryGameID = this.GameSettings.LotteryGameID,
-                DrawingNumber = drawingNumbers,
+                // TODO: Fix Lottery game id
+                //LotteryGameID = this.GameSettings.LotteryGameID,
+                //DrawingNumber = drawingNumbers,
                 IsCalculated = false,
                 DrawTime = drawingDate,
                 CreationDate = DateTime.Now,
@@ -123,7 +123,7 @@ namespace LottoDemo.BusinessLogic.Services
 
         private void CalculateGameWinnings(LottoDrawing drawing)
         {
-            // TODO:
+            // TODO: Game winnings calculation
         }
     }
 }

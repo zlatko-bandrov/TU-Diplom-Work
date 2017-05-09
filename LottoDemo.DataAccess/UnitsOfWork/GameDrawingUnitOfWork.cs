@@ -23,11 +23,5 @@ namespace LottoDemo.Repositories.UnitsOfWork
         {
             get { return this.lottoDrawingRepo ?? (this.lottoDrawingRepo = new GenericRepository<LottoDrawing>(this.Context)); }
         }
-
-        private GenericRepository<LotteryGameSetting> gameSettingsRepository;
-        public GenericRepository<LotteryGameSetting> GameSettingsRepository
-        {
-            get { return this.gameSettingsRepository ?? (this.gameSettingsRepository = new GenericRepository<LotteryGameSetting>(this.Context)); }
-        }
     }
 }

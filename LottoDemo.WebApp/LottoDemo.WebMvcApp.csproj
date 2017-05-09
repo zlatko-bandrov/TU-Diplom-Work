@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -449,6 +450,7 @@
     <Content Include="Scripts\components\layout_scripts.js" />
     <Content Include="Scripts\components\services.js" />
     <Content Include="Scripts\components\snap.js" />
+    <Content Include="Scripts\custom\single-ticket-box.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -473,7 +475,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\Local Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\Local Publish.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
@@ -486,9 +490,6 @@
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
-    <Content Include="Views\Home\Index.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Views\Partials\MainMenu.cshtml" />
     <Content Include="Views\BaseTemplate.cshtml" />
     <Content Include="Views\HomePage.cshtml">
@@ -526,7 +527,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LotteryGamesList\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>

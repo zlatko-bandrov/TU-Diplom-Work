@@ -12,15 +12,13 @@ namespace LottoDemo.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class LotteryGameSetting
+    public partial class LottoTicketBall
     {
         public int ID { get; set; }
-        public int LotteryGameID { get; set; }
-        public int MinimalBallNumber { get; set; }
-        public int MaximalBallNumber { get; set; }
-        public double DrawingTimeInterval { get; set; }
-        public int DrawingBallsCount { get; set; }
+        public int LottoTocketID { get; set; }
+        public int LotteryBallID { get; set; }
     
-        public virtual LotteryGame LotteryGame { get; set; }
+        public virtual LottoTicket LottoTicket { get; set; }
+        public virtual LotteryBall LotteryBall { get; set; }
     }
 }

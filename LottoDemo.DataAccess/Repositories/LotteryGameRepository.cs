@@ -15,9 +15,9 @@ namespace LottoDemo.Repositories.Repositories
         {
         }
 
-        public LotteryGame GetByName(string gameName)
+        public LotteryGame GetByCMSID(Guid gameCMSId)
         {
-            return this.Get(g => g.Name.Equals(gameName, StringComparison.OrdinalIgnoreCase));
+            return this.Get(g => g.CMSID.Equals(gameCMSId));
         }
     }
 }

@@ -53,22 +53,16 @@
     <Compile Include="Balance.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Country.cs">
-      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Currency.cs">
-      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DrawingNumber.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Jackpot.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="LotteryGame.cs">
+    <Compile Include="LotteryBall.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="LotteryGameSetting.cs">
+    <Compile Include="LotteryGame.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LottoDemoDBContext.Context.cs">
@@ -89,7 +83,13 @@
     <Compile Include="LottoDrawing.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="LottoDrawingBall.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="LottoTicket.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LottoTicketBall.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

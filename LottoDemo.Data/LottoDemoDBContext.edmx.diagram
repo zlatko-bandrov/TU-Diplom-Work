@@ -5,26 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4a0058a039eb4a449f6e28025e77770c" Name="Diagram1" ShowGrid="false" DisplayType="true">
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Balance" Width="1.5" PointX="3.75" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Country" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Currency" Width="1.5" PointX="1.5" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.DrawingNumber" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Jackpot" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGame" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawing" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicket" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.User" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Balance" Width="1.5" PointX="2.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Currency" Width="1.5" PointX="0.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Jackpot" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGame" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawing" Width="1.5" PointX="4.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicket" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_Balance_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_Jackpot_Balance" ManuallyRouted="false" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_User_Balance" ManuallyRouted="false" />
-        <AssociationConnector Association="LotteryDemoEFModel.FK_LotteryGame_Country" ManuallyRouted="false" />
-        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoDrawing_DrawingNumbers" ManuallyRouted="false" />
-        <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_DrawingNumbers" ManuallyRouted="false" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" ManuallyRouted="false" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" ManuallyRouted="false" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_LottoTicket_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGameSetting" Width="1.5" PointX="5.25" PointY="12.375" />
-        <AssociationConnector Association="LotteryDemoEFModel.FK_LotteryGameSettings_LotteryGame" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Jackpot_LotteryGame" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawingBall" Width="1.5" PointX="6.875" PointY="8.625" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicketBall" Width="1.5" PointX="5.25" PointY="2" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_LottoDrawing1" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket1" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryBall" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_Lottery_Ball" />
+        <AssociationConnector Association="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_Lottery_Ball" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
