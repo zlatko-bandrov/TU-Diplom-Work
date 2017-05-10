@@ -48,7 +48,6 @@ namespace LottoDemo.BusinessLogic.Services
             return true;
         }
 
-
         private User GetNewUser(string umbracoUsername)
         {
             var balanceCurrency = this.UnitOfWork.CurrencyRepository.AsQuery().FirstOrDefault();

@@ -1,0 +1,92 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
+
+<div>
+    <div class="col-lg-12 lastcontentsection">
+        <div id="confirm" style="margin-bottom:40px;"></div>
+        <div>
+            <h4 class="heading-steps">
+                <span data-ng-if="has_double_jackpot == false" class="ng-scope"> Step 2</span> - Confirm your entries
+            </h4>
+            <div id="medium-grey"></div>
+        </div>
+        <div class="row" id="real_entries">
+
+        </div>
+
+        <div class="row" id="this_tour_hidden" style="display:none">
+            <div class="col-lg-12">
+                <div class="well well-display">
+                    <div id="this_tour" style="width:500px;"></div>
+                    <h4>Tour entries summary</h4>
+                    <div class="claim-info">
+                        <div data-ng-if="selectedJackpot != &#39;double&#39;" class="ng-scope">
+                            1 x Powerball entries
+                        </div>
+                    </div>
+                    <div class="buttons pull-right" id="this_tour_button">
+                        <button type="button" class="btn btn-default">
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="this_tour_cart_hidden" style="display:none">
+            <div class="col-lg-12">
+                <div class="well well-display">
+                    <div id="this_tour_cart" style="width:500px;"></div>
+                    <h4>Tour cart summary</h4>
+                    <div class="claim-info">
+                        <!-- ngIf: selectedJackpot != 'double' --><div data-ng-if="selectedJackpot != &#39;double&#39;" class="ng-scope">
+                            1 x Powerball entries
+                        </div><!-- end ngIf: selectedJackpot != 'double' -->
+                    </div>
+                    <div class="buttons pull-right" id="this_tour_cart_button">
+                        <button data-ng-model="add_to_cart" type="button" class="btn btn-default ng-pristine ng-valid">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="this_tour_cart_real">
+            <div class="col-lg-12">
+                <div class="well well-display" style="min-height:200px;">
+                    <h4>
+                        <span data-ng-show="loading" class="ng-hide"><img src="./MakeABetPage_files/fluid_dg-loader.gif" alt="Fluid_dg-loader">  </span>
+                        Cart summary
+                    </h4>
+                    <div class="claim-info">
+                        <div data-ng-show="!loading &amp;&amp; showDuplicatesEntryAlert" class="ng-hide">
+                            <span class="alert alert-danger">Please check for duplicate or empty entry lines in your basket before you proceed.</span>
+                        </div>
+                        <div data-ng-show="!loading" class="">
+                            <div id="cart_summary" data-ng-bind-html="basket | sanitize" class="ng-binding">
+                                <div id="cart_summary">
+                                    Your cart is empty.
+                                </div>
+                                <div class="col-lg-12 right">
+                                    <hr class="medium-grey">
+                                    Total outstanding<br>
+                                    <span class="total-bold " style="float:none; text-align: right">
+                                        € <span class=" myShoppingBaskets">0.00</span>
+                                    </span>
+                                    <hr class="medium-grey">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="more-products" style="margin-top:-40px;"></div>
+
+        <div class="col-lg-12">
+            @Model.Content.GameDescription
+        </div>
+    </div>
+</div>

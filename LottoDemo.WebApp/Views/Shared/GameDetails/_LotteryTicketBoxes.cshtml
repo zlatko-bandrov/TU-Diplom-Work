@@ -1,0 +1,36 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
+
+<div class="container play-step-one">
+    <div class="col-lg-12">
+        <div id="step1"></div>
+        <h4 class="heading-steps">
+            <span class="ng-scope">@Umbraco.GetDictionaryValue("gameDetailsStepOneText")</span>
+        </h4>
+
+        <div id="demo">
+            <div class="col-lg-12 bordered manuallywrap" id="play-block" style="padding-top: 14px;">
+                <div id="manual"></div>
+                <h4 class="center">
+                    <span>@Umbraco.GetDictionaryValue("gameDetailsTicketsHeadline")</span>
+                </h4>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div>
+                            <ul class="my-slider rn-carousel-slides ng-scope" style="transform: translate3d(0px, 0px, 0px);">
+                                <li class="carousel-wrap rn-carousel-slide ng-scope" style="display: block;">
+                                    @{
+                                        Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
+                                        Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
+                                        Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -14,13 +14,19 @@ namespace LottoDemo.DataAccess
     
     public partial class Jackpot
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Jackpot()
+        {
+            this.LotteryGames = new HashSet<LotteryGame>();
+        }
+    
         public int ID { get; set; }
         public int BalanceID { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
-        public int GameID { get; set; }
     
         public virtual Balance Balance { get; set; }
-        public virtual LotteryGame LotteryGame { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LotteryGame> LotteryGames { get; set; }
     }
 }

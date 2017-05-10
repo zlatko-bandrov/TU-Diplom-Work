@@ -1,20 +1,23 @@
-﻿
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
 
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  ng-scope" data-ng-repeat="ticket in tickets_per_screen">
-    <div class="ticket_0 play-block-ticket" data-ticket="0" data-ticket-number="0">
-        <!-- ngRepeat: (key, ballset) in ballsets --><div class="item ng-scope" data-ng-repeat="(key, ballset) in ballsets">
-            <!-- ngIf: key == 0 --><div class="play-block-heading-pick ng-scope" data-ng-if="key == 0">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  ng-scope">
+    <div class="ticket_0 play-block-ticket">
+        <div class="item ng-scope">
+
+            <div class="play-block-heading-pick ng-scope">
                 <div class="right">
                     <div>
-                        <!-- ngIf: key == 0 --><div class="play-block-quick-pick ng-scope" data-ng-if="key == 0" style="border: 1px none;" data-tick="0">
+                        <div class="play-block-quick-pick ng-scope" style="border: 1px none;">
                             <button type="button" class="btn btn-quickpick" data-ng-click="quickPick($event, addTicket(carousel, ticket))">
                                 Quick pick <span data-icon="l" class="icon" id="pick_manual"></span>
                             </button>
-                        </div><!-- end ngIf: key == 0 -->
+                        </div>
                     </div>
                 </div>
-            </div><!-- end ngIf: key == 0 -->
-            <!-- ngIf: key == 0 --><div class="play-block-heading ng-scope" data-ng-if="key == 0">
+            </div>
+
+            <div class="play-block-heading ng-scope" data-ng-if="key == 0">
                 <div class="play-block-heading-text ng-binding">
                     Choose 5 numbers
                 </div>
@@ -23,9 +26,9 @@
                         <span data-icon="o" id="icon_0" class="icon" data-ng-click="clear(addTicket(carousel, ticket))" style="cursor: pointer;"></span>
                     </div>
                 </div>
-            </div><!-- end ngIf: key == 0 -->
-            <!-- ngIf: key == 1 -->
-            <div class="play-block-numbers ballset_5" data-ballset="5">
+            </div>
+
+            <div class="play-block-numbers ballset_5">
                 <div id="play-block-numbers">
                     <table id="ticket_0_5">
                         <tbody>
@@ -262,22 +265,19 @@
                     </table>
                 </div>
             </div>
-        </div><!-- end ngRepeat: (key, ballset) in ballsets -->
-        <div class="item ng-scope" data-ng-repeat="(key, ballset) in ballsets">
-            <!-- ngIf: key == 0 -->
-            <!-- ngIf: key == 0 -->
-            <!-- ngIf: key == 1 -->
-        <div class="play-block-heading ballset_6" data-ng-if="key == 1">
-                <!-- ngIf: ballset.main_balls > 1 -->
-                <!-- ngIf: ballset.main_balls == 1 --><span data-ng-if="ballset.main_balls == 1" class="ng-binding ng-scope">
+        </div>
+
+        <div class="item ng-scope">
+            <div class="play-block-heading ballset_6">
+                <span class="ng-binding ng-scope">
                     Choose 1 number
-                </span><!-- end ngIf: ballset.main_balls == 1 -->
-            </div><!-- end ngIf: key == 1 -->
-            <div class="play-block-numbers ballset_6" data-ballset="6">
+                </span>
+            </div>
+            <div class="play-block-numbers ballset_6">
                 <div id="play-block-numbers">
                     <table id="ticket_0_6">
                         <tbody>
-                            <!-- ngRepeat: i in ballset.rows -->
+                            
                             <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
                                 <!-- ngRepeat: number in ballset.numbers[i] -->
                                 <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="1">
@@ -369,6 +369,6 @@
                     </table>
                 </div>
             </div>
-        </div><!-- end ngRepeat: (key, ballset) in ballsets -->
+        </div>
     </div>
 </div>

@@ -15,9 +15,9 @@ namespace LottoDemo.Repositories.Repositories
         {
         }
 
-        public LotteryGame GetByCMSID(Guid gameCMSId)
+        public LotteryGame GetLottoGameByKey(Guid gameUniqueId)
         {
-            return this.Get(g => g.CMSID.Equals(gameCMSId));
+            return this.Get(g => g.GameKey.Equals(gameUniqueId));
         }
     }
 }

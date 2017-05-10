@@ -18,7 +18,7 @@ namespace LottoDemo.DataAccess
         public int LottoTocketID { get; set; }
         public int LotteryBallID { get; set; }
     
-        public virtual LottoTicket LottoTicket { get; set; }
         public virtual LotteryBall LotteryBall { get; set; }
+        public virtual LottoTicket LottoTicket { get; set; }
     }
 }

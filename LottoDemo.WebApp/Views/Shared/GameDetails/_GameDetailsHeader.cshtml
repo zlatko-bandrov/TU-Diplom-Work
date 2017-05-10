@@ -1,0 +1,71 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
+
+<div class="container">
+
+    @*<div class="col-lg-12 progress-steps">
+            <div class="wizard">
+                <a href="/" class="current">Add entries</a>
+                <a>Order summary</a>
+                <a>Payment</a>
+                <a>Order complete</a>
+            </div>
+        </div>
+        <br />*@
+
+    <!-- Page Top Header -->
+    <div class="col-lg-12 grey-bg lotto-logo-holder">
+        <div class="grey-contain">
+            <div class="col-lg-4 col-sm-4 col-xs-12 lotto-logo">
+                <a href="@Model.Content.Url" title="@Model.Content.LotteryName">
+                    <img border="0" style="width: 200px;" class="playlottologo" src="@Umbraco.Media(Model.Content.LotteryLogo).umbracoFile.src" alt="@Model.Content.LotteryName">
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12 center">
+                <div id="usage"></div>
+                <h1>@Model.Content.LotteryName<br /></h1>
+                <span class="jackpottypes ng-scope">
+                    <br />
+                    <span> @Umbraco.GetDictionaryValue("gameDetailsJackpotLabel") </span>
+                </span>
+                <br />
+
+                <div>
+                    <div data-ng-if="double_jackpot_amount" class="ng-scope"></div>
+                    <div data-ng-if="jackpot_amount" class="ng-scope">
+                        <span class="jackpotamounts ng-binding ng-scope" data-ng-if="selectedJackpot == &#39;normal&#39;" ng-bind-html="jackpot_amount">
+                            @ViewBag.JackpotCurrencyCode @ViewBag.GameJackpot
+                        </span>
+                    </div>
+                </div>
+                <br />
+
+                <span class="jackpotamounts_small">
+                    <span style="font-size:18px;">
+                        @Umbraco.GetDictionaryValue("gameDetailsPriceLabel") - <strong>
+                            €@Model.Content.TicketPrice
+                        </strong>
+                    </span>
+                </span>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12 right">
+                <div id="timer"></div>
+                <div class="timer-wrapper" style="width: 298px; padding-top:30px;">
+                    <div class="angular-my-timer-date ng-binding">15 Apr 2017 (Saturday)</div>
+                    <div>
+                        <div data-timer="" data-end-time="1492293600000" class="ng-isolate-scope">
+                            <div class="angular-my-timer ng-scope"><span class="ng-binding">0</span><br/>days</div>
+                            <div class="angular-my-timer ng-scope"><span class="ng-binding">4</span><br/>hours</div>
+                            <div class="angular-my-timer ng-scope"><span class="ng-binding">5</span><br/>minutes</div>
+                            <div class="angular-my-timer ng-scope"><span class="ng-binding">1</span><br/>seconds</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="removed"></div>
