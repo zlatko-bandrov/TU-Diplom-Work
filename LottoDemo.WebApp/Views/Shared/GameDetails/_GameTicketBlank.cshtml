@@ -1,5 +1,20 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
+
+@{
+    var ticketBoxSettings = (ViewBag.TicketBoxSettings as TicketBoxSettings);
+
+    string selectNumbersText =
+        ticketBoxSettings.BallsCount == 1 ?
+            string.Format("Choose {0} number", ticketBoxSettings.BallsCount) :
+            string.Format("Choose {0} numbers", ticketBoxSettings.BallsCount);
+
+    string selectBonusNumbersText =
+        ticketBoxSettings.BonusBallsCount == 1 ?
+            string.Format("Choose {0} number", ticketBoxSettings.BonusBallsCount) :
+            string.Format("Choose {0} numbers", ticketBoxSettings.BonusBallsCount);
+}
 
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  ng-scope">
     <div class="ticket_0 play-block-ticket">
@@ -9,7 +24,7 @@
                 <div class="right">
                     <div>
                         <div class="play-block-quick-pick ng-scope" style="border: 1px none;">
-                            <button type="button" class="btn btn-quickpick" data-ng-click="quickPick($event, addTicket(carousel, ticket))">
+                            <button type="button" class="btn btn-quickpick">
                                 Quick pick <span data-icon="l" class="icon" id="pick_manual"></span>
                             </button>
                         </div>
@@ -17,13 +32,13 @@
                 </div>
             </div>
 
-            <div class="play-block-heading ng-scope" data-ng-if="key == 0">
+            <div class="play-block-heading ng-scope">
                 <div class="play-block-heading-text ng-binding">
-                    Choose 5 numbers
+                    @selectNumbersText
                 </div>
                 <div class="right">
                     <div id="pick_remove" style="min-width:20px;">
-                        <span data-icon="o" id="icon_0" class="icon" data-ng-click="clear(addTicket(carousel, ticket))" style="cursor: pointer;"></span>
+                        <span data-icon="o" id="icon_0" class="icon" style="cursor: pointer;"></span>
                     </div>
                 </div>
             </div>
@@ -32,235 +47,27 @@
                 <div id="play-block-numbers">
                     <table id="ticket_0_5">
                         <tbody>
-                            <!-- ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="1">
-                                    1
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="2">
-                                    2
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="3">
-                                    3
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="4">
-                                    4
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="5">
-                                    5
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="6">
-                                    6
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="7">
-                                    7
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="8">
-                                    8
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="9">
-                                    9
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="10">
-                                    10
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="11">
-                                    11
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="12">
-                                    12
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="13">
-                                    13
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="14">
-                                    14
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="15">
-                                    15
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="16">
-                                    16
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="17">
-                                    17
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="18">
-                                    18
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="19">
-                                    19
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="20">
-                                    20
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="21">
-                                    21
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="22">
-                                    22
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="23">
-                                    23
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="24">
-                                    24
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="25">
-                                    25
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="26">
-                                    26
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="27">
-                                    27
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="28">
-                                    28
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="29">
-                                    29
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="30">
-                                    30
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="31">
-                                    31
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="32">
-                                    32
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="33">
-                                    33
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="34">
-                                    34
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="35">
-                                    35
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="36">
-                                    36
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="37">
-                                    37
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="38">
-                                    38
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="39">
-                                    39
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="40">
-                                    40
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="41">
-                                    41
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="42">
-                                    42
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="43">
-                                    43
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="44">
-                                    44
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="45">
-                                    45
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="46">
-                                    46
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="47">
-                                    47
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="48">
-                                    48
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="49">
-                                    49
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="50">
-                                    50
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="51">
-                                    51
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="52">
-                                    52
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="53">
-                                    53
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="54">
-                                    54
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="55">
-                                    55
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="56">
-                                    56
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="57">
-                                    57
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="58">
-                                    58
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="59">
-                                    59
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="60">
-                                    60
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="61">
-                                    61
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="62">
-                                    62
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="63">
-                                    63
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="64">
-                                    64
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="65">
-                                    65
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="66">
-                                    66
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="67">
-                                    67
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="68">
-                                    68
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="5" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="69">
-                                    69
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
+                            @{
+                                byte ballNumber = 1;
+
+                                for (byte rowIndex = 1; rowIndex <= ticketBoxSettings.Rows; rowIndex++)
+                                {
+                                    <tr>
+                                        @for (byte columnIndex = 1; columnIndex <= ticketBoxSettings.Columns; columnIndex++)
+                                        {
+                                            if (ballNumber <= ticketBoxSettings.GameMaxNumber)
+                                            {
+                                                <td class="playNumber ng-binding ng-scope">@ballNumber</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="border: 1px solid White;">&nbsp;</td>
+                                            }                                            
+                                            ballNumber++;
+                                        }
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -270,101 +77,33 @@
         <div class="item ng-scope">
             <div class="play-block-heading ballset_6">
                 <span class="ng-binding ng-scope">
-                    Choose 1 number
+                    @selectBonusNumbersText
                 </span>
             </div>
             <div class="play-block-numbers ballset_6">
                 <div id="play-block-numbers">
                     <table id="ticket_0_6">
                         <tbody>
-                            
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="1">
-                                    1
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="2">
-                                    2
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="3">
-                                    3
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="4">
-                                    4
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="5">
-                                    5
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="6">
-                                    6
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="7">
-                                    7
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="8">
-                                    8
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="9">
-                                    9
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="10">
-                                    10
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="11">
-                                    11
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="12">
-                                    12
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="13">
-                                    13
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="14">
-                                    14
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="15">
-                                    15
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="16">
-                                    16
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="17">
-                                    17
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="18">
-                                    18
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="19">
-                                    19
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="20">
-                                    20
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
-                            <tr data-ng-repeat="i in ballset.rows" class="ng-scope">
-                                <!-- ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="21">
-                                    21
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="22">
-                                    22
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="23">
-                                    23
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="24">
-                                    24
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="25">
-                                    25
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                                <td class="playNumber ng-binding ng-scope" data-ng-repeat="number in ballset.numbers[i]" data-ballset="6" data-ng-click="selectNumbers($event, ballset.main_balls, addTicket(carousel, ticket))" data-value="26">
-                                    26
-                                </td><!-- end ngRepeat: number in ballset.numbers[i] -->
-                            </tr><!-- end ngRepeat: i in ballset.rows -->
+                            @{
+                                ballNumber = ticketBoxSettings.BonusBallMin;
+                                for (byte rowIndex = 1; rowIndex <= ticketBoxSettings.BonusBallsRows; rowIndex++)
+                                {
+                                    <tr>
+                                        @for (byte columnIndex = 1; columnIndex <= ticketBoxSettings.Columns; columnIndex++)
+                                        {
+                                            if (ballNumber <= ticketBoxSettings.BonusBallMax)
+                                            {
+                                                <td class="playNumber ng-binding ng-scope">@ballNumber</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="border: 1px solid White;">&nbsp;</td>
+                                            }
+                                            ballNumber++;
+                                        }
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>

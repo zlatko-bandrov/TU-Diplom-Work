@@ -259,6 +259,8 @@
     <Compile Include="Helpers\DataHelper.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\LottoGameModel.cs" />
+    <Compile Include="Models\LottoGameSettings.cs" />
+    <Compile Include="Models\TicketBoxSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDemo.BusinessLogic.Extensions.LotteryGame;
+using Umbraco.Core.Models;
 
 namespace LottoDemo.BusinessLogic.Games
 {
@@ -20,10 +21,10 @@ namespace LottoDemo.BusinessLogic.Games
             return lottoGame;
         }
 
-        public LottoGameModel GetLottoGameModelByKey(Guid gameUniqueId)
+        public LottoGameModel GetLottoGameModelByKey(Guid gameUniqueId, IPublishedContent contentItem = null)
         {
             var lottoGame = this.GetLotteryGameByKey(gameUniqueId);
-            return lottoGame != null ? lottoGame.ToLottoGameModel() : null;
+            return lottoGame != null ? lottoGame.ToLottoGameModel(contentItem) : null;
         }
 
         public decimal GetGameJackpot(Guid gameUniqueId)

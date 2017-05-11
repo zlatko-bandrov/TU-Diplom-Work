@@ -9,23 +9,20 @@ namespace LottoDemo.Entities.Models
 {
     public class LottoGameModel
     {
+        public LottoGameModel(IPublishedContent contentItem = null)
+        {
+            this.GameSettings = new LottoGameSettings(contentItem);
+            this.TicketBoxSettings = new TicketBoxSettings(this.GameSettings);
+            this.NextDrawingDate = DateTime.Now.AddMinutes(15);
+        }
+
         public int Id { get; set; }
         public Guid GameKey { get; set; }
         public decimal Jackpot { get; set; }
         public CurrencyModel JackpotCurrency { get; set; }
         public DateTime NextDrawingDate { get; set; }
 
-        public int DrawingTimeInterval { get; set; }
-        public double TicketPrice { get; set; }
-        public int DrawNumbersMaximum { get; set; }
-        public int DrawBallsCount { get; set; }
-        public int BonusBallsCount { get; set; }
-        public int BonusBallMinimum { get; set; }
-        public int BonusBallMaximum { get; set; }
-
-        public void GetDataFromContent(IContent content)
-        {
-
-        }
+        public TicketBoxSettings TicketBoxSettings { get; set; }
+        public LottoGameSettings GameSettings { get; set; }
     }
 }

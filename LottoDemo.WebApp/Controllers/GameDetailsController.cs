@@ -38,7 +38,12 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                LottoGameModel lottoGame = GetLottoGameModel();
+                LottoGameModel lottoGame = this.GetLottoGameModel(true);
+                if (lottoGame != null)
+                {
+                    this.ViewBag.TicketBoxSettings = lottoGame.TicketBoxSettings;
+                    this.ViewBag.GameSettings = lottoGame.GameSettings;
+                }
 
                 return View("GameDetails/_LotteryTicketBoxes", this.CurrentPage);
             }
@@ -64,10 +69,10 @@ namespace LottoDemo.WebApp.Controllers
         }
 
 
-        private LottoGameModel GetLottoGameModel()
+        private LottoGameModel GetLottoGameModel(bool loadDataFromContent = false)
         {
-            Guid gameKey = Services.ContentService.GetById(CurrentPage.Id).Key;
-            LottoGameModel lottoGame = this.GameService.GetLottoGameModelByKey(gameKey);
+            var contentData = Services.ContentService.GetById(this.CurrentPage.Id);
+            LottoGameModel lottoGame = this.GameService.GetLottoGameModelByKey(contentData.Key, this.CurrentPage);
 
             return lottoGame;
         }
