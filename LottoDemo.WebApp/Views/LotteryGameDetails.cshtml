@@ -1,11 +1,18 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.WebApp.Controllers.WebAPI;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
 @{
     Layout = "BaseTemplate.cshtml";
+    
     ViewBag.GameKey = Umbraco.Content(Model.Content.Id).Key;
+    var autoGenerateNumbersUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.GetUmbracoApiService<LotteryGameController>("GetRandomNumbers"));
 }
 @section head {
     <script src="~/Scripts/custom/single-ticket-box.js"></script>
+    <script src="~/Scripts/custom/user-cart.js"></script>
+    <script type="text/javascript">
+        AutoGenerateNumbersUrl = '@autoGenerateNumbersUrl';
+    </script>
 }
 
 <div class="col-lg-12">

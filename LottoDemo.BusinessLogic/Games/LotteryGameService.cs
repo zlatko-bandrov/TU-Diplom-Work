@@ -1,19 +1,15 @@
-﻿using LottoDemo.DataAccess;
+﻿using LottoDemo.BusinessLogic.Extensions.LotteryGame;
+using LottoDemo.DataAccess;
 using LottoDemo.Entities.Models;
 using LottoDemo.Repositories.UnitsOfWork;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LottoDemo.BusinessLogic.Extensions.LotteryGame;
 using Umbraco.Core.Models;
 
 namespace LottoDemo.BusinessLogic.Games
 {
     public class LotteryGameService
     {
-        private LotteryGameUnitOfWork GameUnitOfWork = new LotteryGameUnitOfWork();
+        private LottoGameUnitOfWork GameUnitOfWork = new LottoGameUnitOfWork();
 
         internal LotteryGame GetLotteryGameByKey(Guid gameUniqueId)
         {
@@ -33,5 +29,7 @@ namespace LottoDemo.BusinessLogic.Games
 
             return lottoGame != null ? lottoGame.Jackpot.Balance.Value : 0;
         }
+
+
     }
 }

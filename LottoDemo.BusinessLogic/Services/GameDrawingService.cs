@@ -18,7 +18,7 @@ namespace LottoDemo.BusinessLogic.Services
 
         private int maxIterationsCount;
 
-        internal virtual GameDrawingUnitOfWork UnitOfWork { get; set; }
+        internal virtual LottoGameUnitOfWork UnitOfWork { get; set; }
 
         public double DrawingTimeInterval
         {
@@ -29,7 +29,7 @@ namespace LottoDemo.BusinessLogic.Services
         public GameDrawingService(int maxNumberOfIterations = -1)
         {
             this.maxIterationsCount = maxNumberOfIterations;
-            this.UnitOfWork = new GameDrawingUnitOfWork();
+            this.UnitOfWork = new LottoGameUnitOfWork();
 
             string gameName = ConfigurationManager.AppSettings["LottoGameName"];
             //var lottoGame = this.UnitOfWork.LotteryGameRepository.GetByCMSID(gameName);
@@ -81,12 +81,30 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<byte> GenerateDrawNumbers(byte MinValue, byte MaxValue, byte numbersCount)
+        {
+            byte ballNumber = 0;
+            List<byte> draw = new List<byte>();
+            NumbersGenerator generator = new NumbersGenerator();
+            do
+            {
+                ballNumber = (byte)generator.Next(MinValue, MaxValue);
+                if (!draw.Contains(ballNumber) && ballNumber > 0)
+                {
+                    draw.Add(ballNumber);
+                }
+            }
+            while (draw.Count < numbersCount);
+
+            return draw;
+        }
+
         private List<byte> RunLottoDrawing()
         {
             byte number = 0;
             List<byte> draw = new List<byte>();
             NumbersGenerator generator = new NumbersGenerator();
-            // TODO: Fix the lottery drawing service
+            // TODO: Fix the lottery drawing service; And use the method GenerateDrawNumbers
             //do
             //{
             //    number = (byte)generator.Next(this.GameSettings.MinimalBallNumber, this.GameSettings.MaximalBallNumber);
@@ -115,7 +133,7 @@ namespace LottoDemo.BusinessLogic.Services
                 ModifiedDate = DateTime.Now
             };
 
-            this.UnitOfWork.LottoDrawingRepository.Add(newDrawing);
+            this.UnitOfWork.DrawRepository.Add(newDrawing);
             this.UnitOfWork.CommitChanges();
 
             return newDrawing;

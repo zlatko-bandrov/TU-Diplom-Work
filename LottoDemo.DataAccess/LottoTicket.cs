@@ -26,6 +26,9 @@ namespace LottoDemo.DataAccess
         public System.DateTime InputTime { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public System.DateTime CreationDate { get; set; }
+        public bool IsConfirmed { get; set; }
+        public bool IsCalculated { get; set; }
+        public bool IsWinning { get; set; }
     
         public virtual LotteryGame LotteryGame { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -82,8 +82,11 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="LotteryGameID" Type="int" Nullable="false" />
           <Property Name="InputTime" Type="datetime" Nullable="false" />
+          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="IsCalculated" Type="bit" Nullable="false" />
+          <Property Name="IsWinning" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoTicketBalls">
           <Key>
@@ -470,6 +473,9 @@
           <NavigationProperty Name="LotteryGame" Relationship="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" FromRole="LottoTicket" ToRole="LotteryGame" />
           <NavigationProperty Name="LottoTicketBalls" Relationship="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket" FromRole="LottoTicket" ToRole="LottoTicketBall" />
           <NavigationProperty Name="User" Relationship="LotteryDemoEFModel.FK_LottoTicket_User" FromRole="LottoTicket" ToRole="User" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="IsCalculated" Type="Boolean" Nullable="false" />
+          <Property Name="IsWinning" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoTicketBall">
           <Key>
@@ -711,6 +717,9 @@
           <EntitySetMapping Name="LottoTickets">
             <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoTicket">
               <MappingFragment StoreEntitySet="LottoTicket">
+                <ScalarProperty Name="IsWinning" ColumnName="IsWinning" />
+                <ScalarProperty Name="IsCalculated" ColumnName="IsCalculated" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="InputTime" ColumnName="InputTime" />

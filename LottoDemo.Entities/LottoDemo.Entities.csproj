@@ -257,22 +257,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DataHelper.cs" />
+    <Compile Include="Models\Cart\AddToCartModel.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\LottoGameModel.cs" />
     <Compile Include="Models\LottoGameSettings.cs" />
     <Compile Include="Models\TicketBoxSettings.cs" />
+    <Compile Include="Models\WebAPI\AutoGenerateNumbersResult.cs" />
+    <Compile Include="Models\WebAPI\GameDrawSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LottoDemo.Data\LottoDemo.DataAccess.csproj">
-      <Project>{88575736-0028-4191-a7e2-3b82bdcfca0f}</Project>
-      <Name>LottoDemo.DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

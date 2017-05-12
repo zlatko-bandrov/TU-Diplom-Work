@@ -7,7 +7,6 @@
         <h4 class="heading-steps">
             <span class="ng-scope">@Umbraco.GetDictionaryValue("gameDetailsStepOneText")</span>
         </h4>
-
         <div id="demo">
             <div class="col-lg-12 bordered manuallywrap" id="play-block" style="padding-top: 14px;">
                 <div id="manual"></div>
@@ -20,8 +19,13 @@
                             <ul class="my-slider rn-carousel-slides ng-scope" style="transform: translate3d(0px, 0px, 0px);">
                                 <li class="carousel-wrap rn-carousel-slide ng-scope" style="display: block;">
                                     @{
+                                        ViewData["TicketBoxId"] = "ticketBox_1";
                                         Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
+
+                                        ViewData["TicketBoxId"] = "ticketBox_2";
                                         Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
+
+                                        ViewData["TicketBoxId"] = "ticketBox_3";
                                         Html.RenderPartial("GameDetails/_GameTicketBlank", Model);
                                     }
                                 </li>
@@ -31,6 +35,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

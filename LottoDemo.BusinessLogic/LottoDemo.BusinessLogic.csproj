@@ -264,7 +264,7 @@
     <Compile Include="LotteryLogic\NumbersGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GameDrawingService.cs" />
-    <Compile Include="Services\LottoUsersService.cs" />
+    <Compile Include="Services\GamblerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -275,17 +275,17 @@
       <Project>{0980d765-7748-4c1b-b361-c5998479d4ba}</Project>
       <Name>LottoDemo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LottoDemo.DataAccess\LottoDemo.Repositories.csproj">
-      <Project>{a925baf8-1822-40a2-86e3-f0144719bd0c}</Project>
-      <Name>LottoDemo.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LottoDemo.Data\LottoDemo.DataAccess.csproj">
+    <ProjectReference Include="..\LottoDemo.DataAccess\LottoDemo.DataAccess.csproj">
       <Project>{88575736-0028-4191-a7e2-3b82bdcfca0f}</Project>
       <Name>LottoDemo.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\LottoDemo.Entities\LottoDemo.Entities.csproj">
       <Project>{0420d004-6f81-45a8-9bbd-5b04ebd3faac}</Project>
       <Name>LottoDemo.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LottoDemo.Repositories\LottoDemo.Repositories.csproj">
+      <Project>{a925baf8-1822-40a2-86e3-f0144719bd0c}</Project>
+      <Name>LottoDemo.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

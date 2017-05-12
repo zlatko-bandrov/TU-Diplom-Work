@@ -1,9 +1,8 @@
 ﻿using LottoDemo.BusinessLogic.Games;
+using LottoDemo.BusinessLogic.Services;
 using LottoDemo.Entities.Models;
+using LottoDemo.Entities.Models.Cart;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 
@@ -28,7 +27,7 @@ namespace LottoDemo.WebApp.Controllers
             }
             catch (Exception ex)
             {
-                this.Logger.Error(typeof(GameDetailsController), ex.Message, ex);
+                this.WriteErrorMessage(ex);
             }
 
             return new EmptyResult();
@@ -49,7 +48,7 @@ namespace LottoDemo.WebApp.Controllers
             }
             catch (Exception ex)
             {
-                this.Logger.Error(typeof(GameDetailsController), ex.Message, ex);
+                this.WriteErrorMessage(ex);
             }
             return new EmptyResult();
         }
@@ -58,16 +57,41 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
+                LottoGameModel lottoGame = this.GetLottoGameModel();
+                if (lottoGame != null)
+                {
+                    ViewBag.LotteryGameId = lottoGame.Id;
+                }
 
                 return View("GameDetails/_LottoGameCart", this.CurrentPage);
             }
             catch (Exception ex)
             {
-                this.Logger.Error(typeof(GameDetailsController), ex.Message, ex);
+                this.WriteErrorMessage(ex);
             }
             return new EmptyResult();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToCart(AddToCartModel model)
+        {
+            try
+            {
+                model.LoadValues(Request.Form);
+
+                var gamblerService = new GamblerService();
+                gamblerService.AddNewLotteryTickets(this.User.Identity.Name, model);
+
+                return RedirectToCurrentUmbracoPage();
+            }
+            catch (Exception ex)
+            {
+                this.WriteErrorMessage(ex);
+            }
+
+            return new EmptyResult();
+        }
 
         private LottoGameModel GetLottoGameModel(bool loadDataFromContent = false)
         {
@@ -75,6 +99,11 @@ namespace LottoDemo.WebApp.Controllers
             LottoGameModel lottoGame = this.GameService.GetLottoGameModelByKey(contentData.Key, this.CurrentPage);
 
             return lottoGame;
+        }
+
+        private void WriteErrorMessage(Exception ex)
+        {
+            this.Logger.Error(typeof(GameDetailsController), ex.Message, ex);
         }
     }
 }

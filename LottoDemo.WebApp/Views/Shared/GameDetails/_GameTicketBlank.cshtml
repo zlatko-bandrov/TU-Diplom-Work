@@ -16,15 +16,24 @@
             string.Format("Choose {0} numbers", ticketBoxSettings.BonusBallsCount);
 }
 
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  ng-scope">
-    <div class="ticket_0 play-block-ticket">
-        <div class="item ng-scope">
+<script type="text/javascript">
+    GameTicketSettings = {
+        "ballsCount": @ticketBoxSettings.BallsCount,
+        "bonusBallsCount": @ticketBoxSettings.BonusBallsCount,
+        "minBonusBallNumber": @ticketBoxSettings.BonusBallMin,
+        "maxBonusBallNumber": @ticketBoxSettings.BonusBallMax,
+        "drawBallMaxNumber": @ticketBoxSettings.GameMaxNumber
+    };
+</script>
 
-            <div class="play-block-heading-pick ng-scope">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ng-scope">
+    <div class="play-block-ticket" id="@ViewData["TicketBoxId"]">
+        <div class="item">
+            <div class="play-block-heading-pick">
                 <div class="right">
                     <div>
-                        <div class="play-block-quick-pick ng-scope" style="border: 1px none;">
-                            <button type="button" class="btn btn-quickpick">
+                        <div class="play-block-quick-pick" style="border: 1px none;">
+                            <button type="button" id="quickPickButton" class="btn btn-quickpick">
                                 Quick pick <span data-icon="l" class="icon" id="pick_manual"></span>
                             </button>
                         </div>
@@ -32,8 +41,8 @@
                 </div>
             </div>
 
-            <div class="play-block-heading ng-scope">
-                <div class="play-block-heading-text ng-binding">
+            <div class="play-block-heading">
+                <div class="play-block-heading-text">
                     @selectNumbersText
                 </div>
                 <div class="right">
@@ -43,46 +52,44 @@
                 </div>
             </div>
 
-            <div class="play-block-numbers ballset_5">
-                <div id="play-block-numbers">
-                    <table id="ticket_0_5">
-                        <tbody>
-                            @{
-                                byte ballNumber = 1;
-
-                                for (byte rowIndex = 1; rowIndex <= ticketBoxSettings.Rows; rowIndex++)
-                                {
-                                    <tr>
-                                        @for (byte columnIndex = 1; columnIndex <= ticketBoxSettings.Columns; columnIndex++)
+            <div class="play-block-numbers">
+                <div id="play-block-numbers"></div>
+                <table>
+                    <tbody>
+                        @{
+                            byte ballNumber = 1;
+                            for (byte rowIndex = 1; rowIndex <= ticketBoxSettings.Rows; rowIndex++)
+                            {
+                                <tr>
+                                    @for (byte columnIndex = 1; columnIndex <= ticketBoxSettings.Columns; columnIndex++)
+                                    {
+                                        if (ballNumber <= ticketBoxSettings.GameMaxNumber)
                                         {
-                                            if (ballNumber <= ticketBoxSettings.GameMaxNumber)
-                                            {
-                                                <td class="playNumber ng-binding ng-scope">@ballNumber</td>
-                                            }
-                                            else
-                                            {
-                                                <td style="border: 1px solid White;">&nbsp;</td>
-                                            }                                            
-                                            ballNumber++;
+                                            <td class="playNumber drawBallCell">@ballNumber</td>
                                         }
-                                    </tr>
-                                }
+                                        else
+                                        {
+                                            <td style="border: 1px solid White;">&nbsp;</td>
+                                        }
+                                        ballNumber++;
+                                    }
+                                </tr>
                             }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="item ng-scope">
-            <div class="play-block-heading ballset_6">
-                <span class="ng-binding ng-scope">
+        <div class="item">
+            <div class="play-block-heading">
+                <span class="ng-binding">
                     @selectBonusNumbersText
                 </span>
             </div>
-            <div class="play-block-numbers ballset_6">
+            <div class="play-block-numbers">
                 <div id="play-block-numbers">
-                    <table id="ticket_0_6">
+                    <table>
                         <tbody>
                             @{
                                 ballNumber = ticketBoxSettings.BonusBallMin;
@@ -93,7 +100,7 @@
                                         {
                                             if (ballNumber <= ticketBoxSettings.BonusBallMax)
                                             {
-                                                <td class="playNumber ng-binding ng-scope">@ballNumber</td>
+                                                <td class="playNumber bonusBallCell">@ballNumber</td>
                                             }
                                             else
                                             {

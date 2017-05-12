@@ -6,16 +6,16 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4a0058a039eb4a449f6e28025e77770c" Name="Diagram1" ShowGrid="false" DisplayType="true">
         <AssociationConnector Association="LotteryDemoEFModel.FK_Jackpot_LotteryGame" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Balance" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Currency" Width="1.5" PointX="0.75" PointY="4.625" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.Jackpot" Width="1.5" PointX="5.25" PointY="6.375" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryBall" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGame" Width="1.5" PointX="7.5" PointY="6" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawing" Width="1.5" PointX="9.75" PointY="9.625" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawingBall" Width="1.5" PointX="12" PointY="9.875" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Balance" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Currency" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.Jackpot" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryBall" Width="1.5" PointX="9.75" PointY="1.125" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LotteryGame" Width="1.5" PointX="7.5" PointY="6.375" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawing" Width="1.5" PointX="9.75" PointY="10.5" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoDrawingBall" Width="1.5" PointX="12" PointY="10.875" />
         <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicket" Width="1.5" PointX="9.75" PointY="4.5" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicketBall" Width="1.5" PointX="12" PointY="4.875" />
-        <EntityTypeShape EntityType="LotteryDemoEFModel.User" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.LottoTicketBall" Width="1.5" PointX="12" PointY="5.25" />
+        <EntityTypeShape EntityType="LotteryDemoEFModel.User" Width="1.5" PointX="5.25" PointY="3.25" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_Balance_Currency" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_Jackpot_Balance" />
         <AssociationConnector Association="LotteryDemoEFModel.FK_User_Balance" />
