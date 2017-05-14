@@ -138,35 +138,6 @@
     });
     /* Responsive side nav */
 
-
-    /* home page prize ticker */
-    //jQuery.getJSON("/ajax/prize/winners/list.html", function (response) {
-    //    var i = 0;
-    //    setInterval(function () {
-    //        var removeArr = [], len = response.length;
-    //        removeArr[len + 1] = [];
-    //        if (response.hasOwnProperty(i)) {
-    //            var html = [], str_len = 0, w = 0;
-    //            jQuery.each(response[i], function (index, val) {
-    //                w += 1;
-    //                str_len += parseInt(val.length, 10);
-    //                var winner_str = val;
-    //                winner_str += (w === 4 ? "" : "&nbsp;&nbsp;&nbsp;");
-    //                html.push(winner_str);
-    //            });
-    //            if (str_len > 200) {
-    //                html.pop();
-    //            }
-    //            jQuery("#innerNewsTickerRight").html(html.join(' '));
-
-    //        } else {
-    //            i = -1;
-    //        }
-    //        i += 1;
-    //    }, 3000);
-    //});
-    /* home page prize ticker */
-
     //If there is one slider, hide navigation.
     jQuery(document).ready(function () {
         var num = 1;
@@ -188,18 +159,6 @@
             });
         }
     });
-
-    //jQuery(document).ready(function ($) {
-
-    //    $.ajaxSetup({ cache: false });
-
-    //    $.post("/en/checkout/basket.html", {
-    //        route_name: 'homepage'
-    //    }, function (response) {
-    //        $(".myShoppingBasket").replaceWith(response);
-    //    });
-
-    //});
 
     function resetPlay() {
         var lottery_counter = $j('#lottery_ballgrid_count').val();

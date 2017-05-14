@@ -1,0 +1,138 @@
+﻿@using LottoDemo.Entities.Models.Cart;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    var selection = CurrentPage.Site().Children.Where("Visible");
+    var ShoppingCartItems = (List<ShoppingCartItem>)ViewBag.ShoppingCartItems;
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" id="open-left" class="navbar-toggle hidden-md hidden-lg" data-toggle="" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand hidden-lg hidden-md" href="/"><img width="200" height="27" alt="Home page" src="~/Content/Images/en.svg"></a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                @{
+                    var home = CurrentPage.AncestorOrSelf(1);
+                    foreach (var page in home.Children.Where("showInMainNavigation"))
+                    {
+                        <li class="display-smart"><a href="@page.Url">@page.navigationTitle</a></li>
+                    }
+                }
+                <li class="display-smart"><hr class="hr-navbar display-smart" /></li>
+
+                @if (!this.Members.IsLoggedIn())
+                {
+                    <li class="nodrop">
+                        <span data-icon="y" class="nav-icon"></span>
+                        <a id="Login" data-toggle="modal" data-target="#myModal" href="#"> @Umbraco.GetDictionaryValue("LoginMenuItemText")</a>
+                    </li>
+                    <li class="nodrop">
+                        <span data-icon="D" class="nav-icon"></span>
+                        <a class="access" data-toggle="modal" data-target="#myModal" href="#"> @Umbraco.GetDictionaryValue("RegisterMenuItemText")</a>
+                    </li>
+                }
+
+                @if (this.Members.IsLoggedIn())
+                {
+                    <li class="dropdown menu-large hidden-sm hidden-md">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span data-icon="D" class="smaller-icon"></span> @Members.GetCurrentMember().Name (€ @ViewBag.UserBalance) </a>
+                        <ul class="dropdown-menu megamenu row" style="display: none; opacity: 1;">
+                            <li>
+                                <div class="container">
+                                    <div class="content masterContent">
+                                        <div class="megamenu-wrap">
+                                            <div class="col-sm-3 profile-block-wrap">
+                                                <div class="profile-block-wrap">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 center profile-block-wrap">
+                                                <div class="profile-block-wrap">
+                                                    <strong style="display: block;">Current balance</strong>
+                                                    <a class="totalcost-nav" href="#" onclick="return false;">€ @ViewBag.UserBalance</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 profile-block-wrap">
+                                                <div class="profile-block-wrap">
+                                                    <a href="#" style="display: block;">Account details</a>
+                                                    <a href="#" style="display: block;">Results and Entries</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="profile-block-wrap">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown menu-large">
+                        <span data-icon="n" class="nav-icon"></span>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @Umbraco.GetDictionaryValue("CartMenuItemText") ( <span class="cart_counter" id="cart_counter">@ShoppingCartItems.Count</span> )</a>
+                        <ul class="dropdown-menu megamenu row">
+                            <li>
+                                <div class="container">
+
+                                    <div id="myShoppingBasket" class="myShoppingBasket basket playhugelottos">
+                                        <div class="megamenu-wrap">
+                                            <div class="col-md-7">
+                                                @if (ShoppingCartItems.Any())
+                                                {
+                                                    <strong style="font-size:14px; display: block;">@Umbraco.GetDictionaryValue("ShoppingCartMyEntriesText")</strong>
+                                                    foreach (var item in ShoppingCartItems)
+                                                    {
+                                                        <div>
+                                                            @using (Html.BeginUmbracoForm("DeleteAllTickets", "ShoppingCart", new { lottoGameId = item.LottoGameId }, FormMethod.Post))
+                                                            {
+                                                                @Html.AntiForgeryToken()
+                                                                <span>
+                                                                    <a href="@item.LotteryGameUrl" style="display: inline-block; width: 220px;" title="Open @item.LottoGameName game details">
+                                                                        @item.TicketsCount x @item.LottoGameName entries
+                                                                    </a>
+                                                                </span>
+                                                                <button type="submit" class="remove-entries" style="background-color:transparent!important; padding:0px!important" title="Delete all @item.LottoGameName tickets">
+                                                                    <span data-icon="o" class="icon" style="cursor: pointer;"></span>
+                                                                </button>
+                                                            }
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @Umbraco.GetDictionaryValue("CartEmptyText");
+                                                }
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <hr />
+                                                <div>Total outstanding</div>
+                                                <span class="total-bold">€ @ViewBag.TotalCartPrice</span>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (this.Members.IsLoggedIn())
+                {
+                    <li class="nodrop"><a href="@Url.Action("Logout", "MemberLogin")"> @Umbraco.GetDictionaryValue("LogoutMenuItemText")</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>   

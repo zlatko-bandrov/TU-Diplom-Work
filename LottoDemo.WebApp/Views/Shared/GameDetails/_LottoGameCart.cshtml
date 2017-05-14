@@ -1,13 +1,16 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models.Cart;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
-
+@{
+    var ShoppingCartItems = (List<LotteryGameCartItem>)ViewBag.ShoppinCartItems;
+    double totalPrice = (double)ViewBag.CartTotalPrice;
+}
 <div>
-    @*@Url.GetUmbracoApiService<productsapicontroller>("GetAllProducts")*@
     <div class="col-lg-12 lastcontentsection">
         <div id="confirm" style="margin-bottom:40px;"></div>
         <div>
             <h4 class="heading-steps">
-                <span data-ng-if="has_double_jackpot == false" class="ng-scope"> Step 2</span> - Confirm your entries
+                <span class="ng-scope"> Step 2</span> - Confirm your entries
             </h4>
             <div id="medium-grey"></div>
         </div>
@@ -20,212 +23,53 @@
                     </h4>
                     <div class="claim-info">
                         <div id="cart_summary" class="ng-binding">
-
-                            <div class="row" id="cartBoxContainer">
+                            <div id="shopingCartHolder">
                                 <div class="col-lg-12" style="line-height: 38px;">
-                                    <span id="entry_23">
-
-                                        <span id="entry_str_23_standard">
-                                            3 x Lotto 6aus49 entries
-                                        </span>
-
-                                        <!-- Remove button -->
-                                        <script type="text/javascript">
-                                            jQuery(function () {
-                                                jQuery("#cart_standard_23").click(function () {
-                                                    jQuery("#lottery_entries_23").toggle("fast");
-                                                });
-                                            });
-                                        </script>
-
-                                        <div class="viewnumberright">
-                                            <a href="#" id="cart_summary_standard_23" class="pull-right" onclick="javascript:openRemovalBox(this, '23', 'standard'); return false;" title="Remove Entries"><span data-icon="o" class="icon" style="cursor: pointer;"></span></a>
-
-                                            <a class="pull-right" style="cursor: pointer;" id="cart_standard_23"> | <span data-icon="z" class="icon"></span> View your numbers <span data-icon="z" class="icon"></span> | &nbsp;&nbsp;</a>
-                                        </div>
-
-                                        <div id="lottery_entries_23" style="">
-                                            <table class="table table-striped ">
-                                                <thead>
-                                                    <tr>
-                                                        <td>Lotto Numbers</td>
-                                                        <td>Draw date</td>
-                                                        <!--<td>Jackpot Type</td> -->
-                                                        <td></td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr id="23_standard_0">
-                                                        <td>
-                                                            <div class="ballset-wrap">
-                                                                <div class="entryNumber ballSet48">
-                                                                    6
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    19
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    25
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    27
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    29
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    30
-                                                                </div>
-                                                                <div class="entryNumber ballSet49">
-                                                                    3
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            13 May 2017 (Saturday)
-                                                        </td>
-                                                        <!--<td>STANDARD</td> -->
-                                                        <td>
-                                                            <div class="entryRemove">
-                                                                <a href="#" alt="Remove Entry" title="Remove Entry" id="delete_entry_23_0_standard" onclick="deleteLotteryEntry('23', '1', 'standard', 'play_basket', '0'); return false;">
-                                                                    <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr id="23_standard_1">
-                                                        <td>
-                                                            <div class="ballset-wrap">
-                                                                <div class="entryNumber ballSet48">
-                                                                    18
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    21
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    22
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    24
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    44
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    48
-                                                                </div>
-                                                                <div class="entryNumber ballSet49">
-                                                                    8
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            13 May 2017 (Saturday)
-                                                        </td>
-                                                        <!--<td>STANDARD</td> -->
-                                                        <td>
-                                                            <div class="entryRemove">
-                                                                <a href="#" alt="Remove Entry" title="Remove Entry" id="delete_entry_23_1_standard" onclick="deleteLotteryEntry('23', '1', 'standard', 'play_basket', '1'); return false;">
-                                                                    <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr id="23_standard_2">
-                                                        <td>
-                                                            <div class="ballset-wrap">
-                                                                <div class="entryNumber ballSet48">
-                                                                    1
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    2
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    10
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    24
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    42
-                                                                </div>
-                                                                <div class="entryNumber ballSet48">
-                                                                    48
-                                                                </div>
-                                                                <div class="entryNumber ballSet49">
-                                                                    5
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            13 May 2017 (Saturday)
-                                                        </td>
-                                                        <!--<td>STANDARD</td> -->
-                                                        <td>
-                                                            <div class="entryRemove">
-                                                                <a href="#" alt="Remove Entry" title="Remove Entry" id="delete_entry_23_2_standard" onclick="deleteLotteryEntry('23', '1', 'standard', 'play_basket', '2'); return false;">
-                                                                    <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <span class="remove-entry-basket" style="display:none; text-align: center;" id="remove_cart_summary_standard_23">
-                                            <hr class="medium-grey">
-                                            Remove&nbsp;&nbsp;<input type="text" style="font-size:13px;" class="remove-input grey-bg-input" onkeypress="return numberOnly(event);" name="remove_entry_count_standard_23" id="remove_entry_count_standard_23" value="3" size="4">&nbsp;&nbsp;of&nbsp;&nbsp;3                                <a href="#" id="entry_count_standard_23" class="remove-entries-copy grey-btn" onclick="javascript:deleteEntry(this, '23', '1', '3', 'standard', ''); return false;" title="Remove Entries">Remove Entries</a>
-                                            <hr class="medium-grey">
-                                        </span>
-
-                                        <!-- Remove button -->
-                                    </span>
-                                    <br>
+                                    @if (ShoppingCartItems != null && ShoppingCartItems.Any())
+                                    {
+                                        foreach (var cartItem in ShoppingCartItems)
+                                        {
+                                            if (cartItem.Tickets.Any())
+                                            {
+                                                Html.RenderPartial("GameDetails/_ShoppingCartItemPartial", cartItem);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>Your cart is empty.</span>
+                                    }
                                 </div>
+
+                                <div>&nbsp;</div>
                                 <div class="col-lg-12 right">
-
-                                    <hr class="medium-grey">
-                                    Total outstanding<br>
-
+                                    <hr class="medium-grey" />
+                                    <div>Total outstanding</div>
                                     <span class="total-bold " style="float:none; text-align: right">
-                                        € <span class=" myShoppingBaskets">7.50</span>
+                                        € <span id="cartPriceBox" class="myShoppingBaskets">@string.Format("{0:0.00}", totalPrice)</span>
                                     </span>
-                                    <hr class="medium-grey">
+                                    <hr class="medium-grey" />
                                 </div>
                             </div>
 
-                            <div class="row">
-                                Your cart is empty.
-                            </div>
+                            <div class="buttons pull-right">
+                                @using (Html.BeginUmbracoForm("AddToCart", "GameDetails", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("LotteryGameId", (int)ViewBag.LotteryGameId)
+                                    @Html.Hidden("DrawBallsTicket1")
+                                    @Html.Hidden("DrawBallsTicket2")
+                                    @Html.Hidden("DrawBallsTicket3")
+                                    @Html.Hidden("BonusBallsTicket1")
+                                    @Html.Hidden("BonusBallsTicket2")
+                                    @Html.Hidden("BonusBallsTicket3")
 
-                            <div class="col-lg-12 right">
-                                <hr class="medium-grey" />
-                                Total outstanding<br>
-                                <span class="total-bold " style="float:none; text-align: right">
-                                    € <span class="myShoppingBaskets">0.00</span>
-                                </span>
-                                <hr class="medium-grey" />
+                                    <button id="addTicketsToCart" type="submit" class="btn btn-default">
+                                        Add to cart
+                                    </button>
+                                }
                             </div>
-
                         </div>
-                    </div>
-
-                    <div class="buttons pull-right">
-                        @using (Html.BeginUmbracoForm("AddToCart", "GameDetails", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.Hidden("LotteryGameId", (int)ViewBag.LotteryGameId)
-                            @Html.Hidden("DrawBallsTicket1")
-                            @Html.Hidden("DrawBallsTicket2")
-                            @Html.Hidden("DrawBallsTicket3")
-                            @Html.Hidden("BonusBallsTicket1")
-                            @Html.Hidden("BonusBallsTicket2")
-                            @Html.Hidden("BonusBallsTicket3")
-
-                            <button id="addTicketsToCart" type="submit" class="btn btn-default">
-                                Add to cart
-                            </button>
-                        }
                     </div>
                 </div>
             </div>

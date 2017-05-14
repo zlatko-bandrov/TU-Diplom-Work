@@ -15,7 +15,7 @@ namespace LottoDemo.DataAccess
     public partial class LottoTicketBall
     {
         public int ID { get; set; }
-        public int LottoTocketID { get; set; }
+        public int LottoTicketID { get; set; }
         public int LotteryBallID { get; set; }
     
         public virtual LotteryBall LotteryBall { get; set; }

@@ -1,100 +1,14 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
-
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.HomePage>
-
 @{
     Layout = "BaseTemplate.cshtml";
 }
-
 <div class="col-lg-12">
     <div class="row">
-        <div class="twoColWrapper ng-scope" data-ng-app="homeApp" data-ng-controller="homeCtrl">
-            <input type="hidden" name="culture" id="culture" value="en">
-
-            <div>
-                <div class="container ng-scope" data-ng-controller="carouselCtrl">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <!-- ngRepeat: img in images -->
-                            <li data-target="#myCarousel" data-ng-repeat="img in images" class="{active : (img === 0)} ng-scope active" data-slide-to="0"></li><!-- end ngRepeat: img in images -->
-                            <li data-target="#myCarousel" data-ng-repeat="img in images" class="{active : (img === 0)} ng-scope" data-slide-to="1"></li><!-- end ngRepeat: img in images -->
-                        </ol>
-                        <div class="carousel-inner">
-                            <!-- ngRepeat: img in images --><div data-ng-class="{item: true, active : (img.id === 0)}" data-ng-repeat="img in images" class="ng-scope item active">
-                                <!-- ngIf: (images.length-1) === $index -->
-                                <!-- ngIf: img.image_url == '#phl-video' -->
-                                <!-- ngIf: img.image_url != '#phl-video' --><span data-ng-if="img.image_url != &#39;#phl-video&#39;" class="ng-scope">
-                                    <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
-                                        <img data-ng-src="/images/campaign/carousel/en/7553PHLPowerballCarousel1002en_1486731496.jpg" alt="Powerball Jackpot" width="1170" height="400" src="./HomePage_files/7553PHLPowerballCarousel1002en_1486731496.jpg">
-                                    </a>
-                                </span><!-- end ngIf: img.image_url != '#phl-video' -->
-                            </div><!-- end ngRepeat: img in images -->
-                            <div data-ng-class="{item: true, active : (img.id === 0)}" data-ng-repeat="img in images" class="ng-scope item">
-                                <!-- ngIf: (images.length-1) === $index --><div data-ng-if="(images.length-1) === $index" class="ng-scope">
-                                    <div class="jackpot-carousel">
-                                        <div class="jackpot-lottery-name ng-binding">
-                                            Powerball
-                                        </div>
-                                        <div class="jackpot-amount">
-                                            <strong data-ng-bind-html="jackpot_details.currency_symbol" class="ng-binding">US</strong> <span data-ng-bind-html="jackpot_details.jackpot_amount" class="ng-binding">$285,000,000</span>
-                                        </div>
-                                        <div class="jackpot-payout">
-                                            <!-- ngIf: jackpot_details.cash_payout --><span data-ng-if="jackpot_details.cash_payout" class="ng-scope">
-                                                cash payout:            <strong>US</strong> $<span data-ng-bind-html="jackpot_details.cash_payout" class="ng-binding">172,500,000</span>
-                                            </span><!-- end ngIf: jackpot_details.cash_payout -->
-                                            <span data-ng-else=""><br></span>
-                                        </div>
-                                        <hr class="banner-hr">
-                                        <div style="width:660px;">
-                                            <span class="date">
-                                                Draw date:&nbsp;
-                                                <strong>11-02-2017</strong>
-                                            </span>
-                                            <br>
-                                            <div class="time">
-                                                <div data-timer="" data-end-time="1486854000000" class="ng-isolate-scope">
-                                                    <div class="timer-block ng-scope">
-                                                        <span class="timer-number ng-binding" data-ng-bind-html="days">0</span><br>
-                                                        days
-                                                    </div>
-                                                    <div class="timer-block ng-scope">
-                                                        <span class="timer-number ng-binding" data-ng-bind-html="hours">4</span><br>
-                                                        hours
-                                                    </div>
-                                                    <div class="timer-block ng-scope">
-                                                        <span class="timer-number ng-binding" data-ng-bind-html="minutes">17</span> <br>
-                                                        minutes
-                                                    </div>
-                                                    <div class="timer-block ng-scope">
-                                                        <span class="timer-number ng-binding" data-ng-bind-html="seconds">38</span><br>
-                                                        seconds
-                                                    </div>
-                                                </div>
-                                                <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
-                                                    <div class="timer-block timer-play">
-                                                        Play Now
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- end ngIf: (images.length-1) === $index -->
-                                <!-- ngIf: img.image_url == '#phl-video' -->
-                                <!-- ngIf: img.image_url != '#phl-video' --><span data-ng-if="img.image_url != &#39;#phl-video&#39;" class="ng-scope">
-                                    <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
-                                        <img data-ng-src="/site/playhugelottos_com/images/playnow_bg-en-2017.jpg" alt="Play The Lottery" width="1170" height="400" src="./HomePage_files/playnow_bg-en-2017.jpg">
-                                    </a>
-                                </span><!-- end ngIf: img.image_url != '#phl-video' -->
-                            </div><!-- end ngRepeat: img in images -->
-                        </div>
-                        <a class="left carousel-control home-slider" href="https://www.playusalotteries.com/#myCarousel" role="button" id="left-home-slider" data-icon="u" data-slide="prev"></a>
-                        <a class="right carousel-control home-slider" href="https://www.playusalotteries.com/#myCarousel" role="button" id="right-home-slider" data-icon="w" data-slide="next"></a>
-                    </div>
-                </div>
-            </div>
-
+        <div class="twoColWrapper ng-scope">
+            <input type="hidden" name="culture" id="culture" value="en" />
             @{
+                Html.RenderPartial("Carousel/_CarouselPartialView");
                 Html.RenderAction("RenderLotteryList", "LotteryGamesList");
 
                 var settingItem = LottoDemo.WebApp.Helpers.ItemHelper.SettingsItem;
@@ -102,14 +16,14 @@
                 var newsListPage = this.Umbraco.TypedContent(newsListRootId);
                 int newsCount = settingItem.GetValue<int>("homeLatestNewsCount");
             }
-
-            @*Latest News*@
             <div class="col-lg-12 ">
                 <hr /><br />
+
                 <div class="basket-entry-head">
                     <h3 class="News-Sub-Heading">@Umbraco.GetDictionaryValue("newsLatestNewsListTitle")</h3>
                 </div>
-                <br><br>
+
+                <br /><br />
 
                 @if (newsListPage != null && newsListPage.Children.Any())
                 {
@@ -121,5 +35,5 @@
             </div>
         </div>
     </div>
-    <br><br>
+    <br /><br />
 </div>

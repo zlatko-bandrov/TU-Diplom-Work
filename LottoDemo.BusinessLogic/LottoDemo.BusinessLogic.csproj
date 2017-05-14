@@ -264,7 +264,7 @@
     <Compile Include="LotteryLogic\NumbersGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GameDrawingService.cs" />
-    <Compile Include="Services\GamblerService.cs" />
+    <Compile Include="Services\LottoUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -6,12 +6,14 @@
     
     ViewBag.GameKey = Umbraco.Content(Model.Content.Id).Key;
     var autoGenerateNumbersUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.GetUmbracoApiService<LotteryGameController>("GetRandomNumbers"));
+    var updateTicketTimerUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.GetUmbracoApiService<LotteryGameController>("GetNextDrawTimeLeft"));
 }
 @section head {
     <script src="~/Scripts/custom/single-ticket-box.js"></script>
     <script src="~/Scripts/custom/user-cart.js"></script>
     <script type="text/javascript">
         AutoGenerateNumbersUrl = '@autoGenerateNumbersUrl';
+        UpdateTicketTimerUrl = '@updateTicketTimerUrl';
     </script>
 }
 

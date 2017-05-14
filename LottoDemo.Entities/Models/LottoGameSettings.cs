@@ -31,5 +31,6 @@ namespace LottoDemo.Entities.Models
         public byte BonusBallsCount { get; set; }
         public byte BonusBallMin { get; set; }
         public byte BonusBallMax { get; set; }
+        
     }
 }

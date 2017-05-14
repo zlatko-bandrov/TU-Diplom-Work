@@ -69,7 +69,7 @@
                     <select name="BirthDateYear" id="customer_registration_lead_dob_year">
                         @for (int year = 1990; year <= DateTime.Now.Year; year++)
                         {
-                    <option value="@year" selected="@(year == DateTime.Now.Year ? "selected" : null)">@year</option>
+                            <option value="@year" selected="@(year == DateTime.Now.Year ? "selected" : null)">@year</option>
                         }
                     </select>-
                     <select name="BirthDateMonth" id="customer_registration_lead_dob_month">
@@ -89,7 +89,7 @@
                     <select name="BirthDateDay" id="customer_registration_lead_dob_day">
                         @for (int day = 1; day <= 31; day++)
                         {
-                        <option value="@day">@day</option>
+                            <option value="@day">@day</option>
                         }
                     </select>
                 </div>

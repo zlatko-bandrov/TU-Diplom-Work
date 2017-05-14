@@ -11,18 +11,28 @@ namespace LottoDemo.Entities.Models
     {
         public LottoGameModel(IPublishedContent contentItem = null)
         {
+            if (contentItem != null)
+            {
+                this.Jackpot = decimal.Parse(contentItem.GetProperty("Jackpot").Value.ToString());
+                this.LottoGameName = contentItem.Name;
+                this.LottoGameUrl = contentItem.Url;
+            }
             this.GameSettings = new LottoGameSettings(contentItem);
             this.TicketBoxSettings = new TicketBoxSettings(this.GameSettings);
-            this.NextDrawingDate = DateTime.Now.AddMinutes(15);
         }
 
         public int Id { get; set; }
         public Guid GameKey { get; set; }
         public decimal Jackpot { get; set; }
         public CurrencyModel JackpotCurrency { get; set; }
-        public DateTime NextDrawingDate { get; set; }
+
+        public DateTime NextDrawingTime { get; set; }
+        public DateTime PreviousDrawingTime { get; set; }
 
         public TicketBoxSettings TicketBoxSettings { get; set; }
         public LottoGameSettings GameSettings { get; set; }
+
+        public string LottoGameName { get; set; }
+        public string LottoGameUrl { get; set; }
     }
 }

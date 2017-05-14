@@ -22,7 +22,7 @@ namespace LottoDemo.BusinessLogic.Extensions.LotteryGame
 
             if (lottoGame.Jackpot != null && lottoGame.Jackpot.Balance != null)
             {
-                model.Jackpot = lottoGame.Jackpot.Balance.Value;
+                //model.Jackpot = lottoGame.Jackpot.Balance.Value;
                 if (lottoGame.Jackpot.Balance.Currency != null)
                 {
                     model.JackpotCurrency = lottoGame.Jackpot.Balance.Currency.ToCurrencyModel();

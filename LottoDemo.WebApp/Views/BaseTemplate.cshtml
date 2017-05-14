@@ -58,27 +58,22 @@
     @RenderSection("head", false)
 </head>
 <body>
-    @{ Html.RenderPartial("~/Views/Partials/MainMenu.cshtml"); }
+    @{ Html.RenderAction("RenderMainMenu", "ShoppingCart");  }
 
     <div id="content" class="snap-content">
-
-        @*Top Navigation Bar*@
         @{ Html.RenderPartial("MainNavigation"); }
-
         <div class="container white-bg">
             @RenderBody()
             <div id="clearFooter"><!-- --></div>
         </div>
-
         @{
             Html.RenderPartial("PaymentMethodsList");
             Html.RenderPartial("Footer");
         }
     </div>
-
-    @{ Html.RenderPartial("BodyBottomScripts"); }
-
-    @*Create the login form html*@
-    @{ Html.RenderAction("RenderLoginDialog", "MemberLogin"); }
+    @{
+        Html.RenderPartial("BodyBottomScripts");
+        Html.RenderAction("RenderLoginDialog", "MemberLogin");
+    }
 </body>
 </html>

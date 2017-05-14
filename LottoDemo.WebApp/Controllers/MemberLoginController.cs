@@ -53,7 +53,7 @@ namespace LottoDemo.WebApp.Controllers
                     memberService.Save(newMember);
 
                     // To create new user in the lottery system database
-                    GamblerService service = new GamblerService();
+                    LottoUserService service = new LottoUserService();
                     service.CreateNewUser(model.MemberEmail);
 
                     // Login the new member

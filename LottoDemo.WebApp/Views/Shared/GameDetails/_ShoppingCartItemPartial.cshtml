@@ -1,0 +1,62 @@
+﻿@using LottoDemo.Entities.Models.Cart;
+@model LotteryGameCartItem
+
+<div id="entry_23">
+    <span id="entry_str_23_standard">
+        @Model.Tickets.Count x @Model.LottoGameName entries
+    </span>
+    <div class="viewnumberright">
+        @using (Html.BeginUmbracoForm("DeleteAllTickets", "GameDetails", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="pull-right" title="Delete all tickets" style="margin-right: 30px; background-color: transparent !important; padding: 0 !important;">
+                <span data-icon="o" class="icon" style="cursor: pointer; color: #428BCA;"></span>
+            </button>
+        }
+    </div>
+
+    <div id="lottery_entries_23" style="">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <td>Lotto Numbers</td>
+                    <td>Draw date</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.Tickets)
+                {
+                    <tr id="@ticket.LottoTicketId">
+                        <td>
+                            <div class="ballset-wrap">
+                                @foreach (byte ballNumber in ticket.BallsNumbers)
+                                {
+                                    <div class="entryNumber ballSet48">@ballNumber</div>
+                                }
+                                @foreach (byte ballNumber in ticket.BonusBallsNumbers)
+                                {
+                                    <div class="entryNumber ballSet49">@ballNumber</div>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @ticket.GameDrawTime.ToString("dd MMM yyyy (dddd)")
+                        </td>
+                        <td>
+                            <div class="entryRemove">
+                                @using (Html.BeginUmbracoForm("DeleteSingleTicket", "GameDetails", new { lotteryTicketId = @ticket.LottoTicketId }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" title="Delete the ticket" style="background-color: transparent !important; padding: 0 !important;">
+                                        <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

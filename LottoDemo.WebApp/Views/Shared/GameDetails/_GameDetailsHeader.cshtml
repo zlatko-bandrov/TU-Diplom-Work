@@ -1,19 +1,26 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteryGame>
 
+@{
+    var ticketBoxSettings = (ViewBag.TicketBoxSettings as TicketBoxSettings);
+    DateTime nextDrawingTime = (DateTime)ViewBag.NextDrawTime;
+    TimeSpan timeLeft = (TimeSpan)ViewBag.NextDrawTimeLeft;
+}
+<script type="text/javascript">
+    GameTicketSettings = {
+        "ballsCount": @ticketBoxSettings.BallsCount,
+        "bonusBallsCount": @ticketBoxSettings.BonusBallsCount,
+        "minBonusBallNumber": @ticketBoxSettings.BonusBallMin,
+        "maxBonusBallNumber": @ticketBoxSettings.BonusBallMax,
+        "drawBallMaxNumber": @ticketBoxSettings.GameMaxNumber
+    };
+
+    GameNextDrawTime = '@(((DateTime)ViewBag.NextDrawTime).Ticks)';
+    EnableDrawTimer = @((timeLeft.TotalSeconds > 5).ToString().ToLower());
+    CurrentPageUrl = '@Model.Content.Url';
+</script>
 <div class="container">
-
-    @*<div class="col-lg-12 progress-steps">
-            <div class="wizard">
-                <a href="/" class="current">Add entries</a>
-                <a>Order summary</a>
-                <a>Payment</a>
-                <a>Order complete</a>
-            </div>
-        </div>
-        <br />*@
-
-    <!-- Page Top Header -->
     <div class="col-lg-12 grey-bg lotto-logo-holder">
         <div class="grey-contain">
             <div class="col-lg-4 col-sm-4 col-xs-12 lotto-logo">
@@ -51,15 +58,14 @@
             </div>
 
             <div class="col-lg-4 col-sm-4 col-xs-12 right">
-                <div id="timer"></div>
                 <div class="timer-wrapper" style="width: 298px; padding-top:30px;">
-                    <div class="angular-my-timer-date ng-binding">15 Apr 2017 (Saturday)</div>
-                    <div>
-                        <div data-timer="" data-end-time="1492293600000" class="ng-isolate-scope">
-                            <div class="angular-my-timer ng-scope"><span class="ng-binding">0</span><br/>days</div>
-                            <div class="angular-my-timer ng-scope"><span class="ng-binding">4</span><br/>hours</div>
-                            <div class="angular-my-timer ng-scope"><span class="ng-binding">5</span><br/>minutes</div>
-                            <div class="angular-my-timer ng-scope"><span class="ng-binding">1</span><br/>seconds</div>
+                    <div class="angular-my-timer-date ng-binding">@nextDrawingTime.ToString("dd MMM yyyy (dddd)")</div>
+                    <div id="ticketDrawTimer">
+                        <div class="ng-isolate-scope">
+                            <div class="angular-my-timer ng-scope"><span id="days">@timeLeft.Days</span><br />days</div>
+                            <div class="angular-my-timer ng-scope"><span id="hours">@timeLeft.Hours</span><br />hours</div>
+                            <div class="angular-my-timer ng-scope"><span id="minutes">@timeLeft.Minutes</span><br />minutes</div>
+                            <div class="angular-my-timer ng-scope"><span id="seconds">@timeLeft.Seconds</span><br />seconds</div>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,10 @@ using log4net;
 using System.Reflection;
 using LottoDemo.Common.Services;
 using LottoDemo.BusinessLogic.Services;
+using System.Globalization;
+using System.Net.Http;
+using LottoDemo.Entities.Models;
+using System.Net.Http.Headers;
 
 namespace TestConsoleApp
 {
@@ -18,13 +22,41 @@ namespace TestConsoleApp
     {
         private static Timer ServiceTimer;
 
+        private static HttpClient _httpClient = new HttpClient();
+
+        protected static Guid GetLottoGameKey
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["LotteryGameKey"];
+                return Guid.Parse(value);
+            }
+        }
+
+        protected static string GetWebApiUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["webAPIUrl"];
+            }
+        }
+
+        protected static LottoGameSettings GameSettings { get; set; }
+
+
         static void Main(string[] args)
         {
             try
             {
+                WriteMessage("Start getting the game settings.");
+
+                InitGameSettings();
+
+
+
                 Console.WriteLine("{0:h:mm:ss.fff} Creating timer.\n", DateTime.Now);
 
-                System.Globalization.CultureInfo formatProvider = System.Globalization.CultureInfo.InvariantCulture;
+                CultureInfo formatProvider = CultureInfo.InvariantCulture;
                 int numberOfIterations = int.Parse(ConfigurationManager.AppSettings["NumberOfDrawings"], formatProvider);
 
                 GameDrawingService drawingService = new GameDrawingService(numberOfIterations);
@@ -49,6 +81,10 @@ namespace TestConsoleApp
                 {
                     ServiceTimer.Dispose();
                 }
+                if (_httpClient != null)
+                {
+                    _httpClient.Dispose();
+                }
             }
         }
 
@@ -58,6 +94,40 @@ namespace TestConsoleApp
             {
                 ServiceTimer.Dispose();
             }
+        }
+
+
+        private static bool InitGameSettings()
+        {
+            string webApiMethod = string.Format("umbraco/Api/LotteryGame/GetGameSettings?gameKey={0}", GetLottoGameKey);
+            _httpClient.BaseAddress = new Uri(GetWebApiUrl);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = _httpClient.GetAsync(webApiMethod).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                GameSettings = response.Content.ReadAsAsync<LottoDemo.Entities.Models.LottoGameSettings>().Result;
+                WriteMessage("Game settins were retrieved successfully from the CMS.");
+                return true;
+            }
+            else
+            {
+                WriteMessage(new Exception("Error Code" + response.StatusCode + " : Message - " + response.ReasonPhrase));
+                return false;
+            }
+        }
+
+        private static void WriteMessage(string infoMessage)
+        {
+            Console.WriteLine(infoMessage);
+            Log.Info(MethodBase.GetCurrentMethod().DeclaringType, infoMessage);
+        }
+
+        private static void WriteMessage(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Log.Error(MethodBase.GetCurrentMethod().DeclaringType, ex.Message, ex);
         }
     }
 }

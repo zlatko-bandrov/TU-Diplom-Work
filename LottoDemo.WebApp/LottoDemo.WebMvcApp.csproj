@@ -467,6 +467,7 @@
     <Compile Include="Controllers\GameDetailsController.cs" />
     <Compile Include="Controllers\LotteryGamesListController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\WebAPI\LotteryGameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -493,7 +494,7 @@
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
-    <Content Include="Views\Partials\MainMenu.cshtml" />
+    <Content Include="Views\ShoppingCart\MainMenu.cshtml" />
     <Content Include="Views\BaseTemplate.cshtml" />
     <Content Include="Views\HomePage.cshtml">
       <SubType>Code</SubType>
@@ -502,9 +503,6 @@
     <Content Include="Views\Partials\PaymentMethodsList.cshtml" />
     <Content Include="Views\Partials\BodyBottomScripts.cshtml" />
     <Content Include="Views\Partials\MainNavigation.cshtml" />
-    <Content Include="Views\Partials\HomePageBanner.cshtml" />
-    <Content Include="Views\Partials\LottoGamesList.cshtml" />
-    <Content Include="Views\Partials\LatestNewsList.cshtml" />
     <Content Include="Views\ContactUsPage.cshtml" />
     <Content Include="Views\FAQPage.cshtml" />
     <Content Include="Views\HowToPlay.cshtml" />
@@ -524,6 +522,8 @@
     <Content Include="Views\Shared\GameDetails\_GameDetailsHeader.cshtml" />
     <Content Include="Views\Shared\GameDetails\_LotteryTicketBoxes.cshtml" />
     <Content Include="Views\Shared\GameDetails\_LottoGameCart.cshtml" />
+    <Content Include="Views\Shared\GameDetails\_ShoppingCartItemPartial.cshtml" />
+    <Content Include="Views\Shared\Carousel\_CarouselPartialView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

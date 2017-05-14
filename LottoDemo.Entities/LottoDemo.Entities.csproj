@@ -258,12 +258,17 @@
   <ItemGroup>
     <Compile Include="Helpers\DataHelper.cs" />
     <Compile Include="Models\Cart\AddToCartModel.cs" />
+    <Compile Include="Models\Cart\LotteryGameCartItem.cs" />
+    <Compile Include="Models\Cart\LotteryTicketCartItem.cs" />
+    <Compile Include="Models\Cart\ShoppingCartItem.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\LottoGameModel.cs" />
     <Compile Include="Models\LottoGameSettings.cs" />
     <Compile Include="Models\TicketBoxSettings.cs" />
     <Compile Include="Models\WebAPI\AutoGenerateNumbersResult.cs" />
+    <Compile Include="Models\WebAPI\DrawingTimerModel.cs" />
     <Compile Include="Models\WebAPI\GameDrawSettings.cs" />
+    <Compile Include="Models\WebAPI\NextDrawTimeLeftModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,5 +15,10 @@ namespace LottoDemo.Repositories.Repositories
         {
             return this.Get(g => g.GameKey.Equals(gameUniqueId));
         }
+
+        public LotteryGame GetLottoGameById(int lottoGameId)
+        {
+            return this.Get(g => g.ID == lottoGameId);
+        }
     }
 }
