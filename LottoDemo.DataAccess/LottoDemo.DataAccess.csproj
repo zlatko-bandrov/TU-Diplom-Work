@@ -56,6 +56,9 @@
     <Compile Include="Currency.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GameWinningsTier.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Jackpot.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>

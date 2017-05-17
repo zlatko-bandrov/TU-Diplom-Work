@@ -15,6 +15,11 @@ namespace LottoDemo.BusinessLogic.Services
 {
     public class LottoUserService
     {
+        public static LottoUserService GetInstance()
+        {
+            return new LottoUserService();
+        }
+
         private decimal InitialUserBalance
         {
             get
@@ -29,7 +34,10 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
-        private UserUnitOfWork UnitOfWork = new UserUnitOfWork();
+        public UserUnitOfWork UnitOfWork
+        {
+            get { return UserUnitOfWork.GetInstance(); }
+        }
 
         public bool CreateNewUser(string umbracoUsername)
         {

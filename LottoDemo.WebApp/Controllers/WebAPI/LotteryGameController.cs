@@ -14,11 +14,10 @@ namespace LottoDemo.WebApp.Controllers.WebAPI
         public JsonResult<AutoGenerateNumbersResult> GetRandomNumbers([FromUri]GameDrawSettings gameSettings)
         {
             var gameNumbers = new AutoGenerateNumbersResult();
-            var drawingService = new GameDrawingService();
 
-            gameNumbers.BallsList = drawingService.GenerateDrawNumbers(1, gameSettings.DrawBallMaxNumber, gameSettings.DrawBallsCount);
+            gameNumbers.BallsList = LottoDrawService.GenerateDrawNumbers(1, gameSettings.DrawBallMaxNumber, gameSettings.DrawBallsCount);
             gameNumbers.BonusBallsList =
-                drawingService.GenerateDrawNumbers(
+                LottoDrawService.GenerateDrawNumbers(
                     gameSettings.MinBonusBallNumber,
                     gameSettings.MaxBonusBallNumber,
                     gameSettings.BonusBallsCount);

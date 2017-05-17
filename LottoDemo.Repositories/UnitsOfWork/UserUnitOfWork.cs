@@ -6,6 +6,11 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class UserUnitOfWork : BaseUnitOfWork
     {
+        public static UserUnitOfWork GetInstance()
+        {
+            return new UserUnitOfWork();
+        }
+
         private GenericRepository<User> lotteryUserRepo;
         public GenericRepository<User> UserRepository
         {

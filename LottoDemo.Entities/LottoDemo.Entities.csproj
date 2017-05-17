@@ -256,7 +256,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\DataHelper.cs" />
     <Compile Include="Models\Cart\AddToCartModel.cs" />
     <Compile Include="Models\Cart\LotteryGameCartItem.cs" />
     <Compile Include="Models\Cart\LotteryTicketCartItem.cs" />

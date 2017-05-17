@@ -11,8 +11,15 @@ namespace LottoDemo.WebApp.Controllers
 {
     public class GameDetailsController : SurfaceController
     {
-        private LotteryGameService GameService = new LotteryGameService();
-        private LottoUserService LottoUserService = new LottoUserService();
+        public LotteryGameService GameService
+        {
+            get { return LotteryGameService.GetInstance(); }
+        }
+
+        public LottoUserService LottoUserService
+        {
+            get { return LottoUserService.GetInstance(); }
+        }
 
         public ActionResult RenderHeader()
         {
@@ -95,8 +102,7 @@ namespace LottoDemo.WebApp.Controllers
             try
             {
                 model.LoadValues(Request.Form);
-                var gamblerService = new LottoUserService();
-                gamblerService.AddNewLotteryTickets(this.User.Identity.Name, model);
+                LottoUserService.AddNewLotteryTickets(this.User.Identity.Name, model);
 
                 return RedirectToCurrentUmbracoPage();
             }

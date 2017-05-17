@@ -12,28 +12,39 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class LottoGameUnitOfWork : BaseUnitOfWork
     {
-        private LotteryGameRepository _gameRepository;
+        public static LottoGameUnitOfWork GetInstance()
+        {
+            return new LottoGameUnitOfWork();
+        }
+
+        private LotteryGameRepository _gameRepository = null;
         public LotteryGameRepository GameRepository
         {
             get { return _gameRepository ?? (_gameRepository = new LotteryGameRepository(this.Context)); }
         }
 
-        private GenericRepository<LottoDrawing> _drawRepository;
+        private GenericRepository<LottoDrawing> _drawRepository = null;
         public GenericRepository<LottoDrawing> DrawRepository
         {
             get { return this._drawRepository ?? (this._drawRepository = new GenericRepository<LottoDrawing>(this.Context)); }
         }
 
-        private GenericRepository<LottoDrawingBall> _drawBallsRelationsRepository;
+        private GenericRepository<LottoDrawingBall> _drawBallsRelationsRepository = null;
         public GenericRepository<LottoDrawingBall> DrawBallsRelationsRepository
         {
             get { return this._drawBallsRelationsRepository ?? (this._drawBallsRelationsRepository = new GenericRepository<LottoDrawingBall>(this.Context)); }
         }
 
-        private GenericRepository<LotteryBall> _ballsRepository;
+        private GenericRepository<LotteryBall> _ballsRepository = null;
         public GenericRepository<LotteryBall> BallsRepository
         {
             get { return this._ballsRepository ?? (this._ballsRepository = new GenericRepository<LotteryBall>(this.Context)); }
+        }
+
+        private GenericRepository<GameWinningsTier> _winningsTiersRepository = null;
+        public GenericRepository<GameWinningsTier> WinningsTiersRepository
+        {
+            get { return this._winningsTiersRepository ?? (this._winningsTiersRepository = new GenericRepository<GameWinningsTier>(this.Context)); }
         }
     }
 }

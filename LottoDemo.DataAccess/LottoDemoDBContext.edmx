@@ -26,6 +26,17 @@
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="GameWinningsTier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LottoGameID" Type="int" Nullable="false" />
+          <Property Name="BallsCount" Type="tinyint" Nullable="false" />
+          <Property Name="BonnusBallCount" Type="tinyint" Nullable="false" />
+          <Property Name="TierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TierPercent" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Jackpot">
           <Key>
             <PropertyRef Name="ID" />
@@ -114,6 +125,18 @@
             </Principal>
             <Dependent Role="Balance">
               <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameWinningsTier_LotteryGame">
+          <End Role="LotteryGame" Type="Self.LotteryGame" Multiplicity="1" />
+          <End Role="GameWinningsTier" Type="Self.GameWinningsTier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LotteryGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GameWinningsTier">
+              <PropertyRef Name="LottoGameID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -251,6 +274,7 @@
         <EntityContainer Name="LotteryDemoEFModelStoreContainer">
           <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameWinningsTier" EntityType="Self.GameWinningsTier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jackpot" EntityType="Self.Jackpot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LotteryBall" EntityType="Self.LotteryBall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LotteryGame" EntityType="Self.LotteryGame" Schema="dbo" store:Type="Tables" />
@@ -262,6 +286,10 @@
           <AssociationSet Name="FK_Balance_Currency" Association="Self.FK_Balance_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Balance" EntitySet="Balance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameWinningsTier_LotteryGame" Association="Self.FK_GameWinningsTier_LotteryGame">
+            <End Role="LotteryGame" EntitySet="LotteryGame" />
+            <End Role="GameWinningsTier" EntitySet="GameWinningsTier" />
           </AssociationSet>
           <AssociationSet Name="FK_Jackpot_Balance" Association="Self.FK_Jackpot_Balance">
             <End Role="Balance" EntitySet="Balance" />
@@ -374,6 +402,11 @@
             <End Role="LottoTicket" EntitySet="LottoTickets" />
             <End Role="LottoTicketBall" EntitySet="LottoTicketBalls" />
           </AssociationSet>
+          <EntitySet Name="GameWinningsTiers" EntityType="LotteryDemoEFModel.GameWinningsTier" />
+          <AssociationSet Name="FK_GameWinningsTier_LotteryGame" Association="LotteryDemoEFModel.FK_GameWinningsTier_LotteryGame">
+            <End Role="LotteryGame" EntitySet="LotteryGames" />
+            <End Role="GameWinningsTier" EntitySet="GameWinningsTiers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Balance">
           <Key>
@@ -435,6 +468,7 @@
           <NavigationProperty Name="Jackpot" Relationship="LotteryDemoEFModel.FK_LotteryGame_Jackpot" FromRole="LotteryGame" ToRole="Jackpot" />
           <NavigationProperty Name="LottoDrawings" Relationship="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" FromRole="LotteryGame" ToRole="LottoDrawing" />
           <NavigationProperty Name="LottoTickets" Relationship="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" FromRole="LotteryGame" ToRole="LottoTicket" />
+          <NavigationProperty Name="GameWinningsTiers" Relationship="LotteryDemoEFModel.FK_GameWinningsTier_LotteryGame" FromRole="LotteryGame" ToRole="GameWinningsTier" />
         </EntityType>
         <EntityType Name="LottoDrawing">
           <Key>
@@ -629,6 +663,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GameWinningsTier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LottoGameID" Type="Int32" Nullable="false" />
+          <Property Name="BallsCount" Type="Byte" Nullable="false" />
+          <Property Name="BonnusBallCount" Type="Byte" Nullable="false" />
+          <Property Name="TierName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TierPercent" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LotteryGame" Relationship="LotteryDemoEFModel.FK_GameWinningsTier_LotteryGame" FromRole="GameWinningsTier" ToRole="LotteryGame" />
+        </EntityType>
+        <Association Name="FK_GameWinningsTier_LotteryGame">
+          <End Type="LotteryDemoEFModel.LotteryGame" Role="LotteryGame" Multiplicity="1" />
+          <End Type="LotteryDemoEFModel.GameWinningsTier" Role="GameWinningsTier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LotteryGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GameWinningsTier">
+              <PropertyRef Name="LottoGameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -742,6 +800,18 @@
               <MappingFragment StoreEntitySet="LottoTicketBalls">
                 <ScalarProperty Name="LotteryBallID" ColumnName="LotteryBallID" />
                 <ScalarProperty Name="LottoTicketID" ColumnName="LottoTicketID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameWinningsTiers">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.GameWinningsTier">
+              <MappingFragment StoreEntitySet="GameWinningsTier">
+                <ScalarProperty Name="TierPercent" ColumnName="TierPercent" />
+                <ScalarProperty Name="TierName" ColumnName="TierName" />
+                <ScalarProperty Name="BonnusBallCount" ColumnName="BonnusBallCount" />
+                <ScalarProperty Name="BallsCount" ColumnName="BallsCount" />
+                <ScalarProperty Name="LottoGameID" ColumnName="LottoGameID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -12,6 +12,11 @@ namespace LottoDemo.WebApp.Controllers
         private readonly string NewMemberGroupName = "Lottery Games";
         private readonly string NewMemberType = "lottoGamer";
 
+        public LottoUserService LottoUserService
+        {
+            get { return LottoUserService.GetInstance(); }
+        }
+
         public ActionResult RenderLoginDialog()
         {
             var model = new LoginFromViewModel();
@@ -53,8 +58,7 @@ namespace LottoDemo.WebApp.Controllers
                     memberService.Save(newMember);
 
                     // To create new user in the lottery system database
-                    LottoUserService service = new LottoUserService();
-                    service.CreateNewUser(model.MemberEmail);
+                    LottoUserService.CreateNewUser(model.MemberEmail);
 
                     // Login the new member
                     if (Membership.ValidateUser(model.MemberEmail, model.MemberPassword))

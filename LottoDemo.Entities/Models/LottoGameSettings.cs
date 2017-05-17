@@ -14,7 +14,7 @@ namespace LottoDemo.Entities.Models
             if (contentItem != null)
             {
                 // Set game settings
-                this.DrawingTimeInterval = byte.Parse(contentItem["DrawingTimeInterval"].ToString());
+                this.DrawingTimeInterval = double.Parse(contentItem["DrawingTimeInterval"].ToString());
                 this.TicketPrice = double.Parse(contentItem["TicketPrice"].ToString());
                 this.GameMaxNumber = byte.Parse(contentItem["DrawNumbersMaximum"].ToString());
                 this.BallsCount = byte.Parse(contentItem["DrawBallsCount"].ToString());
@@ -24,13 +24,12 @@ namespace LottoDemo.Entities.Models
             }
         }
 
-        public byte DrawingTimeInterval { get; set; }
+        public double DrawingTimeInterval { get; set; }
         public double TicketPrice { get; set; }
         public byte GameMaxNumber { get; set; }
         public byte BallsCount { get; set; }
         public byte BonusBallsCount { get; set; }
         public byte BonusBallMin { get; set; }
         public byte BonusBallMax { get; set; }
-        
     }
 }

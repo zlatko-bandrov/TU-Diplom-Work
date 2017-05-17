@@ -260,10 +260,10 @@
     <Compile Include="Extensions\CurrencyExtensions.cs" />
     <Compile Include="Extensions\LotteryGameExtensions.cs" />
     <Compile Include="Entities\Extensions\DrawingNumberExtensions.cs" />
-    <Compile Include="Games\LotteryGameService.cs" />
+    <Compile Include="Services\LotteryGameService.cs" />
     <Compile Include="LotteryLogic\NumbersGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\GameDrawingService.cs" />
+    <Compile Include="Services\LottoDrawService.cs" />
     <Compile Include="Services\LottoUserService.cs" />
   </ItemGroup>
   <ItemGroup>
