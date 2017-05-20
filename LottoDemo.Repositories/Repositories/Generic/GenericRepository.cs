@@ -28,7 +28,7 @@ namespace LottoDemo.Repositories.Generic
             return this.Table.AsNoTracking();
         }
 
-        public virtual IEnumerable<T> AsList(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> AsList(Expression<Func<T, bool>> predicate = null)
         {
             return this.AsQuery(predicate).ToList();
         }

@@ -1,28 +1,13 @@
-﻿
-<script type="text/javascript" src="~/Scripts/components/angular.min.js"></script>
+﻿<script type="text/javascript" src="~/Scripts/components/angular.min.js"></script>
 <script type="text/javascript" src="~/Scripts/components/angular-animate.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-route.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-local-storage.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-touch.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-carousel.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-timer.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/angular-sanitize.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/app.js"></script>
-@*<script type="text/javascript" src="~/Scripts/components/services.js"></script>*@
-<script type="text/javascript" src="~/Scripts/components/home.js"></script>
 <script type="text/javascript" src="~/Scripts/components/bootstrap.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/hideShowPassword.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.popup_window.js"></script>
-@*<script type="text/javascript" src="~/Scripts/components/chat_popup.js"></script>*@
 <script type="text/javascript" src="~/Scripts/components/jquery.simplemodal.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.json-2.2.min.js"></script>
-<script type="text/javascript" src="~/Scripts/components/basket.js"></script>
-<script type="text/javascript" src="~/Scripts/components/snap.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.common.js"></script>
 <script type="text/javascript" src="~/Scripts/components/jquery.facybox.js"></script>
 <script type="text/javascript" src="~/Scripts/components/layout_scripts.js"></script>
-<script type="text/javascript" src="~/Scripts/components/homepagepixel.js"></script>
-<script type="text/javascript" src="~/Scripts/components/crypto.js"></script>
+<script type="text/javascript" src="~/Scripts/components/snap.js"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
@@ -35,51 +20,6 @@
             jQuery('#simplemodal-overlay').hide();
         });
 
-        jQuery('#customer_registration_lead_password').hidePassword(true);
-        jQuery('#password-2').hidePassword(true);
-        jQuery("#spinning1").hide();
-
-        jQuery(function () {
-            jQuery('#login_button').on('click', function (event) {
-                jQuery("#spinning1").show();
-                jQuery("#login_button").hide();
-            });
-        });
-
-        jQuery(function () {
-            jQuery('#register_button').on('submit', function (event) {
-                jQuery("#spinning").show();
-                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
-            });
-        });
-    });
-
-</script>
-
-<script type="text/javascript">
-    //modify code below when promotion ends
-    jQuery(document).ready(function () {
-
-        try {
-            // log every unique visit
-            var uniqueKey = jQuery.cookie("js");
-
-            if (uniqueKey === "undefined" || uniqueKey === undefined || uniqueKey == "") {
-                uniqueKey = CryptoJS.MD5(moment().toString());
-
-                var momentDate = moment().add('years', 1);
-                var expiryDate = new Date(momentDate.year(), momentDate.month(), momentDate.day(), momentDate.hour(), momentDate.minute(), momentDate.second(), momentDate.milliseconds());
-
-
-                jQuery.post("https://www.playusalotteries.com/unique/visit.html", { "unique_key": uniqueKey }, function (response) {
-                    if (response.status === "success") {
-                        jQuery.cookie("unique_key", uniqueKey, { expires: expiryDate, secure: false });
-                    }
-                }, 'json');
-            }
-        }
-        catch (e) {
-        }
     });
 
     /* Responsive side nav */
@@ -103,10 +43,8 @@
                         sessionStorage.setItem("screenwidth", x);
                     }
                 });
-
                 if (x < 768) window.location.reload(); //reload for side nav
                 if (x > 768) window.location.reload(); //reload for main nav
-
             }, 250);
         });
     });
@@ -127,7 +65,6 @@
     };
 
     var myToggleButton = document.getElementById('open-left')
-
     myToggleButton.addEventListener('click', function () {
         if (snapper.state().state == "left") {
             snapper.close();
@@ -149,7 +86,6 @@
                     jQuery('#left-home-slider').hide();
                 });
             });
-
             jQuery(function () {
                 jQuery('#right-home-slider').hover(function () {
                     jQuery('#right-home-slider').hide();
@@ -159,12 +95,4 @@
             });
         }
     });
-
-    function resetPlay() {
-        var lottery_counter = $j('#lottery_ballgrid_count').val();
-        for (var i = 0; i < lottery_counter; i++) {
-            resetEntry(i);
-        }
-        return true;
-    }
 </script>

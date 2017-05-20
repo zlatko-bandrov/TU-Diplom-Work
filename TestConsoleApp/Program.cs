@@ -15,60 +15,27 @@ namespace TestConsoleApp
     {
         private static Timer ServiceTimer;
 
-        private static HttpClient _httpClient = new HttpClient();
-
-        protected static Guid GetLottoGameKey
+        private static readonly string _lotteryGameName = ConfigurationManager.AppSettings["LottoGameName"];
+        public static string LotteryGameName
         {
-            get
-            {
-                string value = ConfigurationManager.AppSettings["LotteryGameKey"];
-                return Guid.Parse(value);
-            }
+            get { return _lotteryGameName; }
         }
-
-        protected static string GetWebApiUrl
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["webAPIUrl"];
-            }
-        }
-
-        protected static int DrawingsCount
-        {
-            get
-            {
-                CultureInfo formatProvider = CultureInfo.InvariantCulture;
-                int drawingCount = int.Parse(ConfigurationManager.AppSettings["NumberOfDrawings"], formatProvider);
-
-                return drawingCount;
-            }
-        }
-
-        protected static string LotteryGameName
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["LottoGameName"];
-            }
-        }
-
-        protected static LottoGameSettings GameSettings { get; set; }
-
 
         static void Main(string[] args)
         {
             try
             {
-                if (!InitGameSettings())
+                LottoDrawService drawingService = new LottoDrawService();
+                if (!drawingService.InitGameSettings())
                 {
                     Console.ReadLine();
                     return;
                 }
 
-                LottoDrawService.WriteLogMessage("Start the number generation service.\n");
+                // Get current game last draw time
 
-                LottoDrawService drawingService = new LottoDrawService(GameSettings, GetLottoGameKey, DrawingsCount);
+                LottoDrawService.WriteLogMessage(string.Format("Start the number generation service for '{0}'.\n", LotteryGameName));
+
                 AutoResetEvent autoEvent = new AutoResetEvent(false);
                 ServiceTimer = new Timer(drawingService.ExecuteLottoDraw, autoEvent, TimeSpan.Zero, TimeSpan.FromMinutes(drawingService.DrawingTimeInterval));
                 autoEvent.WaitOne();
@@ -88,10 +55,6 @@ namespace TestConsoleApp
                 {
                     ServiceTimer.Dispose();
                 }
-                if (_httpClient != null)
-                {
-                    _httpClient.Dispose();
-                }
             }
         }
 
@@ -100,29 +63,6 @@ namespace TestConsoleApp
             if (ServiceTimer != null)
             {
                 ServiceTimer.Dispose();
-            }
-        }
-
-        private static bool InitGameSettings()
-        {
-            string webApiMethod = string.Format("umbraco/Api/LotteryGame/GetGameSettings?gameKey={0}", GetLottoGameKey);
-            _httpClient.BaseAddress = new Uri(GetWebApiUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            LottoDrawService.WriteLogMessage("Start getting the game settings.");
-
-            HttpResponseMessage response = _httpClient.GetAsync(webApiMethod).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                GameSettings = response.Content.ReadAsAsync<LottoDemo.Entities.Models.LottoGameSettings>().Result;
-                LottoDrawService.WriteLogMessage("Game settins were retrieved successfully from the CMS.");
-                return true;
-            }
-            else
-            {
-                LottoDrawService.WriteLogMessage(new Exception("Error Code" + response.StatusCode + " : Message - " + response.ReasonPhrase));
-                return false;
             }
         }
     }

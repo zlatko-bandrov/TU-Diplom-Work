@@ -12,10 +12,18 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class LottoGameUnitOfWork : BaseUnitOfWork
     {
-        public static LottoGameUnitOfWork GetInstance()
+        #region Singleton Pattern
+
+        private LottoGameUnitOfWork()
         {
-            return new LottoGameUnitOfWork();
+
         }
+
+        private static readonly LottoGameUnitOfWork _instance = new LottoGameUnitOfWork();
+
+        public static LottoGameUnitOfWork Instance { get { return _instance; } }
+
+        #endregion
 
         private LotteryGameRepository _gameRepository = null;
         public LotteryGameRepository GameRepository

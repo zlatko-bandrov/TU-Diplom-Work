@@ -433,14 +433,8 @@
     <Content Include="Scripts\components\angular-timer.min.js" />
     <Content Include="Scripts\components\angular-touch.min.js" />
     <Content Include="Scripts\components\angular.min.js" />
-    <Content Include="Scripts\components\app.js" />
-    <Content Include="Scripts\components\basket.js" />
     <Content Include="Scripts\components\bootstrap.min.js" />
-    <Content Include="Scripts\components\chat_popup.js" />
     <Content Include="Scripts\components\crypto.js" />
-    <Content Include="Scripts\components\hideShowPassword.js" />
-    <Content Include="Scripts\components\home.js" />
-    <Content Include="Scripts\components\homepagepixel.js" />
     <Content Include="Scripts\components\jquery.common.js" />
     <Content Include="Scripts\components\jquery.facybox.js" />
     <Content Include="Scripts\components\jquery.json-2.2.min.js" />
@@ -448,8 +442,6 @@
     <Content Include="Scripts\components\jquery.popup_window.js" />
     <Content Include="Scripts\components\jquery.simplemodal.js" />
     <Content Include="Scripts\components\layout_scripts.js" />
-    <Content Include="Scripts\components\services.js" />
-    <Content Include="Scripts\components\snap.js" />
     <Content Include="Scripts\custom\single-ticket-box.js" />
     <Content Include="Scripts\custom\user-cart.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -464,10 +456,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameDetailsController.cs" />
     <Compile Include="Controllers\LotteryGamesListController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\WebAPI\LotteryGameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -524,6 +518,8 @@
     <Content Include="Views\Shared\GameDetails\_LottoGameCart.cshtml" />
     <Content Include="Views\Shared\GameDetails\_ShoppingCartItemPartial.cshtml" />
     <Content Include="Views\Shared\Carousel\_CarouselPartialView.cshtml" />
+    <Content Include="Views\UserAccountDetails.cshtml" />
+    <Content Include="Views\UserAccount\RenderDetailsForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

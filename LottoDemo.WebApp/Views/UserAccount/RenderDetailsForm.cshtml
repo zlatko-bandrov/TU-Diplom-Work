@@ -1,0 +1,173 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserAccountDetails>
+
+<div class="row">
+    <div class="twoColWrapper col-lg-12">
+        <div class="rowL247">
+            <div class="pageContent">
+                <div class="col-lg-12">
+
+                    @using (Html.BeginUmbracoForm("UpdateCustomerProfile", "UserAccount", FormMethod.Post))
+                    {
+                        var errorsList = (List<string>)ViewBag.ErrorsList;
+                        var memberProfile = (CustomerProfileModel)ViewBag.MemberProfile;
+
+                        @Html.AntiForgeryToken();
+
+                        <div class="pageHeader">
+                            <h1>@Model.Content.BrowserTitle</h1>
+                        </div>
+
+                        if (errorsList != null && errorsList.Any())
+                        {
+                            <div>
+                                <div class="alert alert-danger">
+                                    <b>@Umbraco.GetDictionaryValue("customerDetailsErrorsTitle")</b>
+                                    <ul>
+                                        @foreach (var errorText in errorsList)
+                                        {
+                                            <li>
+                                                @errorText
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="basket-entry-head">
+                            @Umbraco.GetDictionaryValue("customerMemberDetails")
+                        </div>
+                        <div class="row spacing-fix">
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsFirstName")</label></strong>
+                                <div>
+                                    <input type="text" name="FirstName" value="@memberProfile.FirstName" size="50" maxlength="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsLastName")</label></strong>
+                                <div>
+                                    <input type="text" name="LastName" value="@memberProfile.LastName" size="50" maxlength="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsGender")</label></strong>
+                                <div>
+                                    <select name="Gender" class="form-control">
+                                        <option value="not selected" selected="@(memberProfile.Gender.Equals("not selected", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Not Selected</option>
+                                        <option value="female" selected="@(memberProfile.Gender.Equals("female", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Female</option>
+                                        <option value="male" selected="@(memberProfile.Gender.Equals("male", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Male</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong>*<label>@Umbraco.GetDictionaryValue("customerDateOfBirth")</label> </strong>
+                                <div>@memberProfile.DateOfBirth.ToString("dd MMM yyyy")</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsAddressLine1")</label> </strong>
+                                <div>
+                                    <input type="text" name="AddressLine1" value="@memberProfile.AddressLine1" size="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsAddressLine2")</label></strong>
+                                <div>
+                                    <input type="text" name="AddressLine2" value="@memberProfile.AddressLine2" ize="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsCity")</label></strong>
+                                <div>
+                                    <input type="text" name="City" value="@memberProfile.City" size="50" maxlength="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsCounty")</label> </strong>
+                                <div>
+                                    <input type="text" name="County" value="@memberProfile.County" size="50" maxlength="50" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsPostalCode")</label></strong>
+                                <div>
+                                    <input type="text" name="PostalCode" value="@memberProfile.PostalCode" class="tinyText" size="20" maxlength="20" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <strong> *<label>@Umbraco.GetDictionaryValue("customerCountry")</label></strong><br>
+                                Bulgaria            <div class="micronote">
+                                    For security reasons, any change to country must be updated by support staff. Please
+                                    <a target="_blank" href="/contact-us/">email us</a> should you need to update these details.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="basket-entry-head">
+                            @Umbraco.GetDictionaryValue("customerDetailsContactDetails")
+                        </div>
+                        <div class="row spacing-fix">
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsMobilePhone")</label> </strong>
+                                <div>
+                                    <input type="text" name="MobilePhone" value="@memberProfile.MobilePhone" class="smallText" size="20" maxlength="20" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsWorkPhone")</label> </strong>
+                                <div>
+                                    <input type="text" name="WorkPhone" value="@memberProfile.WorkPhone" class="smallText" size="20" maxlength="20" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <strong><label>@Umbraco.GetDictionaryValue("customerDetailsEmail")</label> </strong>
+                                <div>
+                                    @memberProfile.Email
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="buttons-align center">
+                                        <button type="submit" name="Save" value="@Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")" title="@Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")" class="long fullbtn">
+                                            @Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+                    <div class="col-lg-12" style="position: relative;">
+                        <h1>@Umbraco.GetDictionaryValue("customerDetailsUpdatePasswordHeadline")</h1>
+                        <div class="pageTitle">@Umbraco.GetDictionaryValue("customerDetailsPassDescriptionText")</div>
+                        @using (Html.BeginUmbracoForm("UpdateCustomerPassword", "UserAccount", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken();
+                            <input type="password" name="CurrentPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsCurrentPassHint")" />
+                            <input type="password" name="NewPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsNewPassHint")" />
+                            <input type="password" name="ConfirmPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsNewPassHint")" />
+                            <div class="buttons">
+                                <input type="submit" name="commit" value="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" class="fullbtn"
+                                       alt="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" title="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" />
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

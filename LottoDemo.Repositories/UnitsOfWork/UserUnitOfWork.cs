@@ -6,10 +6,15 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class UserUnitOfWork : BaseUnitOfWork
     {
-        public static UserUnitOfWork GetInstance()
-        {
-            return new UserUnitOfWork();
-        }
+        #region Singleton Pattern
+
+        private UserUnitOfWork() { }
+
+        private static readonly UserUnitOfWork _instance = new UserUnitOfWork();
+
+        public static UserUnitOfWork Instance { get { return _instance; } }
+
+        #endregion
 
         private GenericRepository<User> lotteryUserRepo;
         public GenericRepository<User> UserRepository

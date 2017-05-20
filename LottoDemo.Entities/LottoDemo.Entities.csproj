@@ -264,6 +264,8 @@
     <Compile Include="Models\LottoGameModel.cs" />
     <Compile Include="Models\LottoGameSettings.cs" />
     <Compile Include="Models\TicketBoxSettings.cs" />
+    <Compile Include="Models\CustomerProfileModel.cs" />
+    <Compile Include="Models\MemberPasswordChangeModel.cs" />
     <Compile Include="Models\WebAPI\AutoGenerateNumbersResult.cs" />
     <Compile Include="Models\WebAPI\DrawingTimerModel.cs" />
     <Compile Include="Models\WebAPI\GameDrawSettings.cs" />

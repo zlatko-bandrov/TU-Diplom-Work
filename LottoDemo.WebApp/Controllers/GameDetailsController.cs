@@ -11,15 +11,9 @@ namespace LottoDemo.WebApp.Controllers
 {
     public class GameDetailsController : SurfaceController
     {
-        public LotteryGameService GameService
-        {
-            get { return LotteryGameService.GetInstance(); }
-        }
+        public LotteryGameService GameService { get { return LotteryGameService.Instance; } }
 
-        public LottoUserService LottoUserService
-        {
-            get { return LottoUserService.GetInstance(); }
-        }
+        public LottoUserService LottoUserService { get { return LottoUserService.Instance; } }
 
         public ActionResult RenderHeader()
         {

@@ -1,0 +1,7 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserAccountDetails>
+@{
+    Layout = "WithRightSidebar.cshtml";
+
+    Html.RenderAction("RenderCustomerDetailsForm", "UserAccount");
+}

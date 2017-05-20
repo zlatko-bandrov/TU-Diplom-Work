@@ -12,10 +12,7 @@ namespace LottoDemo.WebApp.Controllers
         private readonly string NewMemberGroupName = "Lottery Games";
         private readonly string NewMemberType = "lottoGamer";
 
-        public LottoUserService LottoUserService
-        {
-            get { return LottoUserService.GetInstance(); }
-        }
+        public LottoUserService LottoUserService { get { return LottoUserService.Instance; } }
 
         public ActionResult RenderLoginDialog()
         {

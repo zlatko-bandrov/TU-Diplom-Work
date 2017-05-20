@@ -13,15 +13,17 @@ namespace LottoDemo.BusinessLogic.Games
 {
     public class LotteryGameService
     {
-        public static LotteryGameService GetInstance()
-        {
-            return new LotteryGameService();
-        }
+        #region Singleton Pattern
 
-        public LottoGameUnitOfWork GameUnitOfWork
-        {
-            get { return LottoGameUnitOfWork.GetInstance(); }
-        }
+        private LotteryGameService() { }
+
+        private static readonly LotteryGameService _instance = new LotteryGameService();
+
+        public static LotteryGameService Instance { get { return _instance; } }
+
+        #endregion
+
+        public LottoGameUnitOfWork GameUnitOfWork { get { return LottoGameUnitOfWork.Instance; } }
 
         internal LotteryGame GetLotteryGameByKey(Guid gameUniqueId)
         {
@@ -52,7 +54,6 @@ namespace LottoDemo.BusinessLogic.Games
         {
             return DateTime.MinValue;
         }
-
 
         public LottoDrawing CreateNewLottoDraw(DateTime drawingDate, List<byte> ballNumbers, Guid lottoGameKey)
         {
@@ -93,7 +94,25 @@ namespace LottoDemo.BusinessLogic.Games
             return newDrawing;
         }
 
-        public void CalculateGameWinnings(LottoDrawing drawing)
+        public List<GameWinningsTier> GetWinningTiers(int gameId)
+        {
+            List<GameWinningsTier> tiers = this.GameUnitOfWork.WinningsTiersRepository.AsQuery(w => w.LottoGameID == gameId).ToList();
+
+            return tiers;
+        }
+
+        public LottoDrawing GetGameLastDrawTime(int gameId)
+        {
+            var lastDraw =
+                this.GameUnitOfWork.DrawRepository
+                    .AsQuery(g => g.LotteryGameID == gameId)
+                    .OrderByDescending(d => d.DrawTime)
+                    .FirstOrDefault();
+
+            return lastDraw;
+        }
+
+        public void CalculateLottoDrawWinnings(LottoDrawing drawing)
         {
             // TODO: Game winnings calculation
         }

@@ -5,6 +5,10 @@ using LottoDemo.DataAccess;
 using LottoDemo.Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,39 +19,63 @@ namespace LottoDemo.BusinessLogic.Services
     {
         #region Properties
 
-        private int iterationIndex;
+        private int _iterationIndex = 0;
+        private static int _iterationsCount = -1;
+        private static readonly HttpClient _httpClient = new HttpClient();
 
-        private int MaxIterationsCount;
-
-        private LotteryGameService GameService
+        private static readonly string _webApiUrl = ConfigurationManager.AppSettings["webAPIUrl"];
+        public static string WebApiUrl
         {
-            get { return LotteryGameService.GetInstance(); }
+            get { return _webApiUrl; }
+        }
+
+        private static Guid _lotteryGameKey;
+        public static Guid LotteryGameKey
+        {
+            get
+            {
+                if (_lotteryGameKey == Guid.Empty)
+                {
+                    _lotteryGameKey = Guid.Parse(ConfigurationManager.AppSettings["LotteryGameKey"]);
+                }
+
+                return _lotteryGameKey;
+            }
         }
 
         public double DrawingTimeInterval
         {
-            get { return GameSettings.DrawingTimeInterval; }
+            get { return GameSettings != null ? GameSettings.DrawingTimeInterval : 5; }
         }
 
-        public Guid GameKey { get; set; }
+        public static int DrawingsCount
+        {
+            get
+            {
+                if (_iterationsCount <= -1)
+                {
+                    CultureInfo formatProvider = CultureInfo.InvariantCulture;
+                    _iterationsCount = int.Parse(ConfigurationManager.AppSettings["NumberOfDrawings"], formatProvider);
+                }
 
-        public LottoGameSettings GameSettings { get; set; }
+                return _iterationsCount;
+            }
+        }
+
+        public LottoGameSettings GameSettings { get; internal set; }
+
+        public LotteryGameService GameService
+        {
+            get { return LotteryGameService.Instance; }
+        }
 
         #endregion
-
-        public LottoDrawService(LottoGameSettings gameSettings, Guid gameKey, int maxNumberOfIterations = -1)
-        {
-            this.MaxIterationsCount = maxNumberOfIterations;
-            this.GameSettings = gameSettings;
-            this.GameKey = gameKey;
-        }
-
-
+        
         public void ExecuteLottoDraw(Object stateInfo)
         {
             AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
             DateTime lottoDrawTime = DateTime.Now;
-            this.iterationIndex++;
+            this._iterationIndex++;
 
             var drawNumbersTask = Task.Run(() =>
             {
@@ -58,31 +86,31 @@ namespace LottoDemo.BusinessLogic.Services
                 WriteLogMessage(infoMessage);
 
                 // Create and save the lottery drawing in the database
-                LottoDrawing lotteryDrawing = GameService.CreateNewLottoDraw(lottoDrawTime, numbers, GameKey);
+                LottoDrawing lotteryDrawing = GameService.CreateNewLottoDraw(lottoDrawTime, numbers, LotteryGameKey);
 
                 return lotteryDrawing;
             });
             drawNumbersTask.ContinueWith((antecedent) =>
             {
                 LottoDrawing drawing = antecedent.Result;
-                GameService.CalculateGameWinnings(drawing);
+                GameService.CalculateLottoDrawWinnings(drawing);
             },
             TaskContinuationOptions.OnlyOnRanToCompletion);
 
             try
             {
                 drawNumbersTask.Wait();
-                if (this.iterationIndex == this.MaxIterationsCount)
+                if (this._iterationIndex == DrawingsCount)
                 {
                     // Reset the counter and signal the waiting thread.
-                    this.iterationIndex = 0;
+                    this._iterationIndex = 0;
                     autoEvent.Set();
                 }
             }
             catch (Exception error)
             {
                 Log.Error(MethodBase.GetCurrentMethod().DeclaringType, error.Message, error);
-                this.iterationIndex = 0;
+                this._iterationIndex = 0;
                 autoEvent.Set();
             }
         }
@@ -92,7 +120,6 @@ namespace LottoDemo.BusinessLogic.Services
             byte ballNumber = 0;
             List<byte> draw = new List<byte>();
             NumbersGenerator generator = new NumbersGenerator();
-
             do
             {
                 ballNumber = (byte)generator.Next(MinValue, MaxValue);
@@ -109,8 +136,33 @@ namespace LottoDemo.BusinessLogic.Services
         private List<byte> RunLottoDrawing()
         {
             List<byte> draw = (List<byte>)GenerateDrawNumbers(1, GameSettings.GameMaxNumber, GameSettings.BallsCount);
-
             return draw;
+        }
+
+        public bool InitGameSettings()
+        {
+            string webApiMethod = string.Format("umbraco/Api/LotteryGame/GetGameSettings?gameKey={0}", LotteryGameKey);
+            _httpClient.BaseAddress = new Uri(WebApiUrl);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            LottoDrawService.WriteLogMessage("Loading game settings...");
+            HttpResponseMessage response = _httpClient.GetAsync(webApiMethod).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                GameSettings = response.Content.ReadAsAsync<LottoDemo.Entities.Models.LottoGameSettings>().Result;
+
+                LottoDrawService.WriteLogMessage(
+                    string.Format("\"{0}\" game settins were retrieved successfully from the CMS.\n",
+                        GameSettings != null ? GameSettings.GameDisplayName : string.Empty));
+
+                return GameSettings != null;
+            }
+            else
+            {
+                LottoDrawService.WriteLogMessage(new Exception(string.Format("Error Code {0} : Message - {1}\n", response.StatusCode, response.ReasonPhrase)));
+                return false;
+            }
         }
 
         public static void WriteLogMessage(string infoMessage)

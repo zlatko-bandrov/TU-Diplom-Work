@@ -10,10 +10,7 @@ namespace LottoDemo.WebApp.Controllers
 {
     public class ShoppingCartController : SurfaceController
     {
-        public LottoUserService UserService
-        {
-            get { return LottoUserService.GetInstance(); }
-        }
+        public LottoUserService UserService { get { return LottoUserService.Instance; } }
 
         public ActionResult RenderMainMenu()
         {

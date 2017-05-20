@@ -15,10 +15,15 @@ namespace LottoDemo.BusinessLogic.Services
 {
     public class LottoUserService
     {
-        public static LottoUserService GetInstance()
-        {
-            return new LottoUserService();
-        }
+        #region Singleton Pattern
+
+        private LottoUserService() { }
+
+        private static readonly LottoUserService _instance = new LottoUserService();
+
+        public static LottoUserService Instance { get { return _instance; } }
+
+        #endregion
 
         private decimal InitialUserBalance
         {
@@ -34,10 +39,7 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
-        public UserUnitOfWork UnitOfWork
-        {
-            get { return UserUnitOfWork.GetInstance(); }
-        }
+        public UserUnitOfWork UnitOfWork { get { return UserUnitOfWork.Instance; } }
 
         public bool CreateNewUser(string umbracoUsername)
         {
@@ -71,7 +73,7 @@ namespace LottoDemo.BusinessLogic.Services
                 try
                 {
                     LottoTicket ticket = null;
-                    var gameUnitOfWork = new LottoGameUnitOfWork();
+                    var gameUnitOfWork = LottoGameUnitOfWork.Instance;
                     var lottoGameKey = gameUnitOfWork.GameRepository.Get(g => g.ID == tickets.LotteryGameId).GameKey;
                     decimal gameTicketPrice = this.GetGameTicketPrice(lottoGameKey);
 
@@ -185,7 +187,7 @@ namespace LottoDemo.BusinessLogic.Services
             if (loggedUser.LottoTickets != null && loggedUser.LottoTickets.Where(t => !t.IsCalculated).Any())
             {
                 var allUserGames = loggedUser.LottoTickets.Where(t => !t.IsCalculated).GroupBy(t => t.LotteryGameID).ToList();
-                var gameService = new LotteryGameService();
+                var gameService = LotteryGameService.Instance;
                 var umbracoHelper = new Umbraco.Web.UmbracoHelper(Umbraco.Web.UmbracoContext.Current);
 
                 foreach (var g in allUserGames)
