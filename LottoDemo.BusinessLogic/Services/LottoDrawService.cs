@@ -77,10 +77,19 @@ namespace LottoDemo.BusinessLogic.Services
             });
             drawNumbersTask.ContinueWith((antecedent) =>
             {
-                LotteryGameService gameService = new LotteryGameService();
-                LottoDrawing executedDraw = antecedent.Result;
-                WriteLogMessage("Start winnings calculation.\n");
-                gameService.DoExecutedDrawWinnings(executedDraw);
+                try
+                {
+                    LotteryGameService gameService = new LotteryGameService();
+                    LottoDrawing executedDraw = antecedent.Result;
+                    WriteLogMessage("Start winnings calculation.");
+                    gameService.DoExecutedDrawWinnings(executedDraw, GameSettings.Jackpot);
+                    WriteLogMessage("Draw calculations finished.\n");
+                }
+                catch (Exception ex)
+                {
+                    WriteLogMessage(ex);
+                    throw ex;
+                }
             },
             TaskContinuationOptions.OnlyOnRanToCompletion);
 
@@ -195,7 +204,7 @@ namespace LottoDemo.BusinessLogic.Services
             {
                 NextLottoDrawID = nextGameDraw.ID;
             }
-            WriteLogMessage(string.Format("Next draw (ID={1}) is at: {0}...\n", NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss"), NextLottoDrawID));
+            WriteLogMessage(string.Format("Next draw (ID={1}) is at: {0}...\n", NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss", CultureInfo.InvariantCulture), NextLottoDrawID));
         }
     }
 }

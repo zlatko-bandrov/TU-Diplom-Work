@@ -262,7 +262,6 @@
     <Compile Include="Converters\WinningTierConverter.cs" />
     <Compile Include="Extensions\CurrencyExtensions.cs" />
     <Compile Include="Extensions\LotteryGameExtensions.cs" />
-    <Compile Include="Entities\Extensions\DrawingNumberExtensions.cs" />
     <Compile Include="Services\LotteryGameService.cs" />
     <Compile Include="LotteryLogic\NumbersGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

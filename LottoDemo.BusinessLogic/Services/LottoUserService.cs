@@ -349,7 +349,7 @@ namespace LottoDemo.BusinessLogic.Services
                             var lottoTicket = UnitOfWork.TicketsRepository.Get(t => t.ID == ticket.ID);
                             if (lottoTicket != null)
                             {
-                                this.UpdateUserBalance(lottoTicket.User, entry.Value.WinningTier.WinningPerPerson);
+                                UpdateUserBalance(lottoTicket.User, entry.Value.WinningTier.WinningPerPerson);
 
                                 lottoTicket.IsWinning = true;
                                 lottoTicket.IsCalculated = true;

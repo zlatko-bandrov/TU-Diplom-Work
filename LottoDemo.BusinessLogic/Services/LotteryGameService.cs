@@ -216,19 +216,19 @@ namespace LottoDemo.BusinessLogic.Games
             return DateTime.MinValue;
         }
 
-        public LottoDrawStatistic DoExecutedDrawWinnings(LottoDrawing executedDraw)
+        public LottoDrawStatistic DoExecutedDrawWinnings(LottoDrawing executedDraw, decimal jackpot)
         {
             DateTime previousDrawTime = GetPreviousDrawTime(executedDraw.LotteryGameID, executedDraw.ID);
             LottoDrawStatistic drawStatistics = this.CreateDrawStatistics(executedDraw.LotteryGameID);
             LottoDrawModel drawModel = LottoDrawModelConverter.AssignFrom(executedDraw);
 
             var allTicketsByDraw = UserServices.GetAllTicketsByDraw(executedDraw.LotteryGameID, previousDrawTime, executedDraw.DrawTime);
-            this.DoWinningsCalculation(drawModel, allTicketsByDraw, drawStatistics);
+            this.DoWinningsCalculation(drawModel, allTicketsByDraw, drawStatistics, jackpot);
 
             return drawStatistics;
         }
 
-        private void DoWinningsCalculation(LottoDrawModel executedDraw, List<LotteryTicket> lotteryTickets, LottoDrawStatistic drawStatistics)
+        private void DoWinningsCalculation(LottoDrawModel executedDraw, List<LotteryTicket> lotteryTickets, LottoDrawStatistic drawStatistics, decimal jackpot)
         {
             byte ballsCount = 0;
             byte bonusBallsCount = 0;
@@ -244,6 +244,10 @@ namespace LottoDemo.BusinessLogic.Games
                     statisticsItem.Tickets.Add(ticket);
                 }
             }
+
+            // Calculate winnings per tier
+            CalculatePricesPerWinning(drawStatistics, jackpot);
+
             // Remove winning tickets from the looser tickets
             this.UpdateTicketList(lotteryTickets, drawStatistics);
 
@@ -251,8 +255,6 @@ namespace LottoDemo.BusinessLogic.Games
             UserServices.UpdateTicketsAtLost(lotteryTickets);
             UserServices.UpdateWinningTickets(drawStatistics);
             SaveDrawStatisticsToDatabase(drawStatistics, executedDraw.ID);
-
-            
         }
 
         // Create initial statistics data
@@ -295,7 +297,8 @@ namespace LottoDemo.BusinessLogic.Games
                         DrawStatistic newDrawStatistic = new DrawStatistic
                         {
                             LottoDrawingID = executedDrawId,
-                            WinningsTierID = entry.Value.WinningTier.ID
+                            WinningsTierID = entry.Value.WinningTier.ID,
+                            WinningPerPerson = entry.Value.WinningTier.WinningPerPerson
                         };
                         GameUnitOfWork.DrawStatisticsRepository.Add(newDrawStatistic);
 
@@ -310,12 +313,30 @@ namespace LottoDemo.BusinessLogic.Games
                         }
                     }
                 }
+
+                var executedDraw = GameUnitOfWork.DrawRepository.Get(d => d.ID == executedDrawId);
+                if (executedDraw != null)
+                {
+                    executedDraw.IsCalculated = true;
+                    GameUnitOfWork.DrawRepository.Update(executedDraw);
+                }
+
                 GameUnitOfWork.CommitChanges();
             }
             catch (Exception ex)
             {
                 GameUnitOfWork.Rollback();
                 throw ex;
+            }
+        }
+
+        private void CalculatePricesPerWinning(LottoDrawStatistic drawStatistics, decimal jackpot)
+        {
+            foreach (var entry in drawStatistics.Table)
+            {
+                int ticketsCount = entry.Value.Tickets.Count;
+                decimal tierPrice = jackpot / ((decimal)entry.Value.WinningTier.TierPercent / 100);
+                entry.Value.WinningTier.WinningPerPerson = ticketsCount != 0 ? tierPrice / ticketsCount : tierPrice;
             }
         }
     }

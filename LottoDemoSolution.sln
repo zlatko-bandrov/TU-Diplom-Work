@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.BusinessLogic", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.WebMvcApp", "LottoDemo.WebApp\LottoDemo.WebMvcApp.csproj", "{492ACA8C-743C-4D60-9EEB-F1F2ACCB57EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Common", "LottoDemo.Common\LottoDemo.Common.csproj", "{0980D765-7748-4C1B-B361-C5998479D4BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Entities", "LottoDemo.Entities\LottoDemo.Entities.csproj", "{0420D004-6F81-45A8-9BBD-5B04EBD3FAAC}"
@@ -16,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.DataAccess", "LottoDemo.DataAccess\LottoDemo.DataAccess.csproj", "{88575736-0028-4191-A7E2-3B82BDCFCA0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Repositories", "LottoDemo.Repositories\LottoDemo.Repositories.csproj", "{A925BAF8-1822-40A2-86E3-F0144719BD0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.LottoGameService", "LottoDemo.LottoGameService\LottoDemo.LottoGameService.csproj", "{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,16 +49,6 @@ Global
 		{492ACA8C-743C-4D60-9EEB-F1F2ACCB57EE}.Release|ARM.ActiveCfg = Release|Any CPU
 		{492ACA8C-743C-4D60-9EEB-F1F2ACCB57EE}.Release|x64.ActiveCfg = Release|Any CPU
 		{492ACA8C-743C-4D60-9EEB-F1F2ACCB57EE}.Release|x86.ActiveCfg = Release|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|ARM.ActiveCfg = Release|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|x64.ActiveCfg = Release|Any CPU
-		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|x86.ActiveCfg = Release|Any CPU
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0980D765-7748-4C1B-B361-C5998479D4BA}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -99,6 +89,16 @@ Global
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|x64.ActiveCfg = Release|Any CPU
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|x86.ActiveCfg = Release|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|x64.ActiveCfg = Release|Any CPU
+		{A480271C-81AA-4808-A9B2-C5A8AC5C5EA0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

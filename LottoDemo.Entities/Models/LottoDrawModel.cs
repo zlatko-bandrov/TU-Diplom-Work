@@ -15,6 +15,7 @@ namespace LottoDemo.Entities.Models
         }
 
         public int ID { get; set; }
+        public int LottoGameID { get; set; }
         public List<byte> BallsList { get; set; }
         public List<byte> BonusBallsList { get; set; }
     }

@@ -23,6 +23,7 @@ namespace LottoDemo.DataAccess
         public int ID { get; set; }
         public int WinningsTierID { get; set; }
         public int LottoDrawingID { get; set; }
+        public decimal WinningPerPerson { get; set; }
     
         public virtual GameWinningsTier GameWinningsTier { get; set; }
         public virtual LottoDrawing LottoDrawing { get; set; }

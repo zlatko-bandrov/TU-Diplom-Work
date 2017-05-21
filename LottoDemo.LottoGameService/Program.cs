@@ -36,7 +36,7 @@ namespace TestConsoleApp
                 LottoDrawService.WriteLogMessage(string.Format("Start the number generation service for '{0}'.\n", LotteryGameName));
                 TimeSpan delayTime = drawingService.NextDrawExecution - DateTime.Now;
 
-                LottoDrawService.WriteLogMessage(string.Format("Next draw is at: {0}...\n", drawingService.NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss")));
+                LottoDrawService.WriteLogMessage(string.Format("Next draw is at: {0}...\n", drawingService.NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)));
 
                 AutoResetEvent autoEvent = new AutoResetEvent(false);
                 ServiceTimer = new Timer(drawingService.ExecuteLottoDraw, autoEvent, delayTime, TimeSpan.FromMinutes(drawingService.DrawingTimeInterval));

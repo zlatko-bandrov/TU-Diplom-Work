@@ -16,6 +16,7 @@ namespace LottoDemo.BusinessLogic.Converters
             model.ID = lottoDraw.ID;
             model.BallsList.AddRange(lottoDraw.LottoDrawingBalls.Where(b => b.LotteryBall.IsBonusBall == false).Select(b => b.LotteryBall.BallNumber));
             model.BonusBallsList.AddRange(lottoDraw.LottoDrawingBalls.Where(b => b.LotteryBall.IsBonusBall == true).Select(b => b.LotteryBall.BallNumber));
+            model.LottoGameID = lottoDraw.LotteryGameID;
 
             return model;
         }

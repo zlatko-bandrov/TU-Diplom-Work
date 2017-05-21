@@ -29,6 +29,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WinningsTierID" Type="int" Nullable="false" />
           <Property Name="LottoDrawingID" Type="int" Nullable="false" />
+          <Property Name="WinningPerPerson" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="GameWinningsTier">
           <Key>
@@ -681,6 +682,7 @@
           <NavigationProperty Name="GameWinningsTier" Relationship="LotteryDemoEFModel.FK_DrawStatistics_GameWinningsTier" FromRole="DrawStatistic" ToRole="GameWinningsTier" />
           <NavigationProperty Name="LottoDrawing" Relationship="LotteryDemoEFModel.FK_DrawStatistics_LottoDrawing" FromRole="DrawStatistic" ToRole="LottoDrawing" />
           <NavigationProperty Name="WinningTickets" Relationship="LotteryDemoEFModel.FK_WinningTickets_DrawStatistics" FromRole="DrawStatistic" ToRole="WinningTicket" />
+          <Property Name="WinningPerPerson" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="WinningTicket">
           <Key>
@@ -851,6 +853,7 @@
           <EntitySetMapping Name="DrawStatistics">
             <EntityTypeMapping TypeName="LotteryDemoEFModel.DrawStatistic">
               <MappingFragment StoreEntitySet="DrawStatistics">
+                <ScalarProperty Name="WinningPerPerson" ColumnName="WinningPerPerson" />
                 <ScalarProperty Name="LottoDrawingID" ColumnName="LottoDrawingID" />
                 <ScalarProperty Name="WinningsTierID" ColumnName="WinningsTierID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
