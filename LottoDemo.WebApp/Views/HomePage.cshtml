@@ -8,7 +8,7 @@
         <div class="twoColWrapper ng-scope">
             <input type="hidden" name="culture" id="culture" value="en" />
             @{
-                Html.RenderPartial("Carousel/_CarouselPartialView");
+                Html.RenderPartial("Carousel/_CarouselPartialView", Model);
                 Html.RenderAction("RenderLotteryList", "LotteryGamesList");
 
                 var settingItem = LottoDemo.WebApp.Helpers.ItemHelper.SettingsItem;

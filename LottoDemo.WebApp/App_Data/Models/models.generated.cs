@@ -19,7 +19,7 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "65d1b388c8b0c960")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "fe994f161417e32b")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
@@ -886,6 +886,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Jackpot
+		///</summary>
+		[ImplementPropertyType("jackpot")]
+		public int Jackpot
+		{
+			get { return this.GetPropertyValue<int>("jackpot"); }
+		}
+
+		///<summary>
 		/// Lottery Logo
 		///</summary>
 		[ImplementPropertyType("lotteryLogo")]
@@ -910,6 +919,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string LotteryPageTitle
 		{
 			get { return this.GetPropertyValue<string>("lotteryPageTitle"); }
+		}
+
+		///<summary>
+		/// Payment Percent
+		///</summary>
+		[ImplementPropertyType("paymentPercent")]
+		public string PaymentPercent
+		{
+			get { return this.GetPropertyValue<string>("paymentPercent"); }
 		}
 
 		///<summary>
@@ -1086,6 +1104,59 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<AdvertiseList, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+	}
+
+	/// <summary>UserAccountDetails</summary>
+	[PublishedContentModel("userAccountDetails")]
+	public partial class UserAccountDetails : PublishedContentModel, IBasePage
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "userAccountDetails";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public UserAccountDetails(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UserAccountDetails, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// BrowserTitle
+		///</summary>
+		[ImplementPropertyType("browserTitle")]
+		public string BrowserTitle
+		{
+			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// NavigationTitle
+		///</summary>
+		[ImplementPropertyType("navigationTitle")]
+		public string NavigationTitle
+		{
+			get { return BasePage.GetNavigationTitle(this); }
+		}
+
+		///<summary>
+		/// ShowInNavigation
+		///</summary>
+		[ImplementPropertyType("showInMainNavigation")]
+		public bool ShowInMainNavigation
+		{
+			get { return BasePage.GetShowInMainNavigation(this); }
 		}
 	}
 
@@ -1274,12 +1345,48 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Address Line 1
+		///</summary>
+		[ImplementPropertyType("addressLine1")]
+		public string AddressLine1
+		{
+			get { return this.GetPropertyValue<string>("addressLine1"); }
+		}
+
+		///<summary>
+		/// Address Line 2
+		///</summary>
+		[ImplementPropertyType("addressLine2")]
+		public string AddressLine2
+		{
+			get { return this.GetPropertyValue<string>("addressLine2"); }
+		}
+
+		///<summary>
+		/// City
+		///</summary>
+		[ImplementPropertyType("city")]
+		public string City
+		{
+			get { return this.GetPropertyValue<string>("city"); }
+		}
+
+		///<summary>
 		/// Country
 		///</summary>
 		[ImplementPropertyType("country")]
 		public string Country
 		{
 			get { return this.GetPropertyValue<string>("country"); }
+		}
+
+		///<summary>
+		/// County
+		///</summary>
+		[ImplementPropertyType("county")]
+		public string County
+		{
+			get { return this.GetPropertyValue<string>("county"); }
 		}
 
 		///<summary>
@@ -1301,6 +1408,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Gender
+		///</summary>
+		[ImplementPropertyType("gender")]
+		public object Gender
+		{
+			get { return this.GetPropertyValue("gender"); }
+		}
+
+		///<summary>
 		/// Last Name
 		///</summary>
 		[ImplementPropertyType("lastName")]
@@ -1319,12 +1435,12 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Person Title
+		/// Postal Code
 		///</summary>
-		[ImplementPropertyType("personTitle")]
-		public object PersonTitle
+		[ImplementPropertyType("postalCode")]
+		public string PostalCode
 		{
-			get { return this.GetPropertyValue("personTitle"); }
+			get { return this.GetPropertyValue<string>("postalCode"); }
 		}
 
 		///<summary>
@@ -1406,6 +1522,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string UmbracoMemberPasswordRetrievalQuestion
 		{
 			get { return this.GetPropertyValue<string>("umbracoMemberPasswordRetrievalQuestion"); }
+		}
+
+		///<summary>
+		/// Work Phone
+		///</summary>
+		[ImplementPropertyType("workPhone")]
+		public string WorkPhone
+		{
+			get { return this.GetPropertyValue<string>("workPhone"); }
 		}
 	}
 

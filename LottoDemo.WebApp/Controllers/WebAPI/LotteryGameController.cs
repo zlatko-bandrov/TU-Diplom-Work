@@ -59,5 +59,6 @@ namespace LottoDemo.WebApp.Controllers.WebAPI
         }
 
         // TODO: Make API call to Update jackpot
+        // TODO: Add Cache out percent - 95%
     }
 }

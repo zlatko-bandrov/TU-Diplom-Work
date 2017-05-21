@@ -1,4 +1,15 @@
-﻿<div>
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.HomePage>
+
+@{
+    var firstCarousel = Umbraco.Content(Umbraco.TypedContent(1249).Children.FirstOrDefault().Id);
+    var secondCarousel = Umbraco.Content(Umbraco.TypedContent(1249).Children.Skip(1).FirstOrDefault().Id);
+    //Umbraco.TypedMedia(firstCarousel.BackgroundImage).umbracoFile.src
+
+    var firstPage = Umbraco.Content(firstCarousel.PageUrl);
+    var secondPage = Umbraco.Content(secondCarousel.PageUrl);
+}
+<div>
     <div class="container ng-scope" data-ng-controller="carouselCtrl">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -9,10 +20,10 @@
 
             <div class="carousel-inner">
 
-                <div data-ng-class="{item: true, active : (img.id === 0)}" data-ng-repeat="img in images" class="ng-scope item active">
-                    <span data-ng-if="img.image_url != &#39;#phl-video&#39;" class="ng-scope">
-                        <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
-                            <img data-ng-src="/images/campaign/carousel/en/7553PHLPowerballCarousel1002en_1486731496.jpg" alt="Powerball Jackpot" width="1170" height="400" src="./HomePage_files/7553PHLPowerballCarousel1002en_1486731496.jpg">
+                <div data-ng-repeat="img in images" class="ng-scope item active">
+                    <span class="ng-scope">
+                        <a href="@secondPage.Url">
+                            <img alt="Powerball Jackpot" width="1170" height="400" src="@Umbraco.Media(secondCarousel.BackgroundImage).umbracoFile.src" />
                         </a>
                     </span>
                 </div>
@@ -40,7 +51,7 @@
                                     Draw date:&nbsp;
                                     <strong>11-02-2017</strong>
                                 </span>
-                                <br>
+                                <br/>
                                 <div class="time">
                                     <div data-timer="" data-end-time="1486854000000" class="ng-isolate-scope">
                                         <div class="timer-block ng-scope">
@@ -60,7 +71,7 @@
                                             seconds
                                         </div>
                                     </div>
-                                    <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
+                                    <a href="@secondCarousel.Url">
                                         <div class="timer-block timer-play">
                                             Play Now
                                         </div>
@@ -69,17 +80,17 @@
                             </div>
                         </div>
                     </div>
-                    <span data-ng-if="img.image_url != &#39;#phl-video&#39;" class="ng-scope">
-                        <a href="https://www.playusalotteries.com/en/play-the-lottery/the-american-powerball-lottery.html">
-                            <img data-ng-src="/site/playhugelottos_com/images/playnow_bg-en-2017.jpg" alt="Play The Lottery" width="1170" height="400" src="./HomePage_files/playnow_bg-en-2017.jpg" />
+                    <span class="ng-scope">
+                        <a href="@firstPage.Url">
+                            <img alt="Play The Lottery" width="1170" height="400" src="@Umbraco.Media(firstCarousel.BackgroundImage).umbracoFile.src" />
                         </a>
                     </span>
                 </div>
 
             </div>
 
-            <a class="left carousel-control home-slider" href="https://www.playusalotteries.com/#myCarousel" role="button" id="left-home-slider" data-icon="u" data-slide="prev"></a>
-            <a class="right carousel-control home-slider" href="https://www.playusalotteries.com/#myCarousel" role="button" id="right-home-slider" data-icon="w" data-slide="next"></a>
+            <a class="left carousel-control home-slider" href="#myCarousel" role="button" id="left-home-slider" data-icon="u" data-slide="prev"></a>
+            <a class="right carousel-control home-slider" href="#myCarousel" role="button" id="right-home-slider" data-icon="w" data-slide="next"></a>
         </div>
     </div>
 </div>
