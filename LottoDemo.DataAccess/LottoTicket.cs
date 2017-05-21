@@ -18,14 +18,13 @@ namespace LottoDemo.DataAccess
         public LottoTicket()
         {
             this.LottoTicketBalls = new HashSet<LottoTicketBall>();
+            this.WinningTickets = new HashSet<WinningTicket>();
         }
     
         public int ID { get; set; }
         public int UserID { get; set; }
         public int LotteryGameID { get; set; }
         public System.DateTime InputTime { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
-        public System.DateTime CreationDate { get; set; }
         public bool IsCalculated { get; set; }
         public bool IsWinning { get; set; }
     
@@ -33,5 +32,7 @@ namespace LottoDemo.DataAccess
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoTicketBall> LottoTicketBalls { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WinningTicket> WinningTickets { get; set; }
     }
 }

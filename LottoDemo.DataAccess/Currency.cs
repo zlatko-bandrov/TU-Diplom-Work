@@ -24,8 +24,6 @@ namespace LottoDemo.DataAccess
         public string Name { get; set; }
         public string Code { get; set; }
         public string Symbol { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
-        public System.DateTime CreationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Balance> Balances { get; set; }

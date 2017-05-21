@@ -14,6 +14,12 @@ namespace LottoDemo.DataAccess
     
     public partial class GameWinningsTier
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GameWinningsTier()
+        {
+            this.DrawStatistics = new HashSet<DrawStatistic>();
+        }
+    
         public int ID { get; set; }
         public int LottoGameID { get; set; }
         public byte BallsCount { get; set; }
@@ -22,5 +28,7 @@ namespace LottoDemo.DataAccess
         public double TierPercent { get; set; }
     
         public virtual LotteryGame LotteryGame { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DrawStatistic> DrawStatistics { get; set; }
     }
 }

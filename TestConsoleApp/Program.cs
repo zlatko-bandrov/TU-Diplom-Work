@@ -15,29 +15,31 @@ namespace TestConsoleApp
     {
         private static Timer ServiceTimer;
 
-        private static readonly string _lotteryGameName = ConfigurationManager.AppSettings["LottoGameName"];
         public static string LotteryGameName
         {
-            get { return _lotteryGameName; }
+            get { return ConfigurationManager.AppSettings["LottoGameName"]; }
         }
 
         static void Main(string[] args)
         {
             try
             {
+                Console.Title = string.Format("Lottery Game Service - {0}", LotteryGameName);
                 LottoDrawService drawingService = new LottoDrawService();
-                if (!drawingService.InitGameSettings())
+                if (!drawingService.Start())
                 {
                     Console.ReadLine();
                     return;
                 }
 
                 // Get current game last draw time
-
                 LottoDrawService.WriteLogMessage(string.Format("Start the number generation service for '{0}'.\n", LotteryGameName));
+                TimeSpan delayTime = drawingService.NextDrawExecution - DateTime.Now;
+
+                LottoDrawService.WriteLogMessage(string.Format("Next draw is at: {0}...\n", drawingService.NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss")));
 
                 AutoResetEvent autoEvent = new AutoResetEvent(false);
-                ServiceTimer = new Timer(drawingService.ExecuteLottoDraw, autoEvent, TimeSpan.Zero, TimeSpan.FromMinutes(drawingService.DrawingTimeInterval));
+                ServiceTimer = new Timer(drawingService.ExecuteLottoDraw, autoEvent, delayTime, TimeSpan.FromMinutes(drawingService.DrawingTimeInterval));
                 autoEvent.WaitOne();
 
                 LottoDrawService.WriteLogMessage("\nDestroying timer.");
@@ -47,7 +49,7 @@ namespace TestConsoleApp
             }
             catch (Exception ex)
             {
-                Log.Error(MethodBase.GetCurrentMethod().DeclaringType, ex.Message, ex);
+                LottoDrawService.WriteLogMessage(ex);
             }
             finally
             {

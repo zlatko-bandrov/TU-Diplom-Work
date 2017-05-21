@@ -56,10 +56,10 @@
     <Compile Include="Currency.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="GameWinningsTier.cs">
+    <Compile Include="DrawStatistic.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Jackpot.cs">
+    <Compile Include="GameWinningsTier.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LotteryBall.cs">
@@ -97,6 +97,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
+      <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WinningTicket.cs">
       <DependentUpon>LottoDemoDBContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>

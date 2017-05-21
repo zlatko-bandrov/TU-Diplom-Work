@@ -46,14 +46,12 @@
                                     <input type="text" name="FirstName" value="@memberProfile.FirstName" size="50" maxlength="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsLastName")</label></strong>
                                 <div>
                                     <input type="text" name="LastName" value="@memberProfile.LastName" size="50" maxlength="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsGender")</label></strong>
                                 <div>
@@ -64,47 +62,40 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong>*<label>@Umbraco.GetDictionaryValue("customerDateOfBirth")</label> </strong>
                                 <div>@memberProfile.DateOfBirth.ToString("dd MMM yyyy")</div>
                             </div>
-
                             <div class="col-md-12">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsAddressLine1")</label> </strong>
                                 <div>
                                     <input type="text" name="AddressLine1" value="@memberProfile.AddressLine1" size="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsAddressLine2")</label></strong>
                                 <div>
                                     <input type="text" name="AddressLine2" value="@memberProfile.AddressLine2" ize="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsCity")</label></strong>
                                 <div>
                                     <input type="text" name="City" value="@memberProfile.City" size="50" maxlength="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsCounty")</label> </strong>
                                 <div>
                                     <input type="text" name="County" value="@memberProfile.County" size="50" maxlength="50" />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsPostalCode")</label></strong>
                                 <div>
                                     <input type="text" name="PostalCode" value="@memberProfile.PostalCode" class="tinyText" size="20" maxlength="20" />
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <strong> *<label>@Umbraco.GetDictionaryValue("customerCountry")</label></strong><br>
                                 Bulgaria            <div class="micronote">
@@ -136,17 +127,14 @@
                                     @memberProfile.Email
                                 </div>
                             </div>
-
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="buttons-align center">
-                                        <button type="submit" name="Save" value="@Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")" title="@Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")" class="long fullbtn">
-                                            @Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton")
-                                        </button>
+                                        @{ string buttonText = Umbraco.GetDictionaryValue("customerDetailsUpdateDetailsButton"); }
+                                        <button type="submit" name="Save" value="@buttonText" title="@buttonText" class="long fullbtn">@buttonText</button>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     }
 

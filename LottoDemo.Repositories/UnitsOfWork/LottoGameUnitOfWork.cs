@@ -12,19 +12,6 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class LottoGameUnitOfWork : BaseUnitOfWork
     {
-        #region Singleton Pattern
-
-        private LottoGameUnitOfWork()
-        {
-
-        }
-
-        private static readonly LottoGameUnitOfWork _instance = new LottoGameUnitOfWork();
-
-        public static LottoGameUnitOfWork Instance { get { return _instance; } }
-
-        #endregion
-
         private LotteryGameRepository _gameRepository = null;
         public LotteryGameRepository GameRepository
         {
@@ -53,6 +40,18 @@ namespace LottoDemo.Repositories.UnitsOfWork
         public GenericRepository<GameWinningsTier> WinningsTiersRepository
         {
             get { return this._winningsTiersRepository ?? (this._winningsTiersRepository = new GenericRepository<GameWinningsTier>(this.Context)); }
+        }
+
+        private GenericRepository<DrawStatistic> _drawStatisticRepository = null;
+        public GenericRepository<DrawStatistic> DrawStatisticsRepository
+        {
+            get { return this._drawStatisticRepository ?? (this._drawStatisticRepository = new GenericRepository<DrawStatistic>(this.Context)); }
+        }
+
+        private GenericRepository<WinningTicket> _winningTicketRepository = null;
+        public GenericRepository<WinningTicket> WinningTicketsRepository
+        {
+            get { return this._winningTicketRepository ?? (this._winningTicketRepository = new GenericRepository<WinningTicket>(this.Context)); }
         }
     }
 }

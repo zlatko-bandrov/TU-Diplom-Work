@@ -9,10 +9,7 @@ namespace LottoDemo.Entities.Models
 {
     public class LottoGameSettings
     {
-        public LottoGameSettings(
-            IPublishedContent contentItem = null,
-            DateTime? previousDraw = null,
-            DateTime? nextDraw = null)
+        public LottoGameSettings(IPublishedContent contentItem = null, DateTime? previousDraw = null, DateTime? nextDraw = null)
         {
             if (contentItem != null)
             {

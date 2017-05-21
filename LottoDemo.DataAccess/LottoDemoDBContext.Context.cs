@@ -29,7 +29,6 @@ namespace LottoDemo.DataAccess
     
         public virtual DbSet<Balance> Balances { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
-        public virtual DbSet<Jackpot> Jackpots { get; set; }
         public virtual DbSet<LotteryBall> LotteryBalls { get; set; }
         public virtual DbSet<LotteryGame> LotteryGames { get; set; }
         public virtual DbSet<LottoDrawing> LottoDrawings { get; set; }
@@ -38,6 +37,8 @@ namespace LottoDemo.DataAccess
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<LottoTicketBall> LottoTicketBalls { get; set; }
         public virtual DbSet<GameWinningsTier> GameWinningsTiers { get; set; }
+        public virtual DbSet<DrawStatistic> DrawStatistics { get; set; }
+        public virtual DbSet<WinningTicket> WinningTickets { get; set; }
     
         public virtual int CreateNewLottoDrawing(Nullable<int> lotteryGame, Nullable<System.DateTime> drawTime, Nullable<byte> numberOne, Nullable<byte> numberTwo, Nullable<byte> numberThree, Nullable<byte> numberFour, Nullable<byte> numberFive, Nullable<byte> numberSix, Nullable<byte> numberSeven)
         {

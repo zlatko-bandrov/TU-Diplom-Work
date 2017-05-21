@@ -257,6 +257,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\LotteryTicketConverter.cs" />
+    <Compile Include="Converters\LottoDrawModelConverter.cs" />
+    <Compile Include="Converters\WinningTierConverter.cs" />
     <Compile Include="Extensions\CurrencyExtensions.cs" />
     <Compile Include="Extensions\LotteryGameExtensions.cs" />
     <Compile Include="Entities\Extensions\DrawingNumberExtensions.cs" />
@@ -288,6 +291,7 @@
       <Name>LottoDemo.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

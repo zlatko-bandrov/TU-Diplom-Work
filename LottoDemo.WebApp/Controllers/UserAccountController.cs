@@ -17,7 +17,7 @@ namespace LottoDemo.WebApp.Controllers
             {
                 if (!User.Identity.IsAuthenticated)
                 {
-                    return RedirectToRoute("/");
+                    return RedirectToUmbracoPage(1050);
                 }
 
                 ViewBag.MemberProfile = this.GetMemberProfile();

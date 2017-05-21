@@ -11,9 +11,9 @@ namespace LottoDemo.WebApp.Controllers
 {
     public class GameDetailsController : SurfaceController
     {
-        public LotteryGameService GameService { get { return LotteryGameService.Instance; } }
+        public LotteryGameService GameService = new LotteryGameService();
 
-        public LottoUserService LottoUserService { get { return LottoUserService.Instance; } }
+        public LottoUserService LottoUserService = new LottoUserService();
 
         public ActionResult RenderHeader()
         {
@@ -24,20 +24,18 @@ namespace LottoDemo.WebApp.Controllers
                 {
                     ViewBag.TicketBoxSettings = lottoGame.TicketBoxSettings;
                     ViewBag.GameSettings = lottoGame.GameSettings;
-                    ViewBag.JackpotCurrencyCode = lottoGame.JackpotCurrency.Code;
+                    ViewBag.JackpotCurrencyCode = "EUR";
                     ViewBag.NextDrawTime = lottoGame.NextDrawingTime;
                     ViewBag.NextDrawTimeLeft = lottoGame.NextDrawingTime - DateTime.Now;
                     ViewBag.GameJackpot = lottoGame.Jackpot.ToString("0,0").Replace(",", " ");
                 }
-
                 return View("GameDetails/_GameDetailsHeader", this.CurrentPage);
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
-
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         public ActionResult RenderTicketBoxes()
@@ -50,14 +48,13 @@ namespace LottoDemo.WebApp.Controllers
                     ViewBag.TicketBoxSettings = lottoGame.TicketBoxSettings;
                     ViewBag.GameSettings = lottoGame.GameSettings;
                 }
-
                 return View("GameDetails/_LotteryTicketBoxes", this.CurrentPage);
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         public ActionResult RenderCart()
@@ -74,7 +71,6 @@ namespace LottoDemo.WebApp.Controllers
                     {
                         totalPrice = cartItem.TicketPrice * cartItem.Tickets.Count;
                     }
-
                     ViewBag.LotteryGameId = lottoGame.Id;
                     ViewBag.ShoppinCartItems = shoppingCartItems;
                     ViewBag.CartTotalPrice = totalPrice;
@@ -84,9 +80,9 @@ namespace LottoDemo.WebApp.Controllers
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         [HttpPost]
@@ -97,15 +93,12 @@ namespace LottoDemo.WebApp.Controllers
             {
                 model.LoadValues(Request.Form);
                 LottoUserService.AddNewLotteryTickets(this.User.Identity.Name, model);
-
-                return RedirectToCurrentUmbracoPage();
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
-
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         [HttpPost]
@@ -119,13 +112,12 @@ namespace LottoDemo.WebApp.Controllers
                 {
                     LottoUserService.DeleteAllTicketsByGame(System.Web.HttpContext.Current.User.Identity.Name, lottoGame.Id);
                 }
-                return RedirectToCurrentUmbracoPage();
             }
             catch (Exception ex)
             {
                 this.WriteErrorMessage(ex);
             }
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         [HttpPost]
@@ -138,13 +130,12 @@ namespace LottoDemo.WebApp.Controllers
                 {
                     LottoUserService.DeleteSingleTicketByGame(System.Web.HttpContext.Current.User.Identity.Name, lotteryTicketId);
                 }
-                return RedirectToCurrentUmbracoPage();
             }
             catch (Exception ex)
             {
                 this.WriteErrorMessage(ex);
             }
-            return new EmptyResult();
+            return CurrentUmbracoPage();
         }
 
         private LottoGameModel GetLottoGameModel(bool loadDataFromContent = false)
@@ -152,8 +143,8 @@ namespace LottoDemo.WebApp.Controllers
             var contentData = Services.ContentService.GetById(this.CurrentPage.Id);
             LottoGameModel lottoGame = this.GameService.GetLottoGameModelByKey(contentData.Key, loadDataFromContent ? this.CurrentPage : null);
 
-            lottoGame.NextDrawingTime = this.GameService.GetNextDrawTime();
-            lottoGame.PreviousDrawingTime = this.GameService.GetLastCompleteDrawDate();
+            lottoGame.NextDrawingTime = this.GameService.GetNextAvailableDraw(contentData.Key);
+            lottoGame.PreviousDrawingTime = this.GameService.GetLastCompletedDrawTime(contentData.Key);
 
             return lottoGame;
         }

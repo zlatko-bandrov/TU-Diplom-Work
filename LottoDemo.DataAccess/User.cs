@@ -23,8 +23,6 @@ namespace LottoDemo.DataAccess
         public int ID { get; set; }
         public string Username { get; set; }
         public int BalanceID { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
-        public System.DateTime CreationDate { get; set; }
     
         public virtual Balance Balance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

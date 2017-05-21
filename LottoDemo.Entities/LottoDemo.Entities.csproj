@@ -261,6 +261,10 @@
     <Compile Include="Models\Cart\LotteryTicketCartItem.cs" />
     <Compile Include="Models\Cart\ShoppingCartItem.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
+    <Compile Include="Models\DrawStatisticItem.cs" />
+    <Compile Include="Models\LotteryTicket.cs" />
+    <Compile Include="Models\LottoDrawModel.cs" />
+    <Compile Include="Models\LottoDrawStatistic.cs" />
     <Compile Include="Models\LottoGameModel.cs" />
     <Compile Include="Models\LottoGameSettings.cs" />
     <Compile Include="Models\TicketBoxSettings.cs" />
@@ -270,6 +274,7 @@
     <Compile Include="Models\WebAPI\DrawingTimerModel.cs" />
     <Compile Include="Models\WebAPI\GameDrawSettings.cs" />
     <Compile Include="Models\WebAPI\NextDrawTimeLeftModel.cs" />
+    <Compile Include="Models\WinningTier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

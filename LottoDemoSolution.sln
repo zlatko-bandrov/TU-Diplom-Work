@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.DataAccess", "Lot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.Repositories", "LottoDemo.Repositories\LottoDemo.Repositories.csproj", "{A925BAF8-1822-40A2-86E3-F0144719BD0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoDemo.LotteryGameService", "LottoDemo.LotteryGameService\LottoDemo.LotteryGameService.csproj", "{7C46E1C2-C79A-4F76-941D-FAF262164F98}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,16 +99,6 @@ Global
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|x64.ActiveCfg = Release|Any CPU
 		{A925BAF8-1822-40A2-86E3-F0144719BD0C}.Release|x86.ActiveCfg = Release|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Release|ARM.ActiveCfg = Release|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Release|x64.ActiveCfg = Release|Any CPU
-		{7C46E1C2-C79A-4F76-941D-FAF262164F98}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

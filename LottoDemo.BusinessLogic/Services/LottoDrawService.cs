@@ -19,18 +19,16 @@ namespace LottoDemo.BusinessLogic.Services
     {
         #region Properties
 
-        private int _iterationIndex = 0;
-        private static int _iterationsCount = -1;
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        private static readonly string _webApiUrl = ConfigurationManager.AppSettings["webAPIUrl"];
-        public static string WebApiUrl
+        private readonly string _webApiUrl = ConfigurationManager.AppSettings["webAPIUrl"];
+        public string WebApiUrl
         {
             get { return _webApiUrl; }
         }
 
-        private static Guid _lotteryGameKey;
-        public static Guid LotteryGameKey
+        private Guid _lotteryGameKey;
+        public Guid LotteryGameKey
         {
             get
             {
@@ -38,79 +36,61 @@ namespace LottoDemo.BusinessLogic.Services
                 {
                     _lotteryGameKey = Guid.Parse(ConfigurationManager.AppSettings["LotteryGameKey"]);
                 }
-
                 return _lotteryGameKey;
             }
         }
 
-        public double DrawingTimeInterval
-        {
-            get { return GameSettings != null ? GameSettings.DrawingTimeInterval : 5; }
-        }
+        public LottoGameSettings GameSettings { get; set; }
 
-        public static int DrawingsCount
-        {
-            get
-            {
-                if (_iterationsCount <= -1)
-                {
-                    CultureInfo formatProvider = CultureInfo.InvariantCulture;
-                    _iterationsCount = int.Parse(ConfigurationManager.AppSettings["NumberOfDrawings"], formatProvider);
-                }
+        public double DrawingTimeInterval { get { return GameSettings != null ? GameSettings.DrawingTimeInterval : 5; } }
 
-                return _iterationsCount;
-            }
-        }
+        public int LottoGameId { get; set; }
 
-        public LottoGameSettings GameSettings { get; internal set; }
+        public DateTime NextDrawExecution { get; set; }
 
-        public LotteryGameService GameService
-        {
-            get { return LotteryGameService.Instance; }
-        }
+        public int NextLottoDrawID { get; set; }
 
         #endregion
-        
+
+
         public void ExecuteLottoDraw(Object stateInfo)
         {
             AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
-            DateTime lottoDrawTime = DateTime.Now;
-            this._iterationIndex++;
-
             var drawNumbersTask = Task.Run(() =>
             {
                 // Generate lottery game drawing numbers
-                List<byte> numbers = this.RunLottoDrawing();
+                LotteryGameService gameService = new LotteryGameService();
+                List<byte> balls = null;
+                List<byte> bonusBalls = null;
+                this.RunLottoDrawing(out balls, out bonusBalls);
 
-                string infoMessage = string.Format("Drawing at {0}: {1}", lottoDrawTime.ToString("HH:mm:ss"), string.Join(", ", numbers));
-                WriteLogMessage(infoMessage);
+                // Update lotto draw in the database
+                LottoDrawing currentLottoDraw = gameService.UpdateLottoDraw(NextLottoDrawID, balls, bonusBalls);
 
-                // Create and save the lottery drawing in the database
-                LottoDrawing lotteryDrawing = GameService.CreateNewLottoDraw(lottoDrawTime, numbers, LotteryGameKey);
+                string updateMessage = string.Format("Draw with ID={3} was executed at {0}, Balls: {1}, Bonnus Balls: {2}; Updating draw to database...\n",
+                        NextDrawExecution.ToString("HH:mm:ss"), string.Join(", ", balls), string.Join(", ", bonusBalls), NextLottoDrawID);
+                WriteLogMessage(updateMessage);
 
-                return lotteryDrawing;
+                PrepareNextDraw();
+
+                return currentLottoDraw;
             });
             drawNumbersTask.ContinueWith((antecedent) =>
             {
-                LottoDrawing drawing = antecedent.Result;
-                GameService.CalculateLottoDrawWinnings(drawing);
+                LotteryGameService gameService = new LotteryGameService();
+                LottoDrawing executedDraw = antecedent.Result;
+                WriteLogMessage("Start winnings calculation.\n");
+                gameService.DoExecutedDrawWinnings(executedDraw);
             },
             TaskContinuationOptions.OnlyOnRanToCompletion);
 
             try
             {
                 drawNumbersTask.Wait();
-                if (this._iterationIndex == DrawingsCount)
-                {
-                    // Reset the counter and signal the waiting thread.
-                    this._iterationIndex = 0;
-                    autoEvent.Set();
-                }
             }
             catch (Exception error)
             {
-                Log.Error(MethodBase.GetCurrentMethod().DeclaringType, error.Message, error);
-                this._iterationIndex = 0;
+                WriteLogMessage(error);
                 autoEvent.Set();
             }
         }
@@ -129,18 +109,41 @@ namespace LottoDemo.BusinessLogic.Services
                 }
             }
             while (draw.Count < ballsCount);
-
             return draw;
         }
 
-        private List<byte> RunLottoDrawing()
+        private void RunLottoDrawing(out List<byte> ballsList, out List<byte> bonusBallsList)
         {
-            List<byte> draw = (List<byte>)GenerateDrawNumbers(1, GameSettings.GameMaxNumber, GameSettings.BallsCount);
-            return draw;
+            ballsList = (List<byte>)GenerateDrawNumbers(1, GameSettings.GameMaxNumber, GameSettings.BallsCount);
+            bonusBallsList = (List<byte>)GenerateDrawNumbers(GameSettings.BonusBallMin, GameSettings.BonusBallMax, GameSettings.BonusBallsCount);
         }
 
-        public bool InitGameSettings()
+        public static void WriteLogMessage(string infoMessage)
         {
+            Console.WriteLine(infoMessage);
+            Log.Info(MethodBase.GetCurrentMethod().DeclaringType, infoMessage);
+        }
+
+        public static void WriteLogMessage(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Log.Error(MethodBase.GetCurrentMethod().DeclaringType, ex.Message, ex);
+        }
+
+        public bool Start()
+        {
+            bool result = InitGameSettings();
+            if (result)
+            {
+                PrepareNextDraw();
+                result = NextDrawExecution > DateTime.Now;
+            }
+            return result;
+        }
+
+        private bool InitGameSettings()
+        {
+            LotteryGameService gameService = new LotteryGameService();
             string webApiMethod = string.Format("umbraco/Api/LotteryGame/GetGameSettings?gameKey={0}", LotteryGameKey);
             _httpClient.BaseAddress = new Uri(WebApiUrl);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -156,7 +159,13 @@ namespace LottoDemo.BusinessLogic.Services
                     string.Format("\"{0}\" game settins were retrieved successfully from the CMS.\n",
                         GameSettings != null ? GameSettings.GameDisplayName : string.Empty));
 
-                return GameSettings != null;
+                var game = gameService.GetLotteryGameByKey(LotteryGameKey);
+                if (game != null)
+                {
+                    this.LottoGameId = game.ID;
+                }
+
+                return GameSettings != null && this.LottoGameId > 0;
             }
             else
             {
@@ -165,16 +174,28 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
-        public static void WriteLogMessage(string infoMessage)
+        private void SaveNextDrawToDatabase(int lottoGameId, DateTime drawTime)
         {
-            Console.WriteLine(infoMessage);
-            Log.Info(MethodBase.GetCurrentMethod().DeclaringType, infoMessage);
+            LotteryGameService gameService = new LotteryGameService();
+            int nextDrawId = -1;
+            gameService.SaveNewDrawToDatabase(lottoGameId, drawTime, out nextDrawId);
+            NextLottoDrawID = nextDrawId;
         }
 
-        public static void WriteLogMessage(Exception ex)
+        private void PrepareNextDraw()
         {
-            Console.WriteLine(ex.Message);
-            Log.Error(MethodBase.GetCurrentMethod().DeclaringType, ex.Message, ex);
+            LotteryGameService gameService = new LotteryGameService();
+            var nextGameDraw = gameService.TakeTheNextDraw(LottoGameId);
+            NextDrawExecution = gameService.GetTheNextDrawTime(TimeSpan.FromMinutes(GameSettings.DrawingTimeInterval), nextGameDraw);
+            if (nextGameDraw == null)
+            {
+                SaveNextDrawToDatabase(LottoGameId, NextDrawExecution);
+            }
+            else
+            {
+                NextLottoDrawID = nextGameDraw.ID;
+            }
+            WriteLogMessage(string.Format("Next draw (ID={1}) is at: {0}...\n", NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss"), NextLottoDrawID));
         }
     }
 }

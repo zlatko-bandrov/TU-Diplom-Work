@@ -30,6 +30,11 @@ namespace LottoDemo.Common.Services
             GetLogger(loggerType).Error(message, error);
         }
 
+        public static void Error(Type loggerType, Exception error)
+        {
+            GetLogger(loggerType).Error(error.Message, error);
+        }
+
         public static void Debug(Type loggerType, string message)
         {
             GetLogger(loggerType).Debug(message);

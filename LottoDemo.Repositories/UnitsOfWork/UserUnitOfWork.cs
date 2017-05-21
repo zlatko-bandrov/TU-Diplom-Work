@@ -6,16 +6,6 @@ namespace LottoDemo.Repositories.UnitsOfWork
 {
     public class UserUnitOfWork : BaseUnitOfWork
     {
-        #region Singleton Pattern
-
-        private UserUnitOfWork() { }
-
-        private static readonly UserUnitOfWork _instance = new UserUnitOfWork();
-
-        public static UserUnitOfWork Instance { get { return _instance; } }
-
-        #endregion
-
         private GenericRepository<User> lotteryUserRepo;
         public GenericRepository<User> UserRepository
         {
@@ -35,7 +25,7 @@ namespace LottoDemo.Repositories.UnitsOfWork
         }
 
         private GenericRepository<LottoTicket> lottoTicketRepo;
-        public GenericRepository<LottoTicket> LottoTicketRepository
+        public GenericRepository<LottoTicket> TicketsRepository
         {
             get { return this.lottoTicketRepo ?? (this.lottoTicketRepo = new GenericRepository<LottoTicket>(this.Context)); }
         }
