@@ -19,12 +19,12 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "fe994f161417e32b")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8c66ad2a48c41ebd")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
-	/// <summary>HomePage</summary>
+	/// <summary>Home Page</summary>
 	[PublishedContentModel("homePage")]
 	public partial class HomePage : PublishedContentModel, IBasePage
 	{
@@ -56,6 +56,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string BrowserTitle
 		{
 			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
 		}
 
 		///<summary>
@@ -109,6 +118,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Advertises
 		{
 			get { return this.GetPropertyValue<string>("advertises"); }
+		}
+
+		///<summary>
+		/// Carousel List
+		///</summary>
+		[ImplementPropertyType("carouselList")]
+		public object CarouselList
+		{
+			get { return this.GetPropertyValue("carouselList"); }
 		}
 
 		///<summary>
@@ -271,11 +289,14 @@ namespace Umbraco.Web.PublishedContentModels
 	}
 
 	// Mixin content Type 1076 with alias "basePage"
-	/// <summary>BasePage</summary>
+	/// <summary>Base Page</summary>
 	public partial interface IBasePage : IPublishedContent
 	{
 		/// <summary>BrowserTitle</summary>
 		string BrowserTitle { get; }
+
+		/// <summary>Default Headline</summary>
+		string DefaultHeadline { get; }
 
 		/// <summary>NavigationTitle</summary>
 		string NavigationTitle { get; }
@@ -284,7 +305,7 @@ namespace Umbraco.Web.PublishedContentModels
 		bool ShowInMainNavigation { get; }
 	}
 
-	/// <summary>BasePage</summary>
+	/// <summary>Base Page</summary>
 	[PublishedContentModel("basePage")]
 	public partial class BasePage : PublishedContentModel, IBasePage
 	{
@@ -322,6 +343,18 @@ namespace Umbraco.Web.PublishedContentModels
 		public static string GetBrowserTitle(IBasePage that) { return that.GetPropertyValue<string>("browserTitle"); }
 
 		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return GetDefaultHeadline(this); }
+		}
+
+		/// <summary>Static getter for Default Headline</summary>
+		public static string GetDefaultHeadline(IBasePage that) { return that.GetPropertyValue<string>("defaultHeadline"); }
+
+		///<summary>
 		/// NavigationTitle
 		///</summary>
 		[ImplementPropertyType("navigationTitle")]
@@ -346,7 +379,7 @@ namespace Umbraco.Web.PublishedContentModels
 		public static bool GetShowInMainNavigation(IBasePage that) { return that.GetPropertyValue<bool>("showInMainNavigation"); }
 	}
 
-	/// <summary>PlayNowPage</summary>
+	/// <summary>Play Now Page</summary>
 	[PublishedContentModel("playNowPage")]
 	public partial class PlayNowPage : PublishedContentModel, IBasePage
 	{
@@ -381,6 +414,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
 		/// NavigationTitle
 		///</summary>
 		[ImplementPropertyType("navigationTitle")]
@@ -399,7 +441,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>HowToPlay</summary>
+	/// <summary>How To Play</summary>
 	[PublishedContentModel("howToPlay")]
 	public partial class HowToPlay : PublishedContentModel, IBasePage
 	{
@@ -452,6 +494,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
 		/// NavigationTitle
 		///</summary>
 		[ImplementPropertyType("navigationTitle")]
@@ -470,7 +521,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>ResultsAndWinningsPage</summary>
+	/// <summary>Results And Winnings Page</summary>
 	[PublishedContentModel("resultsAndWinningsPage")]
 	public partial class ResultsAndWinningsPage : PublishedContentModel, IBasePage
 	{
@@ -496,12 +547,39 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Details Page Headline
+		///</summary>
+		[ImplementPropertyType("detailsPageHeadline")]
+		public string DetailsPageHeadline
+		{
+			get { return this.GetPropertyValue<string>("detailsPageHeadline"); }
+		}
+
+		///<summary>
+		/// GameDetails
+		///</summary>
+		[ImplementPropertyType("gameDetails")]
+		public IHtmlString GameDetails
+		{
+			get { return this.GetPropertyValue<IHtmlString>("gameDetails"); }
+		}
+
+		///<summary>
 		/// BrowserTitle
 		///</summary>
 		[ImplementPropertyType("browserTitle")]
 		public string BrowserTitle
 		{
 			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
 		}
 
 		///<summary>
@@ -576,6 +654,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
 		/// NavigationTitle
 		///</summary>
 		[ImplementPropertyType("navigationTitle")]
@@ -647,7 +734,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>FAQPage</summary>
+	/// <summary>FAQ Page</summary>
 	[PublishedContentModel("fAQPage")]
 	public partial class FAqpage : PublishedContentModel, IBasePage
 	{
@@ -700,6 +787,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
 		/// NavigationTitle
 		///</summary>
 		[ImplementPropertyType("navigationTitle")]
@@ -718,7 +814,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>ContactUsPage</summary>
+	/// <summary>Contact Us Page</summary>
 	[PublishedContentModel("contactUsPage")]
 	public partial class ContactUsPage : PublishedContentModel, IBasePage
 	{
@@ -750,6 +846,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string BrowserTitle
 		{
 			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
 		}
 
 		///<summary>
@@ -922,12 +1027,12 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Payment Percent
+		/// Total Payout
 		///</summary>
 		[ImplementPropertyType("paymentPercent")]
-		public string PaymentPercent
+		public int PaymentPercent
 		{
-			get { return this.GetPropertyValue<string>("paymentPercent"); }
+			get { return this.GetPropertyValue<int>("paymentPercent"); }
 		}
 
 		///<summary>
@@ -1107,7 +1212,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>UserAccountDetails</summary>
+	/// <summary>User Account Details</summary>
 	[PublishedContentModel("userAccountDetails")]
 	public partial class UserAccountDetails : PublishedContentModel, IBasePage
 	{
@@ -1139,6 +1244,271 @@ namespace Umbraco.Web.PublishedContentModels
 		public string BrowserTitle
 		{
 			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
+		/// NavigationTitle
+		///</summary>
+		[ImplementPropertyType("navigationTitle")]
+		public string NavigationTitle
+		{
+			get { return BasePage.GetNavigationTitle(this); }
+		}
+
+		///<summary>
+		/// ShowInNavigation
+		///</summary>
+		[ImplementPropertyType("showInMainNavigation")]
+		public bool ShowInMainNavigation
+		{
+			get { return BasePage.GetShowInMainNavigation(this); }
+		}
+	}
+
+	/// <summary>CarouselList</summary>
+	[PublishedContentModel("carouselList")]
+	public partial class CarouselList : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "carouselList";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public CarouselList(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CarouselList, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+	}
+
+	/// <summary>CarouselItem</summary>
+	[PublishedContentModel("carouselItem")]
+	public partial class CarouselItem : CarouselList
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "carouselItem";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public CarouselItem(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CarouselItem, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// BackgroundImage
+		///</summary>
+		[ImplementPropertyType("backgroundImage")]
+		public string BackgroundImage
+		{
+			get { return this.GetPropertyValue<string>("backgroundImage"); }
+		}
+
+		///<summary>
+		/// PageUrl
+		///</summary>
+		[ImplementPropertyType("pageUrl")]
+		public object PageUrl
+		{
+			get { return this.GetPropertyValue("pageUrl"); }
+		}
+	}
+
+	/// <summary>Login Page</summary>
+	[PublishedContentModel("loginPage")]
+	public partial class LoginPage : PublishedContentModel, IBasePage
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "loginPage";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public LoginPage(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<LoginPage, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// BrowserTitle
+		///</summary>
+		[ImplementPropertyType("browserTitle")]
+		public string BrowserTitle
+		{
+			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
+		/// NavigationTitle
+		///</summary>
+		[ImplementPropertyType("navigationTitle")]
+		public string NavigationTitle
+		{
+			get { return BasePage.GetNavigationTitle(this); }
+		}
+
+		///<summary>
+		/// ShowInNavigation
+		///</summary>
+		[ImplementPropertyType("showInMainNavigation")]
+		public bool ShowInMainNavigation
+		{
+			get { return BasePage.GetShowInMainNavigation(this); }
+		}
+	}
+
+	/// <summary>User Entries Page</summary>
+	[PublishedContentModel("userEntriesPage")]
+	public partial class UserEntriesPage : PublishedContentModel, IBasePage
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "userEntriesPage";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public UserEntriesPage(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UserEntriesPage, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// BrowserTitle
+		///</summary>
+		[ImplementPropertyType("browserTitle")]
+		public string BrowserTitle
+		{
+			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
+		}
+
+		///<summary>
+		/// NavigationTitle
+		///</summary>
+		[ImplementPropertyType("navigationTitle")]
+		public string NavigationTitle
+		{
+			get { return BasePage.GetNavigationTitle(this); }
+		}
+
+		///<summary>
+		/// ShowInNavigation
+		///</summary>
+		[ImplementPropertyType("showInMainNavigation")]
+		public bool ShowInMainNavigation
+		{
+			get { return BasePage.GetShowInMainNavigation(this); }
+		}
+	}
+
+	/// <summary>Forgot Password Page</summary>
+	[PublishedContentModel("forgotPasswordPage")]
+	public partial class ForgotPasswordPage : PublishedContentModel, IBasePage
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "forgotPasswordPage";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public ForgotPasswordPage(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ForgotPasswordPage, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// BrowserTitle
+		///</summary>
+		[ImplementPropertyType("browserTitle")]
+		public string BrowserTitle
+		{
+			get { return BasePage.GetBrowserTitle(this); }
+		}
+
+		///<summary>
+		/// Default Headline
+		///</summary>
+		[ImplementPropertyType("defaultHeadline")]
+		public string DefaultHeadline
+		{
+			get { return BasePage.GetDefaultHeadline(this); }
 		}
 
 		///<summary>

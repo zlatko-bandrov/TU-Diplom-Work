@@ -3,175 +3,41 @@
 @{
     Layout = "WithRightSidebar.cshtml";
 }
+@section head {
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                $('#gameDrawsSelect:first').change(function () {
+                    let $current = $(this);
+                    let $form = $current.closest('form');
+                    $form.find('input#DrawID:first').val($current.val());
 
+                    $.ajax({
+                        type: "POST",
+                        url: $form.attr('action'),
+                        data: $form.serialize(),
+                        success: function (responseData) {
+                            let $response = $(responseData);
+                            let numbersHtml = $response[0].innerHTML;
+                            let statisticsTable = $response[2].innerHTML;
+                            $("#drawNumbersHolder:first").html(numbersHtml);
+                            $("#winningsStatistics:first").html(statisticsTable);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    });
+                });
+            });
+        })(jQuery);
+    </script>
+}
 <div class="row">
-
     <div class="col-lg-12">
-        <div class="row">
-            <div class="col-md-12 pageHeader">
-                <h1>Lottery results and winnings numbers</h1>
-            </div>
-            <div class="col-md-12 pageContent" style="padding-bottom: 0;">
-
-                <div class="results-main-wrap">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <img class="lottoLogoFront" src="./Results and Winning Numbers_files/euromillions.svg" alt="Euromillions">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="pb-btn">
-                                <a class="lname single l247-btn-primary btn-block" title="Buy EuroMillions Lottery tickets online at playhugelottos.com, play the Euro Millions lottery" href="https://www.playhugelottos.com/en/play-the-lottery/euro-millions.html">Play now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-7 display-fix">
-                            Winnings numbers
-                            <div class="winning_numbers">
-                                <div class="ballset-wrap">
-                                    <div class="entryNumber ballSet2 ">
-                                        19
-                                    </div>
-                                    <div class="entryNumber ballSet2 ">
-                                        25
-                                    </div>
-                                    <div class="entryNumber ballSet2 ">
-                                        33
-                                    </div>
-                                    <div class="entryNumber ballSet2 ">
-                                        36
-                                    </div>
-                                    <div class="entryNumber ballSet2 ">
-                                        48
-                                    </div>
-                                    <div class="entryNumber ballSet3 ">
-                                        2
-                                    </div>
-                                    <div class="entryNumber ballSet3 ">
-                                        9
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 display-fix">
-                            Next estimated jackpot
-                            <h2 style="margin-top:10px;">EU&nbsp;&nbsp; 17,000,000</h2>
-
-                            <p>Last Draw : 17 Feb 2017 (Friday)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class=" results-main-wrap-child">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a title="Buy EuroMillions Lottery tickets online at playhugelottos.com, play the Euro Millions lottery" href="https://www.playhugelottos.com/en/lottery-results-and-winning-numbers/euromillions.html">View prize breakdown</a>
-                        </div>
-                        <div class="col-md-6 right">
-                            <span>
-                                <a title="Buy EuroMillions Lottery tickets online" href="https://www.playhugelottos.com/en/play-the-lottery/euro-millions.html">Buy EuroMillions Lottery tickets online</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="results-main-wrap">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <img class="lottoLogoFront" src="./Results and Winning Numbers_files/germanlotto.svg" alt="Germanlotto">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="pb-btn">
-                                <a class="lname single l247-btn-primary btn-block" title="Play Lotto 6aus49 German Lottery online, buy Lotto 6aus49 German Lottery tickets at playhugelottos.com" href="https://www.playhugelottos.com/en/play-the-lottery/6aus49-lottery.html">Play now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-7 display-fix">
-                            Winnings numbers
-                            <div class="winning_numbers">
-                                <div class="ballset-wrap">
-                                    <div class="entryNumber ballSet48 ">
-                                        7
-                                    </div>
-                                    <div class="entryNumber ballSet48 ">
-                                        13
-                                    </div>
-                                    <div class="entryNumber ballSet48 ">
-                                        18
-                                    </div>
-                                    <div class="entryNumber ballSet48 ">
-                                        33
-                                    </div>
-                                    <div class="entryNumber ballSet48 ">
-                                        36
-                                    </div>
-                                    <div class="entryNumber ballSet48 ">
-                                        39
-                                    </div>
-                                    <div class="entryNumber ballSet49 ">
-                                        4
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 display-fix">
-                            Next estimated jackpot
-
-                            <h2 style="margin-top:10px;">Results Pending</h2>
-
-
-                            <p>Last Draw : 15 Feb 2017 (Wednesday)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class=" results-main-wrap-child">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a title="Play Lotto 6aus49 German Lottery online, buy Lotto 6aus49 German Lottery tickets at playhugelottos.com" href="https://www.playhugelottos.com/en/lottery-results-and-winning-numbers/lotto-6aus49.html">View prize breakdown</a>
-                        </div>
-                        <div class="col-md-6 right">
-                            <span>
-                                <a title="Play Lotto 6aus49 German Lottery online" href="https://www.playhugelottos.com/en/play-the-lottery/6aus49-lottery.html">Play Lotto 6aus49 German Lottery online</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        @{ Html.RenderAction("GamesResultsList", "ResultsAndWinnings"); }
     </div>
-
     <div class="col-md-12 pageContent" style="padding-top: 0 !important;">
-        <p><b>Lotto Results and Winning Numbers at PlayHugeLottos.com</b></p>
-        <p><b><br></b></p>
-        <p>PlayHugeLottos.com posts the latest draw results online, immediately after official draw results are published. Visit this page to view winning numbers and to find out if you are one of the lucky lottery winners!</p>
-        <p>To ensure you never miss out on a lottery win, register and sign up to receive our newsletter. You will be notified of all big, upcoming lottery jackpots and you will be sent winning numbers and results information, direct to your inbox.</p>
-        <p>PlayHugeLottos.com provides draw results for the 15 biggest lotteries in the world, including USA Powerball, Mega Millions and EuroMillions. In addition, draw results are also posted for the giant Spanish raffles, which qualify as some of the biggest games in the world.</p>
-        <p>Find out more about the most monumental draw results for the 15 exciting lotteries available on PlayHugeLottos.com and good luck on your way to millions!</p>
-        <p>&nbsp;</p>
-        <p><b>USA Powerball Lotto Results</b></p>
-        <p>USA Powerball is the world’s biggest lottery and comprises a shared lottery jackpot sold by 45 State lotteries in the USA. Powerball draws are held on Wednesdays and Saturdays at 10:59pm Eastern Time.<br>The biggest draw of all time occurred on Wednesday, 13th January 2016, with a whopping $1.5 billion USD jackpot up for grabs. This draw set the world on fire with entries coming in from all over the globe, including Canada, Australia, India and the UK.</p>
-        <p>There were 3 lucky winners who shared in this amazing and record-breaking jackpot. The lucky winning numbers were 4, 8, 19, 27, 34, 10 – what are YOUR lucky numbers?</p>
-        <p>&nbsp;</p>
-        <p><b>US Mega Millions Lotto Results</b></p>
-        <p>US Mega Millions is another multi-State US lottery, which, up until January 2016, was officially the biggest lottery in the world. US MegaMillions is played in 45 jurisdictions: 43 States plus the District of Columbia &amp; the US Virgin Islands. Mega Millions is drawn at 10:59 p.m. Eastern Time Tuesdays and Fridays, including holidays.</p>
-        <p>The biggest Mega Millions draw occurred on March 30th, 2012, with an unbelievable $656 million USD jackpot on offer. There were 3 lucky winners who managed to pick all 5 lucky numbers plus the Mega ball 2- 4- 23- 38- 46- 23.</p>
-        <p>Stay tuned to the PlayHugeLottos.com Mega Millions results page where we update the winning information after every draw.</p>
-        <p>&nbsp;</p>
-        <p><b>EuroMillions Lotto Results</b></p>
-        <p>The pan-European lottery, EuroMillions, is one of the largest lotteries in the world, and currently holds the record as having had the highest jackpot ever paid out in Europe. 9 participating countries pool together to offer EuroMillions, including: Austria, Belgium, France, Ireland, Luxembourg, Portugal, Spain, Switzerland and the United Kingdom. Draws take place at 8:45pm every Tuesday and Friday in Paris, France.</p>
-        <p>Depending on whether you’re counting in Euros or Pounds Sterling, the biggest EuroMillions draw was either on 10th August, 2012, when 1 lucky winner took home a staggering €190 million or on 12th July, 2011, when 1 fortunate player won £161.7 million for themselves.</p>
-        <p>The winning numbers for these draws were: 11-17-21-48-50 with star numbers 9 and 10, and 17-19-38-42-45 with star numbers 9 and 10. Are 9 and 10 your winning numbers as well?</p>
-        <p>&nbsp;</p>
-        <p><b>The Biggest Lotto Results From Around the World</b></p>
-        <p>Although undisputedly the 3 biggest lotteries in the world, EuroMillions, Powerball and Mega Millions are not the only lotteries to offer spectacular jackpot prizes. 4 other European lotteries have provided some truly tasty jackpot treats over the years.</p>
-        <p>Pan-European lottery, Eurojackpot, has a jackpot cap of €90 million which means that the jackpot can never pass beyond this value. To date, Eurojackpot, has offered this highest possible value just once. On 15th May, 2015, 1 lottery winner from the Czech Republic single-handedly took home this massive Euro prize!</p>
-        <p>For nearly 12 months the Italian National Lottery, SuperEnaLotto, reigned as the biggest lotto jackpot ever offered in Europe. €177 million was finally won on 30th October, 2010, by 1 lucky ticket holder, at the time, the biggest lottery win in Europe.</p>
-        <p>Other massive millionaire pay-outs in the lottery world include €45.4 million paid out to 3 lucky winners in the German Lotto 6 aus 49, won in December 2007. And £66.1 million paid out to 2 winners on 9th January 2016, currently the largest jackpot ever won on the UK National lottery.</p>
-        <p>As you can see, there is never a dull moment when it comes to life-changing lottery jackpots, so make sure you get your tickets right here at PlayHugeLottos.com! Remember, you have to be in it, to win it!</p>
-        <p>&nbsp;</p>
+        @Model.Content.GameDetails
     </div>
-
 </div>

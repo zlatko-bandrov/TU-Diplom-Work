@@ -19,7 +19,7 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                LottoGameModel lottoGame = this.GetLottoGameModel(true);
+                LottoGameModel lottoGame = this.GetLottoGameModel();
                 if (lottoGame != null)
                 {
                     ViewBag.TicketBoxSettings = lottoGame.TicketBoxSettings;
@@ -27,9 +27,9 @@ namespace LottoDemo.WebApp.Controllers
                     ViewBag.JackpotCurrencyCode = "EUR";
                     ViewBag.NextDrawTime = lottoGame.NextDrawingTime;
                     ViewBag.NextDrawTimeLeft = lottoGame.NextDrawingTime - DateTime.Now;
-                    ViewBag.GameJackpot = lottoGame.Jackpot.ToString("0,0").Replace(",", " ");
+                    ViewBag.GameJackpot = lottoGame.Jackpot.ToString("0,0");
                 }
-                return View("GameDetails/_GameDetailsHeader", this.CurrentPage);
+                return PartialView("GameDetails/_GameDetailsHeader", this.CurrentPage);
             }
             catch (Exception ex)
             {
@@ -42,13 +42,13 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                LottoGameModel lottoGame = this.GetLottoGameModel(true);
+                LottoGameModel lottoGame = GetLottoGameModel();
                 if (lottoGame != null)
                 {
                     ViewBag.TicketBoxSettings = lottoGame.TicketBoxSettings;
                     ViewBag.GameSettings = lottoGame.GameSettings;
                 }
-                return View("GameDetails/_LotteryTicketBoxes", this.CurrentPage);
+                return PartialView("GameDetails/_LotteryTicketBoxes", this.CurrentPage);
             }
             catch (Exception ex)
             {
@@ -61,22 +61,25 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                LottoGameModel lottoGame = this.GetLottoGameModel(true);
+                LottoGameModel lottoGame = GetLottoGameModel();
                 if (lottoGame != null)
                 {
-                    var shoppingCartItems = this.LottoUserService.GetAllCartTickets(User.Identity.Name, lottoGame, (string)CurrentPage.GetProperty("LotteryName").Value);
+                    var shoppingCartItems = LottoUserService.GetAllCartTickets(User.Identity.Name, lottoGame, (string)CurrentPage.GetProperty("LotteryName").Value);
                     double totalPrice = 0;
+
                     var cartItem = shoppingCartItems.FirstOrDefault();
                     if (cartItem != null)
                     {
                         totalPrice = cartItem.TicketPrice * cartItem.Tickets.Count;
                     }
-                    ViewBag.LotteryGameId = lottoGame.Id;
+
+                    int? nextDrawId = GameService.TakeTheNextDrawID(lottoGame.Id);
+                    ViewBag.LottoDrawId = nextDrawId.HasValue ? nextDrawId.Value : 0;
                     ViewBag.ShoppinCartItems = shoppingCartItems;
                     ViewBag.CartTotalPrice = totalPrice;
                 }
 
-                return View("GameDetails/_LottoGameCart", CurrentPage);
+                return PartialView("GameDetails/_LottoGameCart", CurrentPage);
             }
             catch (Exception ex)
             {
@@ -138,13 +141,12 @@ namespace LottoDemo.WebApp.Controllers
             return CurrentUmbracoPage();
         }
 
-        private LottoGameModel GetLottoGameModel(bool loadDataFromContent = false)
+        private LottoGameModel GetLottoGameModel()
         {
-            var contentData = Services.ContentService.GetById(this.CurrentPage.Id);
-            LottoGameModel lottoGame = this.GameService.GetLottoGameModelByKey(contentData.Key, loadDataFromContent ? this.CurrentPage : null);
-
-            lottoGame.NextDrawingTime = this.GameService.GetNextAvailableDraw(contentData.Key);
-            lottoGame.PreviousDrawingTime = this.GameService.GetLastCompletedDrawTime(contentData.Key);
+            var contentData = Services.ContentService.GetById(CurrentPage.Id);
+            LottoGameModel lottoGame = GameService.GetLottoGameModelByKey(contentData.Key, CurrentPage);
+            lottoGame.NextDrawingTime = GameService.GetGameNextDrawTime(lottoGame.Id, TimeSpan.FromMinutes(lottoGame.GameSettings.DrawingTimeInterval));
+            lottoGame.PreviousDrawingTime = GameService.GetLastCompletedDrawTime(contentData.Key);
 
             return lottoGame;
         }

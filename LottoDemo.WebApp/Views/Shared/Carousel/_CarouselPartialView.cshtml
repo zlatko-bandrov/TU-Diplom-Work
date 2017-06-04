@@ -4,7 +4,6 @@
 @{
     var firstCarousel = Umbraco.Content(Umbraco.TypedContent(1249).Children.FirstOrDefault().Id);
     var secondCarousel = Umbraco.Content(Umbraco.TypedContent(1249).Children.Skip(1).FirstOrDefault().Id);
-    //Umbraco.TypedMedia(firstCarousel.BackgroundImage).umbracoFile.src
 
     var firstPage = Umbraco.Content(firstCarousel.PageUrl);
     var secondPage = Umbraco.Content(secondCarousel.PageUrl);
@@ -31,19 +30,23 @@
                 <div data-ng-class="{item: true, active : (img.id === 0)}" data-ng-repeat="img in images" class="ng-scope item">
                     <div data-ng-if="(images.length-1) === $index" class="ng-scope">
                         <div class="jackpot-carousel">
+
                             <div class="jackpot-lottery-name ng-binding">
-                                Powerball
+                                @firstPage.LotteryName
                             </div>
+
                             <div class="jackpot-amount">
-                                <strong data-ng-bind-html="jackpot_details.currency_symbol" class="ng-binding">US</strong> 
-                                <span data-ng-bind-html="jackpot_details.jackpot_amount" class="ng-binding">$285,000,000</span>
+                                <strong data-ng-bind-html="jackpot_details.currency_symbol" class="ng-binding"></strong> 
+                                <span data-ng-bind-html="jackpot_details.jackpot_amount" class="ng-binding">€ @firstPage.Jackpot.ToString("0,0")</span>
                             </div>
+
                             <div class="jackpot-payout">
                                 <span data-ng-if="jackpot_details.cash_payout" class="ng-scope">
-                                    cash payout:            <strong>US</strong> $<span data-ng-bind-html="jackpot_details.cash_payout" class="ng-binding">172,500,000</span>
+                                    cash payout: € <span data-ng-bind-html="jackpot_details.cash_payout" class="ng-binding">@((firstPage.Jackpot * 0.95).ToString("0,0"))</span>
                                 </span>
                                 <span data-ng-else=""><br/></span>
                             </div>
+
                             <hr class="banner-hr" />
 
                             <div style="width:660px;">
@@ -52,6 +55,7 @@
                                     <strong>11-02-2017</strong>
                                 </span>
                                 <br/>
+
                                 <div class="time">
                                     <div data-timer="" data-end-time="1486854000000" class="ng-isolate-scope">
                                         <div class="timer-block ng-scope">
@@ -71,15 +75,18 @@
                                             seconds
                                         </div>
                                     </div>
-                                    <a href="@secondCarousel.Url">
+                                    <a href="@firstPage.Url">
                                         <div class="timer-block timer-play">
                                             Play Now
                                         </div>
                                     </a>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
+
                     <span class="ng-scope">
                         <a href="@firstPage.Url">
                             <img alt="Play The Lottery" width="1170" height="400" src="@Umbraco.Media(firstCarousel.BackgroundImage).umbracoFile.src" />

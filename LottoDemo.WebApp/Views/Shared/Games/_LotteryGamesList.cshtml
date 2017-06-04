@@ -1,5 +1,5 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
-
+@using LottoDemo.Entities.Models.ResultsAndWinnings;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LotteriesListPage>
 
 <div class="col-lg-12 ">
@@ -7,61 +7,62 @@
         <div class="basket-entry-head-sml">
             <h1>@Umbraco.GetDictionaryValue("lotteryGamesListTitle")</h1>
         </div>
-
         <div class="col-lg-12">
             <div class="row">
-                <!--        <h4>--><!--</h4>-->
                 <div class="row">
                     <div class="en nextdraw">
                         <div class="lottoryblocks-wrapper">
-
-                            @foreach (ContentModels.LotteryGame lotteryGame in Model.Content.Children)
-                            {
-                                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-6 lottery-fullbox">
-                                    <div class="pb-holder">
-
-                                        <div class="pb-logo">
-                                            <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle">
-                                                <span class="pending">
-                                                    <img src="@Umbraco.Media(lotteryGame.LotteryLogo).umbracoFile.src" alt="Lottery Logo" 
-                                                         class="lottery-logo-img" style="width: 150px;" />
-                                                </span>
-                                            </a>
-                                            <h2 class="lottos">
-                                                @lotteryGame.LotteryName
-                                            </h2>
-                                        </div>
-
-                                        <div class="pb-amount">
-                                            @ViewBag.LastestJackpot
-                                            <span class="jackpotamounts_small">
-                                            </span>
-                                        </div>
-
-                                        <div class="pb-counter">
-                                            <div class="counter">
-                                                <div class="ng-isolate-scope">
-                                                    <div class="ng-scope">
+                            @{
+                                var gamesList = (List<LotteryGameTeaser>)ViewBag.GamesList;
+                                foreach (var lotteryGame in gamesList)
+                                {
+                                    <div class="col-lg-3 col-sm-4 col-md-3 col-xs-6 lottery-fullbox">
+                                        <div class="pb-holder">
+                                            <div class="pb-logo">
+                                                <a href="@lotteryGame.GameUrl" title="@lotteryGame.GameDisplayName">
+                                                    <span class="pending">
+                                                        <img src="@lotteryGame.GameLogoUrl" alt="Lottery Logo" class="lottery-logo-img" style="width: 150px;" />
+                                                    </span>
+                                                </a>
+                                                <h2 class="lottos">
+                                                    @lotteryGame.GameDisplayName
+                                                </h2>
+                                            </div>
+                                            <div class="pb-amount">
+                                                @lotteryGame.EstimatedJackpot.ToString("0,0")
+                                                <span class="jackpotamounts_small">
+                                                    <span>
                                                         <strong>
-                                                            <span class="ng-binding">@ViewBag.NextDraw</span>
+                                                            <br/>
+                                                            @Umbraco.GetDictionaryValue("gameDetailsCostPer") - <span id="PlayUSAPowerball">€ @lotteryGame.TicketPrice.ToString("0.00")</span>
                                                         </strong>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div class="pb-counter">
+                                                <div class="counter">
+                                                    <div class="ng-isolate-scope">
+                                                        <div class="ng-scope">
+                                                            <strong>
+                                                                <span class="ng-binding">
+                                                                    @lotteryGame.NextDrawTime.ToString("dd MMM yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+                                                                </span>
+                                                            </strong>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="pb-btn">
-                                            <div>
-                                                <a href="@lotteryGame.Url" title="@lotteryGame.LotteryPageTitle" class="single">
-                                                    @Umbraco.GetDictionaryValue("lotteryGamesGameDetailLinkText")
-                                                </a>
+                                            <div class="pb-btn">
+                                                <div>
+                                                    <a href="@lotteryGame.GameUrl" title="@lotteryGame.GameDisplayName" class="single">
+                                                        @Umbraco.GetDictionaryValue("lotteryGamesGameDetailLinkText")
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
+                                }
                             }
-
                         </div>
                     </div>
                 </div>

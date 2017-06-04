@@ -18,13 +18,10 @@
             }
             <div class="col-lg-12 ">
                 <hr /><br />
-
                 <div class="basket-entry-head">
                     <h3 class="News-Sub-Heading">@Umbraco.GetDictionaryValue("newsLatestNewsListTitle")</h3>
                 </div>
-
                 <br /><br />
-
                 @if (newsListPage != null && newsListPage.Children.Any())
                 {
                     foreach (ContentModels.NewsItem article in newsListPage.Children.Take(newsCount))

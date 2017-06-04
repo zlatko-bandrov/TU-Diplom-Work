@@ -69,7 +69,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LotteryGameID" Type="int" Nullable="false" />
           <Property Name="DrawTime" Type="datetime" Nullable="false" />
-          <Property Name="IsCalculated" Type="bit" Nullable="false" />
+          <Property Name="WasCompleted" Type="bit" Nullable="false" />
+          <Property Name="WasExecuted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoDrawingBalls">
           <Key>
@@ -85,7 +86,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="LotteryGameID" Type="int" Nullable="false" />
+          <Property Name="LottoDrawID" Type="int" Nullable="false" />
           <Property Name="InputTime" Type="datetime" Nullable="false" />
           <Property Name="IsCalculated" Type="bit" Nullable="false" />
           <Property Name="IsWinning" Type="bit" Nullable="false" />
@@ -222,15 +223,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LottoTicket_LotteryGame">
-          <End Role="LotteryGame" Type="Self.LotteryGame" Multiplicity="1" />
+        <Association Name="FK_LottoTicket_LottoDrawing">
+          <End Role="LottoDrawing" Type="Self.LottoDrawing" Multiplicity="1" />
           <End Role="LottoTicket" Type="Self.LottoTicket" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LotteryGame">
+            <Principal Role="LottoDrawing">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="LottoTicket">
-              <PropertyRef Name="LotteryGameID" />
+              <PropertyRef Name="LottoDrawID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -331,8 +332,8 @@
             <End Role="LotteryGame" EntitySet="LotteryGame" />
             <End Role="LottoDrawing" EntitySet="LottoDrawing" />
           </AssociationSet>
-          <AssociationSet Name="FK_LottoTicket_LotteryGame" Association="Self.FK_LottoTicket_LotteryGame">
-            <End Role="LotteryGame" EntitySet="LotteryGame" />
+          <AssociationSet Name="FK_LottoTicket_LottoDrawing" Association="Self.FK_LottoTicket_LottoDrawing">
+            <End Role="LottoDrawing" EntitySet="LottoDrawing" />
             <End Role="LottoTicket" EntitySet="LottoTicket" />
           </AssociationSet>
           <AssociationSet Name="FK_LottoTicket_User" Association="Self.FK_LottoTicket_User">
@@ -374,7 +375,6 @@
           <EntitySet Name="LotteryGames" EntityType="LotteryDemoEFModel.LotteryGame" />
           <EntitySet Name="LottoDrawings" EntityType="LotteryDemoEFModel.LottoDrawing" />
           <EntitySet Name="LottoDrawingBalls" EntityType="LotteryDemoEFModel.LottoDrawingBall" />
-          <EntitySet Name="LottoTickets" EntityType="LotteryDemoEFModel.LottoTicket" />
           <EntitySet Name="Users" EntityType="LotteryDemoEFModel.User" />
           <AssociationSet Name="FK_Balance_Currency" Association="LotteryDemoEFModel.FK_Balance_Currency">
             <End Role="Currency" EntitySet="Currencies" />
@@ -392,25 +392,13 @@
             <End Role="LotteryGame" EntitySet="LotteryGames" />
             <End Role="LottoDrawing" EntitySet="LottoDrawings" />
           </AssociationSet>
-          <AssociationSet Name="FK_LottoTicket_LotteryGame" Association="LotteryDemoEFModel.FK_LottoTicket_LotteryGame">
-            <End Role="LotteryGame" EntitySet="LotteryGames" />
-            <End Role="LottoTicket" EntitySet="LottoTickets" />
-          </AssociationSet>
           <AssociationSet Name="FK_Lotto_Drawing_Balls_LottoDrawing" Association="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_LottoDrawing">
             <End Role="LottoDrawing" EntitySet="LottoDrawings" />
             <End Role="LottoDrawingBall" EntitySet="LottoDrawingBalls" />
           </AssociationSet>
-          <AssociationSet Name="FK_LottoTicket_User" Association="LotteryDemoEFModel.FK_LottoTicket_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="LottoTicket" EntitySet="LottoTickets" />
-          </AssociationSet>
           <EntitySet Name="LottoTicketBalls" EntityType="LotteryDemoEFModel.LottoTicketBall" />
           <AssociationSet Name="FK_Lotto_Ticket_Balls_Lottery_Ball" Association="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_Lottery_Ball">
             <End Role="LotteryBall" EntitySet="LotteryBalls" />
-            <End Role="LottoTicketBall" EntitySet="LottoTicketBalls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lotto_Ticket_Balls_LottoTicket" Association="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket">
-            <End Role="LottoTicket" EntitySet="LottoTickets" />
             <End Role="LottoTicketBall" EntitySet="LottoTicketBalls" />
           </AssociationSet>
           <EntitySet Name="GameWinningsTiers" EntityType="LotteryDemoEFModel.GameWinningsTier" />
@@ -432,11 +420,24 @@
             <End Role="DrawStatistic" EntitySet="DrawStatistics" />
             <End Role="WinningTicket" EntitySet="WinningTickets" />
           </AssociationSet>
+          <EntitySet Name="LottoTickets" EntityType="LotteryDemoEFModel.LottoTicket" />
+          <AssociationSet Name="FK_LottoTicket_LottoDrawing" Association="LotteryDemoEFModel.FK_LottoTicket_LottoDrawing">
+            <End Role="LottoDrawing" EntitySet="LottoDrawings" />
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lotto_Ticket_Balls_LottoTicket" Association="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket">
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
+            <End Role="LottoTicketBall" EntitySet="LottoTicketBalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LottoTicket_User" Association="LotteryDemoEFModel.FK_LottoTicket_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LottoTicket" EntitySet="LottoTickets" />
+          </AssociationSet>
           <AssociationSet Name="FK_WinningTickets_LottoTicket" Association="LotteryDemoEFModel.FK_WinningTickets_LottoTicket">
             <End Role="LottoTicket" EntitySet="LottoTickets" />
             <End Role="WinningTicket" EntitySet="WinningTickets" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Balance">
           <Key>
             <PropertyRef Name="ID" />
@@ -477,7 +478,6 @@
           <Property Name="JackpotID" Type="Int32" Nullable="false" />
           <Property Name="GameKey" Type="Guid" Nullable="false" />
           <NavigationProperty Name="LottoDrawings" Relationship="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" FromRole="LotteryGame" ToRole="LottoDrawing" />
-          <NavigationProperty Name="LottoTickets" Relationship="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" FromRole="LotteryGame" ToRole="LottoTicket" />
           <NavigationProperty Name="GameWinningsTiers" Relationship="LotteryDemoEFModel.FK_GameWinningsTier_LotteryGame" FromRole="LotteryGame" ToRole="GameWinningsTier" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -489,10 +489,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LotteryGameID" Type="Int32" Nullable="false" />
           <Property Name="DrawTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsCalculated" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LotteryGame" Relationship="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" FromRole="LottoDrawing" ToRole="LotteryGame" />
           <NavigationProperty Name="LottoDrawingBalls" Relationship="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_LottoDrawing" FromRole="LottoDrawing" ToRole="LottoDrawingBall" />
           <NavigationProperty Name="DrawStatistics" Relationship="LotteryDemoEFModel.FK_DrawStatistics_LottoDrawing" FromRole="LottoDrawing" ToRole="DrawStatistic" />
+          <Property Name="WasExecuted" Type="Boolean" Nullable="false" />
+          <Property Name="WasCompleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LottoTickets" Relationship="LotteryDemoEFModel.FK_LottoTicket_LottoDrawing" FromRole="LottoDrawing" ToRole="LottoTicket" />
         </EntityType>
         <EntityType Name="LottoDrawingBall">
           <Key>
@@ -503,21 +505,6 @@
           <Property Name="LotteryBallID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="LotteryBall" Relationship="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_Lottery_Ball" FromRole="LottoDrawingBall" ToRole="LotteryBall" />
           <NavigationProperty Name="LottoDrawing" Relationship="LotteryDemoEFModel.FK_Lotto_Drawing_Balls_LottoDrawing" FromRole="LottoDrawingBall" ToRole="LottoDrawing" />
-        </EntityType>
-        <EntityType Name="LottoTicket">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="LotteryGameID" Type="Int32" Nullable="false" />
-          <Property Name="InputTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="LotteryGame" Relationship="LotteryDemoEFModel.FK_LottoTicket_LotteryGame" FromRole="LottoTicket" ToRole="LotteryGame" />
-          <NavigationProperty Name="User" Relationship="LotteryDemoEFModel.FK_LottoTicket_User" FromRole="LottoTicket" ToRole="User" />
-          <Property Name="IsCalculated" Type="Boolean" Nullable="false" />
-          <Property Name="IsWinning" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="LottoTicketBalls" Relationship="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket" FromRole="LottoTicket" ToRole="LottoTicketBall" />
-          <NavigationProperty Name="WinningTickets" Relationship="LotteryDemoEFModel.FK_WinningTickets_LottoTicket" FromRole="LottoTicket" ToRole="WinningTicket" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -577,18 +564,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LottoTicket_LotteryGame">
-          <End Type="LotteryDemoEFModel.LotteryGame" Role="LotteryGame" Multiplicity="1" />
-          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LotteryGame">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LottoTicket">
-              <PropertyRef Name="LotteryGameID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Lotto_Drawing_Balls_LottoDrawing">
           <End Type="LotteryDemoEFModel.LottoDrawing" Role="LottoDrawing" Multiplicity="1" />
           <End Type="LotteryDemoEFModel.LottoDrawingBall" Role="LottoDrawingBall" Multiplicity="*" />
@@ -598,18 +573,6 @@
             </Principal>
             <Dependent Role="LottoDrawingBall">
               <PropertyRef Name="LottoDrawingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LottoTicket_User">
-          <End Type="LotteryDemoEFModel.User" Role="User" Multiplicity="1" />
-          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LottoTicket">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -632,18 +595,6 @@
             </Principal>
             <Dependent Role="LottoTicketBall">
               <PropertyRef Name="LotteryBallID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lotto_Ticket_Balls_LottoTicket">
-          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="1" />
-          <End Type="LotteryDemoEFModel.LottoTicketBall" Role="LottoTicketBall" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LottoTicket">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LottoTicketBall">
-              <PropertyRef Name="LottoTicketID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -730,6 +681,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LottoTicket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LottoDrawID" Type="Int32" Nullable="false" />
+          <Property Name="InputTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsCalculated" Type="Boolean" Nullable="false" />
+          <Property Name="IsWinning" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LottoDrawing" Relationship="LotteryDemoEFModel.FK_LottoTicket_LottoDrawing" FromRole="LottoTicket" ToRole="LottoDrawing" />
+          <NavigationProperty Name="LottoTicketBalls" Relationship="LotteryDemoEFModel.FK_Lotto_Ticket_Balls_LottoTicket" FromRole="LottoTicket" ToRole="LottoTicketBall" />
+          <NavigationProperty Name="User" Relationship="LotteryDemoEFModel.FK_LottoTicket_User" FromRole="LottoTicket" ToRole="User" />
+          <NavigationProperty Name="WinningTickets" Relationship="LotteryDemoEFModel.FK_WinningTickets_LottoTicket" FromRole="LottoTicket" ToRole="WinningTicket" />
+        </EntityType>
+        <Association Name="FK_LottoTicket_LottoDrawing">
+          <End Type="LotteryDemoEFModel.LottoDrawing" Role="LottoDrawing" Multiplicity="1" />
+          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LottoDrawing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LottoTicket">
+              <PropertyRef Name="LottoDrawID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lotto_Ticket_Balls_LottoTicket">
+          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="1" />
+          <End Type="LotteryDemoEFModel.LottoTicketBall" Role="LottoTicketBall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LottoTicket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LottoTicketBall">
+              <PropertyRef Name="LottoTicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LottoTicket_User">
+          <End Type="LotteryDemoEFModel.User" Role="User" Multiplicity="1" />
+          <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LottoTicket">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WinningTickets_LottoTicket">
           <End Type="LotteryDemoEFModel.LottoTicket" Role="LottoTicket" Multiplicity="1" />
           <End Type="LotteryDemoEFModel.WinningTicket" Role="WinningTicket" Multiplicity="*" />
@@ -742,7 +744,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -792,7 +794,8 @@
           <EntitySetMapping Name="LottoDrawings">
             <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoDrawing">
               <MappingFragment StoreEntitySet="LottoDrawing">
-                <ScalarProperty Name="IsCalculated" ColumnName="IsCalculated" />
+                <ScalarProperty Name="WasCompleted" ColumnName="WasCompleted" />
+                <ScalarProperty Name="WasExecuted" ColumnName="WasExecuted" />
                 <ScalarProperty Name="DrawTime" ColumnName="DrawTime" />
                 <ScalarProperty Name="LotteryGameID" ColumnName="LotteryGameID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -804,18 +807,6 @@
               <MappingFragment StoreEntitySet="LottoDrawingBalls">
                 <ScalarProperty Name="LotteryBallID" ColumnName="LotteryBallID" />
                 <ScalarProperty Name="LottoDrawingID" ColumnName="LottoDrawingID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LottoTickets">
-            <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoTicket">
-              <MappingFragment StoreEntitySet="LottoTicket">
-                <ScalarProperty Name="IsWinning" ColumnName="IsWinning" />
-                <ScalarProperty Name="IsCalculated" ColumnName="IsCalculated" />
-                <ScalarProperty Name="InputTime" ColumnName="InputTime" />
-                <ScalarProperty Name="LotteryGameID" ColumnName="LotteryGameID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -865,6 +856,18 @@
               <MappingFragment StoreEntitySet="WinningTickets">
                 <ScalarProperty Name="DrawStatisticsID" ColumnName="DrawStatisticsID" />
                 <ScalarProperty Name="LottoTicketID" ColumnName="LottoTicketID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LottoTickets">
+            <EntityTypeMapping TypeName="LotteryDemoEFModel.LottoTicket">
+              <MappingFragment StoreEntitySet="LottoTicket">
+                <ScalarProperty Name="IsWinning" ColumnName="IsWinning" />
+                <ScalarProperty Name="IsCalculated" ColumnName="IsCalculated" />
+                <ScalarProperty Name="InputTime" ColumnName="InputTime" />
+                <ScalarProperty Name="LottoDrawID" ColumnName="LottoDrawID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

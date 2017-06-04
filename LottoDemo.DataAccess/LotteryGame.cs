@@ -18,7 +18,6 @@ namespace LottoDemo.DataAccess
         public LotteryGame()
         {
             this.LottoDrawings = new HashSet<LottoDrawing>();
-            this.LottoTickets = new HashSet<LottoTicket>();
             this.GameWinningsTiers = new HashSet<GameWinningsTier>();
         }
     
@@ -31,8 +30,6 @@ namespace LottoDemo.DataAccess
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoDrawing> LottoDrawings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LottoTicket> LottoTickets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GameWinningsTier> GameWinningsTiers { get; set; }
     }

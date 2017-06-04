@@ -56,14 +56,13 @@
                                 @using (Html.BeginUmbracoForm("AddToCart", "GameDetails", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    @Html.Hidden("LotteryGameId", (int)ViewBag.LotteryGameId)
+                                    @Html.Hidden("LottoDrawId", (int)ViewBag.LottoDrawId)
                                     @Html.Hidden("DrawBallsTicket1")
                                     @Html.Hidden("DrawBallsTicket2")
                                     @Html.Hidden("DrawBallsTicket3")
                                     @Html.Hidden("BonusBallsTicket1")
                                     @Html.Hidden("BonusBallsTicket2")
                                     @Html.Hidden("BonusBallsTicket3")
-
                                     <button id="addTicketsToCart" type="submit" class="btn btn-default">
                                         Add to cart
                                     </button>

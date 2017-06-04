@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>423962d0</NuGetPackageImportStamp>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -460,6 +461,7 @@
     <Compile Include="Controllers\GameDetailsController.cs" />
     <Compile Include="Controllers\LotteryGamesListController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
+    <Compile Include="Controllers\ResultsAndWinningsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\WebAPI\LotteryGameController.cs" />
@@ -520,6 +522,14 @@
     <Content Include="Views\Shared\Carousel\_CarouselPartialView.cshtml" />
     <Content Include="Views\UserAccountDetails.cshtml" />
     <Content Include="Views\UserAccount\RenderDetailsForm.cshtml" />
+    <Content Include="Views\ResultsAndWinnings\GamesResultsList.cshtml" />
+    <Content Include="Views\Shared\Authorization\LoginPartial.cshtml" />
+    <Content Include="Views\Shared\Authorization\ForgottenPassword.cshtml" />
+    <Content Include="Views\ResultsAndWinnings\GameResultsDetails.cshtml" />
+    <Content Include="Views\LoginPage.cshtml" />
+    <Content Include="Views\UserEntriesPage.cshtml" />
+    <Content Include="Views\ForgotPasswordPage.cshtml" />
+    <Content Include="Views\ResultsAndWinnings\UpdateDrawResultView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

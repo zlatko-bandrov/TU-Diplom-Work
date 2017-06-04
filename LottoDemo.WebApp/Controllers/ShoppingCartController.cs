@@ -17,7 +17,7 @@ namespace LottoDemo.WebApp.Controllers
             decimal userBalance = 0;
             decimal totalCartValue = 0;
 
-            var shoppingCartItems = UserService.GetAllCartTickets(User.Identity.Name, out userBalance, out totalCartValue);
+            var shoppingCartItems = UserService.GetAllShoppingCartTickets(User.Identity.Name, out userBalance, out totalCartValue);
 
             ViewBag.ShoppingCartItems = shoppingCartItems;
             ViewBag.UserBalance = string.Format("{0:0,0.00}", userBalance).Replace(",", " ");

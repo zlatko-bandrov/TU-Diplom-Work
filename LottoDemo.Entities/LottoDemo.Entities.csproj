@@ -267,6 +267,10 @@
     <Compile Include="Models\LottoDrawStatistic.cs" />
     <Compile Include="Models\LottoGameModel.cs" />
     <Compile Include="Models\LottoGameSettings.cs" />
+    <Compile Include="Models\ResultsAndWinnings\DrawWinningTier.cs" />
+    <Compile Include="Models\ResultsAndWinnings\LotteryGameTeaser.cs" />
+    <Compile Include="Models\ResultsAndWinnings\LottoDrawResult.cs" />
+    <Compile Include="Models\ResultsAndWinnings\UpdateDrawResultsModel.cs" />
     <Compile Include="Models\TicketBoxSettings.cs" />
     <Compile Include="Models\CustomerProfileModel.cs" />
     <Compile Include="Models\MemberPasswordChangeModel.cs" />

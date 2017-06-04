@@ -23,6 +23,7 @@ namespace LottoDemo.Entities.Models
                 this.BonusBallMax = byte.Parse(contentItem["BonusBallMaximum"].ToString());
                 this.GameDisplayName = contentItem["LotteryName"].ToString();
                 this.Jackpot = decimal.Parse(contentItem["Jackpot"].ToString());
+                this.GamePayout = double.Parse(contentItem["PaymentPercent"].ToString());
             }
 
             this.PreviousDrawTime = previousDraw.HasValue ? previousDraw.Value : DateTime.MinValue;
@@ -42,5 +43,6 @@ namespace LottoDemo.Entities.Models
 
         public string GameDisplayName { get; set; }
         public decimal Jackpot { get; set; }
+        public double GamePayout { get; set; }
     }
 }

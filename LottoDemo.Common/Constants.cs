@@ -12,5 +12,7 @@ namespace LottoDemo.Common
         public static readonly string SettingsItemId = ConfigurationManager.AppSettings["SettingsItemID"];
 
         public static readonly string DefaultGameJackpot = ConfigurationManager.AppSettings["InitialLotteryJackpot"];
+
+        public static readonly int DefaultDrawInterval = 10;
     }
 }

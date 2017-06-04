@@ -25,31 +25,30 @@ namespace TestConsoleApp
             try
             {
                 Console.Title = string.Format("Lottery Game Service - {0}", LotteryGameName);
-                LottoDrawService drawingService = new LottoDrawService();
-                if (!drawingService.Start())
+                LottoDrawService gameDrawService = new LottoDrawService();
+                if (!gameDrawService.Start())
                 {
+                    LottoDrawService.WriteLogMessage("There was a problem launching the service. Check the log files for more information.\n");
                     Console.ReadLine();
                     return;
                 }
 
-                // Get current game last draw time
-                LottoDrawService.WriteLogMessage(string.Format("Start the number generation service for '{0}'.\n", LotteryGameName));
-                TimeSpan delayTime = drawingService.NextDrawExecution - DateTime.Now;
+                string message = string.Format("Starting the game service for '{0}'.\n", LotteryGameName);
+                LottoDrawService.WriteLogMessage(message);
 
-                LottoDrawService.WriteLogMessage(string.Format("Next draw is at: {0}...\n", drawingService.NextDrawExecution.ToString("dd/MMM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)));
-
+                TimeSpan timeInterval = gameDrawService.GetDrawInterval();
                 AutoResetEvent autoEvent = new AutoResetEvent(false);
-                ServiceTimer = new Timer(drawingService.ExecuteLottoDraw, autoEvent, delayTime, TimeSpan.FromMinutes(drawingService.DrawingTimeInterval));
+                ServiceTimer = new Timer(gameDrawService.RunGameDrawing, autoEvent, timeInterval, timeInterval);
                 autoEvent.WaitOne();
 
-                LottoDrawService.WriteLogMessage("\nDestroying timer.");
+                LottoDrawService.WriteLogMessage("\nDestroying timer..");
                 ServiceTimer.Dispose();
-
                 Console.ReadLine();
             }
             catch (Exception ex)
             {
                 LottoDrawService.WriteLogMessage(ex);
+                Console.ReadLine();
             }
             finally
             {

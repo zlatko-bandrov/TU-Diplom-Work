@@ -23,15 +23,15 @@ namespace LottoDemo.DataAccess
     
         public int ID { get; set; }
         public int UserID { get; set; }
-        public int LotteryGameID { get; set; }
+        public int LottoDrawID { get; set; }
         public System.DateTime InputTime { get; set; }
         public bool IsCalculated { get; set; }
         public bool IsWinning { get; set; }
     
-        public virtual LotteryGame LotteryGame { get; set; }
-        public virtual User User { get; set; }
+        public virtual LottoDrawing LottoDrawing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LottoTicketBall> LottoTicketBalls { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WinningTicket> WinningTickets { get; set; }
     }

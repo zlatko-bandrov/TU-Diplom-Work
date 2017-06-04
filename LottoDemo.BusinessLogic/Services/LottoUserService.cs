@@ -13,21 +13,10 @@ using System.Reflection;
 
 namespace LottoDemo.BusinessLogic.Services
 {
-    public class LottoUserService
+    public class LottoUserService 
     {
-        private decimal InitialUserBalance
-        {
-            get
-            {
-                decimal temp = 0;
-                if (Decimal.TryParse(ConfigurationManager.AppSettings["InitialUserBalance"], out temp))
-                {
-                    return temp;
-                }
+        private readonly decimal InitialUserBalance = Decimal.Parse(ConfigurationManager.AppSettings["InitialUserBalance"]);
 
-                return 1000;
-            }
-        }
 
         public UserUnitOfWork UnitOfWork = new UserUnitOfWork();
 
@@ -54,61 +43,61 @@ namespace LottoDemo.BusinessLogic.Services
             return user;
         }
 
-        public void AddNewLotteryTickets(string username, AddToCartModel tickets)
+
+        public void AddNewLotteryTickets(string username, AddToCartModel addToCartModel)
         {
             var loggedUser = this.FindUser(username);
-            if (loggedUser != null)
-            {
-                try
-                {
-                    LottoTicket ticket = null;
-                    var gameUnitOfWork = new LottoGameUnitOfWork();
-                    var lottoGameKey = gameUnitOfWork.GameRepository.Get(g => g.ID == tickets.LotteryGameId).GameKey;
-                    decimal gameTicketPrice = this.GetGameTicketPrice(lottoGameKey);
-
-                    // Add ticket one
-                    if (tickets.DrawBallsTicket1.Count() > 0 && tickets.BonusBallsTicket1.Count() > 0)
-                    {
-                        ticket = CreateNewLotteryTicket(tickets.LotteryGameId, loggedUser.ID, tickets.DrawBallsTicket1, tickets.BonusBallsTicket1);
-                        this.UnitOfWork.TicketsRepository.Add(ticket);
-
-                        // Update user money balance, it is one ticket so the change in the balance is one ticket price
-                        loggedUser.Balance.Value += (-1) * gameTicketPrice;
-                    }
-
-                    // Add the second ticket
-                    if (tickets.DrawBallsTicket2.Count() > 0 && tickets.BonusBallsTicket2.Count() > 0)
-                    {
-                        ticket = CreateNewLotteryTicket(tickets.LotteryGameId, loggedUser.ID, tickets.DrawBallsTicket2, tickets.BonusBallsTicket2);
-                        this.UnitOfWork.TicketsRepository.Add(ticket);
-
-                        // Update user money balance, it is one ticket so the change in the balance is one ticket price
-                        loggedUser.Balance.Value += (-1) * gameTicketPrice;
-                    }
-
-                    // Add third ticket
-                    if (tickets.DrawBallsTicket3.Count() > 0 && tickets.BonusBallsTicket3.Count() > 0)
-                    {
-                        ticket = CreateNewLotteryTicket(tickets.LotteryGameId, loggedUser.ID, tickets.DrawBallsTicket3, tickets.BonusBallsTicket3);
-                        this.UnitOfWork.TicketsRepository.Add(ticket);
-
-                        // Update user money balance, it is one ticket so the change in the balance is one ticket price
-                        loggedUser.Balance.Value += (-1) * gameTicketPrice;
-                    }
-                    UnitOfWork.BalanceRepository.Update(loggedUser.Balance);
-
-                    // Save the changes to the database
-                    UnitOfWork.CommitChanges();
-                }
-                catch (Exception ex)
-                {
-                    UnitOfWork.Rollback();
-                    throw ex;
-                }
-            }
-            else
+            if (loggedUser == null)
             {
                 throw new ArgumentNullException("loggedUser", "There is no one logged in currently.");
+            }
+            if (addToCartModel.LottoDrawId <= 0)
+            {
+                return;
+            }
+
+            try
+            {
+                LottoTicket ticket = null;
+                var gameUnitOfWork = new LottoGameUnitOfWork();
+                var lottoGameKey = gameUnitOfWork.DrawRepository.Get(g => g.ID == addToCartModel.LottoDrawId).LotteryGame.GameKey;
+                decimal gameTicketPrice = GetGameTicketPrice(lottoGameKey);
+
+                // Add ticket one
+                if (addToCartModel.DrawBallsTicket1.Count() > 0 && addToCartModel.BonusBallsTicket1.Count() > 0)
+                {
+                    ticket = CreateNewLotteryTicket(addToCartModel.LottoDrawId, loggedUser.ID, addToCartModel.DrawBallsTicket1, addToCartModel.BonusBallsTicket1);
+                    this.UnitOfWork.TicketsRepository.Add(ticket);
+
+                    // Update user money balance, it is one ticket so the change in the balance is one ticket price
+                    loggedUser.Balance.Value += (-1) * gameTicketPrice;
+                }
+                // Add the second ticket
+                if (addToCartModel.DrawBallsTicket2.Count() > 0 && addToCartModel.BonusBallsTicket2.Count() > 0)
+                {
+                    ticket = CreateNewLotteryTicket(addToCartModel.LottoDrawId, loggedUser.ID, addToCartModel.DrawBallsTicket2, addToCartModel.BonusBallsTicket2);
+                    this.UnitOfWork.TicketsRepository.Add(ticket);
+
+                    // Update user money balance, it is one ticket so the change in the balance is one ticket price
+                    loggedUser.Balance.Value += (-1) * gameTicketPrice;
+                }
+                // Add third ticket
+                if (addToCartModel.DrawBallsTicket3.Count() > 0 && addToCartModel.BonusBallsTicket3.Count() > 0)
+                {
+                    ticket = CreateNewLotteryTicket(addToCartModel.LottoDrawId, loggedUser.ID, addToCartModel.DrawBallsTicket3, addToCartModel.BonusBallsTicket3);
+                    this.UnitOfWork.TicketsRepository.Add(ticket);
+
+                    // Update user money balance, it is one ticket so the change in the balance is one ticket price
+                    loggedUser.Balance.Value += (-1) * gameTicketPrice;
+                }
+                UnitOfWork.BalanceRepository.Update(loggedUser.Balance);
+                // Save the changes to the database
+                UnitOfWork.CommitChanges();
+            }
+            catch (Exception ex)
+            {
+                UnitOfWork.Rollback();
+                throw ex;
             }
         }
 
@@ -124,41 +113,31 @@ namespace LottoDemo.BusinessLogic.Services
                     TicketPrice = lotteryGame.GameSettings.TicketPrice
                 };
 
-                var lotteryTickets =
-                    loggedUser.LottoTickets
-                        .Where(t => t.LotteryGameID == lotteryGame.Id
-                            && !t.IsCalculated
-                            && t.InputTime > lotteryGame.PreviousDrawingTime
-                            && t.InputTime < lotteryGame.NextDrawingTime)
-                        .ToList();
-
+                var lotteryTickets = loggedUser.LottoTickets.Where(t => t.LottoDrawing.LotteryGameID == lotteryGame.Id && !t.IsCalculated);
                 // Return if there are no tickets
                 if (lotteryTickets == null || !lotteryTickets.Any())
                 {
                     return cartItemsList;
                 }
-
                 foreach (var ticket in lotteryTickets)
                 {
                     var ballsNumbers = ticket.LottoTicketBalls.Select(r => r.LotteryBall).Where(b => !b.IsBonusBall).OrderBy(b => b.Position).Select(b => b.BallNumber).ToList();
                     var bonusBallsNumbers = ticket.LottoTicketBalls.Select(r => r.LotteryBall).Where(b => b.IsBonusBall).OrderBy(b => b.Position).Select(b => b.BallNumber).ToList();
-
                     gameCartItem.Tickets.Add(new LotteryTicketCartItem
                     {
                         GameDrawTime = lotteryGame.NextDrawingTime,
                         BallsNumbers = ballsNumbers,
                         BonusBallsNumbers = bonusBallsNumbers,
-                        LottoTicketId = ticket.ID
+                        LottoTicketId = ticket.ID,
+                        LottoDrawId = ticket.LottoDrawID
                     });
                 }
-
                 cartItemsList.Add(gameCartItem);
             }
-
             return cartItemsList;
         }
 
-        public List<ShoppingCartItem> GetAllCartTickets(string username, out decimal userBalance, out decimal totalCartValue)
+        public List<ShoppingCartItem> GetAllShoppingCartTickets(string username, out decimal userBalance, out decimal totalCartValue)
         {
             var cartItems = new List<ShoppingCartItem>();
             var loggedUser = this.FindUser(username);
@@ -170,33 +149,30 @@ namespace LottoDemo.BusinessLogic.Services
             {
                 return cartItems;
             }
-
             // Get user balance value 
             userBalance = loggedUser.Balance.Value;
-
             if (loggedUser.LottoTickets != null && loggedUser.LottoTickets.Where(t => !t.IsCalculated).Any())
             {
-                var allUserGames = loggedUser.LottoTickets.Where(t => !t.IsCalculated).GroupBy(t => t.LotteryGameID).ToList();
+                var allUserGames = loggedUser.LottoTickets.Where(t => !t.IsCalculated).GroupBy(t => t.LottoDrawing.LotteryGameID).ToList();
                 var gameService = new LotteryGameService();
                 var umbracoHelper = new Umbraco.Web.UmbracoHelper(Umbraco.Web.UmbracoContext.Current);
 
                 foreach (var g in allUserGames)
                 {
-                    Guid gameKey = g.FirstOrDefault().LotteryGame.GameKey;
+                    Guid gameKey = g.FirstOrDefault().LottoDrawing.LotteryGame.GameKey;
                     var publishedContent = umbracoHelper.TypedContent(gameKey);
                     var gameContent = gameService.GetLottoGameModelByKey(gameKey, publishedContent);
-                    var cartItem = new ShoppingCartItem();
-
-                    cartItem.LottoGameId = g.Key;
-                    cartItem.TicketsCount = g.Count();
-                    cartItem.TicketPrice = gameContent.GameSettings.TicketPrice;
-                    cartItem.LottoGameName = gameContent.LottoGameName;
-                    cartItem.LotteryGameUrl = gameContent.LottoGameUrl;
-
+                    var cartItem = new ShoppingCartItem
+                    {
+                        LottoGameId = g.Key,
+                        TicketsCount = g.Count(),
+                        TicketPrice = gameContent.GameSettings.TicketPrice,
+                        LottoGameName = gameContent.LottoGameName,
+                        LotteryGameUrl = gameContent.LottoGameUrl
+                    };
                     cartItems.Add(cartItem);
                 }
             }
-
             if (cartItems.Any())
             {
                 foreach (var c in cartItems)
@@ -204,7 +180,6 @@ namespace LottoDemo.BusinessLogic.Services
                     totalCartValue += (decimal)(c.TicketPrice * c.TicketsCount);
                 }
             }
-
             return cartItems;
         }
 
@@ -212,9 +187,8 @@ namespace LottoDemo.BusinessLogic.Services
         {
             try
             {
-                var user = this.FindUser(username);
-                var userTickets = user.LottoTickets.Where(t => !t.IsCalculated && t.LotteryGameID == lottoGameId).ToList();
-
+                var user = FindUser(username);
+                var userTickets = user.LottoTickets.Where(t => !t.IsCalculated && t.LottoDrawing.LotteryGameID == lottoGameId);
                 if (userTickets != null && userTickets.Any())
                 {
                     foreach (var lottoTicket in userTickets)
@@ -223,16 +197,16 @@ namespace LottoDemo.BusinessLogic.Services
                         {
                             foreach (var ticketRelation in lottoTicket.LottoTicketBalls)
                             {
-                                this.UnitOfWork.LotteryBallRepository.Remove(ticketRelation.LotteryBall);
+                                UnitOfWork.LotteryBallRepository.Remove(ticketRelation.LotteryBall);
                             }
-                            this.UnitOfWork.LottoTicketBallRepository.Remove(lottoTicket.LottoTicketBalls.ToArray());
+                            UnitOfWork.LottoTicketBallRepository.Remove(lottoTicket.LottoTicketBalls.ToArray());
                         }
                     }
 
                     // Update user money balance 
-                    decimal ticketPrice = this.GetGameTicketPrice(userTickets.FirstOrDefault().LotteryGame.GameKey);
-                    decimal balanceChange = userTickets.Count * ticketPrice;
-                    this.UpdateUserBalance(user, balanceChange, false);
+                    decimal ticketPrice = GetGameTicketPrice(userTickets.FirstOrDefault().LottoDrawing.LotteryGame.GameKey);
+                    decimal balanceChange = userTickets.Count() * ticketPrice;
+                    UpdateUserBalance(user, balanceChange, false);
 
                     UnitOfWork.TicketsRepository.Remove(userTickets.ToArray());
                     UnitOfWork.CommitChanges();
@@ -249,23 +223,20 @@ namespace LottoDemo.BusinessLogic.Services
         {
             try
             {
-                var user = this.FindUser(username);
+                var user = FindUser(username);
                 var userTicket = user.LottoTickets.FirstOrDefault(t => !t.IsCalculated && t.ID == lotteryTicketId);
-
                 if (userTicket != null)
                 {
                     if (userTicket.LottoTicketBalls != null && userTicket.LottoTicketBalls.Any())
                     {
-                        foreach (var ticketRelation in userTicket.LottoTicketBalls)
-                        {
-                            this.UnitOfWork.LotteryBallRepository.Remove(ticketRelation.LotteryBall);
-                        }
-                        this.UnitOfWork.LottoTicketBallRepository.Remove(userTicket.LottoTicketBalls.ToArray());
+                        var lottoBallsList = userTicket.LottoTicketBalls.Select(b => b.LotteryBall).ToArray();
+                        UnitOfWork.LotteryBallRepository.Remove(lottoBallsList);
+                        UnitOfWork.LottoTicketBallRepository.Remove(userTicket.LottoTicketBalls.ToArray());
                     }
 
                     // Update user money balance, it is one ticket so the change in the balance is one ticket price
-                    decimal balanceChange = this.GetGameTicketPrice(userTicket.LotteryGame.GameKey);
-                    this.UpdateUserBalance(user, balanceChange, false);
+                    decimal balanceChange = GetGameTicketPrice(userTicket.LottoDrawing.LotteryGame.GameKey);
+                    UpdateUserBalance(user, balanceChange, false);
 
                     UnitOfWork.TicketsRepository.Remove(userTicket);
                     UnitOfWork.CommitChanges();
@@ -302,14 +273,9 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
-        public List<LotteryTicket> GetAllTicketsByDraw(int lottoGameId, DateTime previousDrawTime, DateTime currentDrawTime)
+        public List<LotteryTicket> GetAllTicketsByDraw(int gameDrawId)
         {
-            var allTickets =
-                UnitOfWork.TicketsRepository
-                    .AsQuery(t => t.LotteryGameID == lottoGameId && t.InputTime > previousDrawTime && t.InputTime < currentDrawTime)
-                    .ToList()
-                    .Select(t => LotteryTicketConverter.AssignFrom(t))
-                    .ToList();
+            var allTickets = UnitOfWork.TicketsRepository.AsList(t => t.LottoDrawID == gameDrawId).Select(t => LotteryTicketConverter.AssignFrom(t)).ToList();
             return allTickets;
         }
 
@@ -349,8 +315,8 @@ namespace LottoDemo.BusinessLogic.Services
                             var lottoTicket = UnitOfWork.TicketsRepository.Get(t => t.ID == ticket.ID);
                             if (lottoTicket != null)
                             {
+                                // Update user balance because of winning ticket
                                 UpdateUserBalance(lottoTicket.User, entry.Value.WinningTier.WinningPerPerson);
-
                                 lottoTicket.IsWinning = true;
                                 lottoTicket.IsCalculated = true;
                                 UnitOfWork.TicketsRepository.Update(lottoTicket);
@@ -367,16 +333,16 @@ namespace LottoDemo.BusinessLogic.Services
             }
         }
 
-        private LottoTicket CreateNewLotteryTicket(int gameId, int userId, IEnumerable<byte> ballsList, IEnumerable<byte> bonusBallsList)
+
+        private LottoTicket CreateNewLotteryTicket(int gameDrawId, int userId, IEnumerable<byte> ballsList, IEnumerable<byte> bonusBallsList)
         {
             DateTime creationTime = DateTime.Now;
             var newTicket = new LottoTicket
             {
                 UserID = userId,
-                LotteryGameID = gameId,
+                LottoDrawID = gameDrawId,
                 InputTime = creationTime
             };
-
             // Add all drawing balls to the ticket
             byte postion = 1;
             foreach (var ballNumber in ballsList)
@@ -387,18 +353,15 @@ namespace LottoDemo.BusinessLogic.Services
                     BallNumber = ballNumber,
                     Position = postion++
                 };
-
                 // Create new ticket - ball connection
                 var newLottoTicketBall = new LottoTicketBall
                 {
                     LottoTicket = newTicket,
                     LotteryBall = newLotteryBall
                 };
-
-                this.UnitOfWork.LottoTicketBallRepository.Add(newLottoTicketBall);
-                this.UnitOfWork.LotteryBallRepository.Add(newLotteryBall);
+                UnitOfWork.LottoTicketBallRepository.Add(newLottoTicketBall);
+                UnitOfWork.LotteryBallRepository.Add(newLotteryBall);
             }
-
             // Add all bonus balls to the ticket
             postion = 1;
             foreach (var ballNumber in bonusBallsList)
@@ -409,17 +372,14 @@ namespace LottoDemo.BusinessLogic.Services
                     BallNumber = ballNumber,
                     Position = postion++
                 };
-
                 var newLottoTicketBall = new LottoTicketBall
                 {
                     LotteryBall = newLotteryBall,
                     LottoTicket = newTicket
                 };
-
-                this.UnitOfWork.LottoTicketBallRepository.Add(newLottoTicketBall);
-                this.UnitOfWork.LotteryBallRepository.Add(newLotteryBall);
+                UnitOfWork.LottoTicketBallRepository.Add(newLottoTicketBall);
+                UnitOfWork.LotteryBallRepository.Add(newLotteryBall);
             }
-
             return newTicket;
         }
 

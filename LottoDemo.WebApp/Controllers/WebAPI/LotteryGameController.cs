@@ -58,7 +58,16 @@ namespace LottoDemo.WebApp.Controllers.WebAPI
             return Json(model);
         }
 
-        // TODO: Make API call to Update jackpot
-        // TODO: Add Cache out percent - 95%
+        [HttpPut]
+        public IHttpActionResult UpdateGameJackpot(Guid gameKey, decimal newJackpot)
+        {
+            var gameContent = Services.ContentService.GetById(gameKey);
+            if (gameContent != null)
+            {
+                gameContent.SetValue("Jackpot", newJackpot);
+                Services.ContentService.SaveAndPublishWithStatus(gameContent);
+            }
+            return Ok();
+        }
     }
 }

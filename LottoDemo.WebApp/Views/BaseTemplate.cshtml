@@ -73,6 +73,7 @@
     </div>
     @{
         Html.RenderPartial("BodyBottomScripts");
+        @RenderSection("bottomScripts", false);
         Html.RenderAction("RenderLoginDialog", "MemberLogin");
     }
 </body>

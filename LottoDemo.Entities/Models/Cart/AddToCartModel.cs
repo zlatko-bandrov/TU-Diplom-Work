@@ -6,7 +6,7 @@ namespace LottoDemo.Entities.Models.Cart
 {
     public class AddToCartModel
     {
-        public int LotteryGameId { get; set; }
+        public int LottoDrawId { get; set; }
 
         public IEnumerable<byte> DrawBallsTicket1 { get; set; }
         public IEnumerable<byte> DrawBallsTicket2 { get; set; }

@@ -1,0 +1,73 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models.ResultsAndWinnings;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ResultsAndWinningsPage>
+
+
+<div class="row">
+    <div class="col-md-12 pageHeader">
+        <h1>@Model.Content.DefaultHeadline</h1>
+    </div>
+    <div class="col-md-12 pageContent" style="padding-bottom: 0;">
+        @{
+            var GamesList = (List<LotteryGameTeaser>)ViewBag.GamesList;
+            foreach (var game in GamesList)
+            {
+                <div class="results-main-wrap">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <img class="lottoLogoFront" src="@game.GameLogoUrl" alt="@game.GameDisplayName" />
+                        </div>
+                        <div class="col-md-5">
+                            <div class="pb-btn">
+                                <a class="lname single l247-btn-primary btn-block" title="@game.GameDisplayName" href="@game.GameUrl">@Umbraco.GetDictionaryValue("drawResutsButton")</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-7 display-fix">
+                            @Umbraco.GetDictionaryValue("drawResutsWinningNums")
+                            <div class="winning_numbers">
+                                <div class="ballset-wrap">
+                                    @foreach (var ball in game.LastDraw.BallsList)
+                                    {
+                                        <div class="entryNumber ballSet2">
+                                            @ball
+                                        </div>
+                                    }
+                                    @foreach (var ball in game.LastDraw.BonusBallsList)
+                                    {
+                                        <div class="entryNumber ballSet3">
+                                            @ball
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 display-fix">
+                            @Umbraco.GetDictionaryValue("drawResutsJackpot")
+                            <h2 style="margin-top:10px;">EUR&nbsp;&nbsp;@game.EstimatedJackpot.ToString("0,0")</h2>
+                            <p>@Umbraco.GetDictionaryValue("drawResutsLastDraw"): @game.PreviousDrawTime.ToString("dd MMM yyyy (dddd)", System.Globalization.CultureInfo.InstalledUICulture)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" results-main-wrap-child">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @using (Html.BeginUmbracoForm("GameResultsDetails", "ResultsAndWinnings", new { gameId = game.GameDbId, gameKey = game.GameKey }, new { id = string.Format("detailsForm{0}", game.GameDbId) }))
+                            {
+                                <a href="#@game.GameUrl.Replace("/", string.Empty)" onclick="document.getElementById('@string.Format("detailsForm{0}", game.GameDbId)').submit();">@Umbraco.GetDictionaryValue("drawResutsPrices")</a>
+                            }
+                        </div>
+                        <div class="col-md-6 right">
+                            <span>
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

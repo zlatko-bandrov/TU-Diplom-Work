@@ -1,0 +1,88 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models.ResultsAndWinnings;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ResultsAndWinningsPage>
+@{
+    var gameDraws = (List<LottoDrawResult>)ViewBag.LottoDraws;
+    var firstDraw = gameDraws.FirstOrDefault();
+    var formatProvider = System.Globalization.CultureInfo.InvariantCulture;
+}
+<div class="row">
+    <div class="ng-scope">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12 pageHeader">
+                    <div style="float: right; "></div>
+                    <h1>@Model.Content.DetailsPageHeadline</h1>
+                </div>
+                <div class="pageContent col-lg-12">
+                    <div>
+                        <div class="lottoName">@ViewBag.GameName</div>
+                        <div class="results-main-wrap">
+                            <div class="col-lg-8 display-fix" id="drawNumbersHolder">
+                                <div>
+                                    <span>@Umbraco.GetDictionaryValue("drawResultsFullDate")</span>
+                                    <span>@firstDraw.DrawDate.ToString("dd MMM yyyy (dddd) HH:mm:ss", formatProvider)</span>
+                                </div>
+                                <div class="ballset-wrap spacingFixOne">
+                                    @foreach (var ball in firstDraw.BallsBumbers)
+                                    {
+                                        <div class="entryNumber ballSet2">@ball</div>
+                                    }
+                                    @foreach (var ball in firstDraw.BonusBallsNumbers)
+                                    {
+                                        <div class="entryNumber ballSet3 bonusBall">@ball</div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-4 display-fix">
+                                <div class="winDateSelect">
+                                    @Umbraco.GetDictionaryValue("drawResultsSelectDate")
+                                    @using (Html.BeginUmbracoForm("UpdateDrawResultView", "ResultsAndWinnings", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken();
+                                        <input type="hidden" value="@ViewBag.GameID" name="GameID" />
+                                        <input type="hidden" value="" id="DrawID" name="DrawID" />
+                                        <select id="gameDrawsSelect" class="form-control ng-pristine ng-valid">
+                                            @foreach (var draw in gameDraws)
+                                            {
+                                                <option value="@draw.DrawID">@draw.DrawDate.ToString("dd MMM yyyy HH:mm:ss", formatProvider)</option>
+                                            }
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacingFixOne ng-scope">
+                        <div class="bs-example">
+                            <table class="table table-striped ng-scope">
+                                <thead>
+                                    <tr class="header">
+                                        <td>@Umbraco.GetDictionaryValue("drawResultsTableResults")</td>
+                                        <td>@Umbraco.GetDictionaryValue("drawResultsTableNumOfWinners")</td>
+                                        <td>@Umbraco.GetDictionaryValue("drawResultsTablePricePerWin")</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="winningsStatistics">
+                                    @foreach (var tier in firstDraw.WinningTiers)
+                                    {
+                                        <tr class="rowColour ng-scope">
+                                            <td class="wnum ng-binding">@tier.TierName</td>
+                                            <td class="wnum ng-binding ng-scope">@tier.NumberOfWinners</td>
+                                            <td class="wnum ng-binding ng-scope" nowrap="nowrap">€ @tier.WinningPerPerson.ToString("0,0.00")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div style="padding-bottom: 10px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
