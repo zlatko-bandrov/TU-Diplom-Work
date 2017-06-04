@@ -19,7 +19,7 @@
                         success: function (responseData) {
                             let $response = $(responseData);
                             let numbersHtml = $response[0].innerHTML;
-                            let statisticsTable = $response[2].innerHTML;
+                            let statisticsTable = $($response[2]).find("tbody").html();
                             $("#drawNumbersHolder:first").html(numbersHtml);
                             $("#winningsStatistics:first").html(statisticsTable);
                         },

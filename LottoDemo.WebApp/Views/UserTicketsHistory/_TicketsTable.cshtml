@@ -1,0 +1,50 @@
+﻿
+
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models.User;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserEntriesPage>
+@{
+    List<UserTicketHistory> GameTickets = (List<UserTicketHistory>)ViewBag.GameTickets;
+}
+<div id="lottery_entries_23" style="">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <td>Лотариини числа</td>
+                <td>Дата на теглене</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in GameTickets)
+            {
+                <tr>
+                    <td>
+                        <div class="ballset-wrap">
+                            @foreach (byte ballNumber in ticket.BallNumbers)
+                            {
+                                <div class="entryNumber ballSet48">@ballNumber</div>
+                            }
+                            @foreach (byte ballNumber in ticket.BonusBallNumbers)
+                            {
+                                <div class="entryNumber ballSet49">@ballNumber</div>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        @ticket.DrawTime.ToString("dd MMM yyyy (dddd)")
+                    </td>
+                    <td>
+                        <div class="entryRemove">
+                            <button type="submit" title="Delete the ticket" style="background-color: transparent !important; padding: 0 !important;">
+                                <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

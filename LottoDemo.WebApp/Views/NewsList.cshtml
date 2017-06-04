@@ -12,10 +12,7 @@
             </div>
 
             <div class="pageContent">
-                <div class="basket-entry-head">
-                    <h3 class="News-Sub-Heading">@Umbraco.GetDictionaryValue("newsLatestNewsListTitle")</h3>
-                </div>
-                <br /><br />
+                <br />
 
                 @if (Model.Content.Children.Any())
                 {
@@ -24,24 +21,6 @@
                         Html.RenderPartial("News/_NewsListPartial", article);                      
                     }
                 }
-
-                @*<div class="tblWrapper">
-                        <div>
-                            <div class="prevpage blog-page-btn"><a class="pagination" alt="First Page" title="First Page" href="https://www.playhugelottos.com/en/lottery-news/page/1.html">«</a></div>
-                            <div class="prevpage blog-page-btn"><a class="pagination" alt="Previous Page" title="Previous Page" href="https://www.playhugelottos.com/en/lottery-news/page/1.html">‹</a></div>
-                            <div class="pages blog-page-btn">
-                                <span class="pagination">1</span>
-                            </div>
-                            <div class="pages blog-page-btn">
-                                <a class="pagination" href="https://www.playhugelottos.com/en/lottery-news/page/2.html">2</a>
-                            </div>
-                            <div class="pages blog-page-btn">
-                                <a class="pagination" href="https://www.playhugelottos.com/en/lottery-news/page/3.html">3</a>
-                            </div>
-                            <div class="nextpage blog-page-btn"><a class="pagination" alt="Next Page" title="Next Page" href="https://www.playhugelottos.com/en/lottery-news/page/2.html">›</a></div>
-                            <div class="nextpage blog-page-btn"><a class="pagination" alt="Final Page" title="Final Page" href="https://www.playhugelottos.com/en/lottery-news/page/3.html">»</a></div>
-                        </div>
-                    </div>*@
 
             </div>
 

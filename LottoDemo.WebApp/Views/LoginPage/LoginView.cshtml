@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LoginPage>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+
+@using (Html.BeginUmbracoForm("MemberLogin", "LoginPage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="text" name="MemberEmail" value="" maxlength="80" tabindex="1" placeholder="@Umbraco.GetDictionaryValue("loginFormEmailHint")" />
+    <input type="password" name="MemberPassword" value="" maxlength="50" tabindex="2" placeholder="@Umbraco.GetDictionaryValue("loginFormPasswortTextHint")" />
+    <div class="buttons-align">
+        <input type="submit" value="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")"
+               alt="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")"
+               title="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")" tabindex="3" class="fullbtn" />
+    </div>
+    <a href="/forgot-password">@Umbraco.GetDictionaryValue("loginForgottenPassword")</a> @String.Format("|") <a data-toggle="modal" data-target="#myModal" href="#">@Umbraco.GetDictionaryValue("loginCreateAccount")</a>
+}

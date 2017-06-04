@@ -459,11 +459,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameDetailsController.cs" />
+    <Compile Include="Controllers\LoginPageController.cs" />
     <Compile Include="Controllers\LotteryGamesListController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Controllers\ResultsAndWinningsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
+    <Compile Include="Controllers\UserTicketsHistoryController.cs" />
     <Compile Include="Controllers\WebAPI\LotteryGameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -530,6 +532,9 @@
     <Content Include="Views\UserEntriesPage.cshtml" />
     <Content Include="Views\ForgotPasswordPage.cshtml" />
     <Content Include="Views\ResultsAndWinnings\UpdateDrawResultView.cshtml" />
+    <Content Include="Views\LoginPage\LoginView.cshtml" />
+    <Content Include="Views\UserTicketsHistory\UserTicketsList.cshtml" />
+    <Content Include="Views\UserTicketsHistory\_TicketsTable.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

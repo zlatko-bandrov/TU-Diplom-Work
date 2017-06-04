@@ -16,3 +16,9 @@ namespace LottoDemo.WebApp
         }
     }
 }
+// TODO: Fix the login popup
+// TODO: Fix the login page
+// TODO: Forgot password Page
+// TODO: Fix the user account changes
+// TODO: Fix the user results and winnings page
+// TODO: Test the winings tickets calculation

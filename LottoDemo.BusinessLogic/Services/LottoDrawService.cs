@@ -188,7 +188,7 @@ namespace LottoDemo.BusinessLogic.Services
                 NextDrawRunTime = lottoDraw.DrawTime;
                 NextDrawID = lottoDraw.ID;
             }
-            WriteLogMessage(string.Format("Next draw (ID={1}) will launch at: {0}...\n", NextDrawRunTime.ToString("dd MMM yyyy HH:mm:ss", CultureInfo.InvariantCulture), NextDrawID));
+            WriteLogMessage(string.Format("Next draw (ID={1}) will launch at: {0}...\n", NextDrawRunTime.ToString("dd MMM yyyy HH:mm:ss", CultureInfo.CurrentCulture), NextDrawID));
         }
 
         private void UpdateTheGameJackpot(Guid gameKey, decimal newJackpot)

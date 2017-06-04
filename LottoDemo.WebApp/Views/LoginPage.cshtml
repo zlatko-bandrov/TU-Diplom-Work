@@ -1,5 +1,21 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LoginPage>
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
-	Layout = "WithRightSidebar.cshtml";
+    Layout = "WithRightSidebar.cshtml";
 }
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pageContent">
+            <div class="login-wrap">
+                <br />
+                <h3 class="lead">
+                    <i class="icon lockclosed"></i>
+                    @Umbraco.GetDictionaryValue("loginFormMemberLogin")
+                </h3>
+                <div id="pageContent">
+                    @{ Html.RenderAction("LoginView", "LoginPage"); }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -71,6 +71,15 @@ namespace LottoDemo.WebApp.Controllers
             return PartialView(result);
         }
 
+        [HttpPost]
+        public ActionResult BackToList()
+        {
+            Session.Remove("CurrentGameID");
+            Session.Remove("CurrentGameKey");
+
+            return RedirectToCurrentUmbracoPage();
+        }
+
         private List<LottoDrawResult> GetAllDraws(int gameId, int drawId = -1)
         {
             var draws = GameService.GetAllCompletedDrawings(gameId, drawId);
@@ -106,7 +115,7 @@ namespace LottoDemo.WebApp.Controllers
                     GameDisplayName = gameModel.LottoGameName,
                     GameUrl = content.Url,
                     GameLogoUrl = mediaUrl,
-                    PreviousDrawTime = gameModel.PreviousDrawingTime,
+                    PreviousDrawTime = GameService.GetLastCompletedDrawTime(gameModel.Id),
                     LastDraw = new LottoDrawModel()
                 };
 

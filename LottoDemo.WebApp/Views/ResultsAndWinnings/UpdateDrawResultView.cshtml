@@ -5,7 +5,7 @@
     <div id="drawStatistics">
         <div>
             <span>@ViewBag.DrawTimeLabel</span>
-            <span>@Model.DrawDate.ToString("dd MMM yyyy (dddd) HH:mm:ss", System.Globalization.CultureInfo.InstalledUICulture)</span>
+            <span>@Model.DrawDate.ToString("dd MMM yyyy (dddd) HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)</span>
         </div>
         <div class="ballset-wrap spacingFixOne">
             @foreach (var ball in Model.BallsBumbers)

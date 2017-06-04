@@ -6,67 +6,11 @@
 <div class="row">
     <div class="twoColWrapper col-lg-12" style="background-color: #fff">
         <div class="pageHeader">
-            <h1>Select your winning lottery numbers</h1>
+            <h1>История на лотарийните ви билети</h1>
         </div>
         <div class="pageContent">
-            <div>Get started: click the lottery name to expand and play.</div>
-            <div class="playusapowerball" id="accordion4">
-                <div class="glossBar counter0">
-                    <div class="greyheader">
-                        <div class="row">
-                            <span class="col-xs-2 col-sm-1">
-                                <img width="16" height="11" alt="PlayUSAPowerball" src="/images/flags/us.png">
-                            </span>
-                            <span class="col-xs-10 col-sm-4 productName">
-                                Powerball
-                            </span>
-                            <span class="col-xs-6 col-sm-3 jackpotAmount">
-                                US&nbsp;&nbsp; 250,000,000
-                            </span>
-                            <div class="col-xs6 col-sm-3 jackpotTimer">
-                                <div id="server4" class="countdown hasCountdown"><div class="countdown_row countdown_amount">04:46:03</div></div>
-                            </div>
-                            <span class="col-sm-1 pull-right hidden-xs aff-hide">
-                                <span data-icon="a" class="open"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lottoWrapper" style="">
-                    <table width="100%">
-                        <tbody>
-                            <tr id="lottopoints-notification" class="basic" cellpadding="0" cellspacing="0">
-                                <td class="status">
-                                    <div class="name">Your lottopoints: 0</div>
-                                    <div class="status">
-                                        Your current tier is: Basic
-                                        <br>
-                                        You need just <b>750</b> points to reach <b>Silver</b>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <hr />
-                            <h3 style="text-transform: capitalize;">quick play options</h3>
-                            <div class="innerButtons">
-                                <select id="quick_pick_4" name="quick_pick[4]" class="playSelect">
-                                    <option value="QP1">Quickpick 1 entry</option>
-                                    <option value="QP3">Quickpick 3 entries</option>
-                                    <option value="QP5" selected="selected">Quickpick 5 entries</option>
-                                    <option value="QP10">Quickpick 10 entries</option>
-                                    <option value="QP25">Quickpick 25 entries</option>
-                                    <option value="QP50">Quickpick 50 entries</option>
-                                    <option value="MF">Most often drawn numbers</option>
-                                    <option value="MO">Most overdue numbers</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div>Натиснете върху лотарийна игра за да видите съдържанието</div>
+            @{ Html.RenderAction("UserTicketsList", "UserTicketsHistory");}
         </div>
     </div>
 </div>

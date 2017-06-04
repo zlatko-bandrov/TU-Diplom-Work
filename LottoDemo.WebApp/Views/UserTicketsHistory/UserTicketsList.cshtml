@@ -1,0 +1,38 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using LottoDemo.Entities.Models.User;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserEntriesPage>
+@{
+    List<UserGameHistory> UserHistory = (List<UserGameHistory>)ViewBag.UserHistory;
+
+    foreach (var game in UserHistory)
+    {
+        <div class="playusapowerball">
+            <div class="glossBar counter0">
+                <div class="greyheader">
+                    <div class="row">
+                        <span class="col-xs-2 col-sm-1">
+                            <img width="16" height="11" alt="PlayUSAPowerball" src="/images/flags/us.png">
+                        </span>
+                        <span class="col-xs-10 col-sm-4 productName">
+                            @game.GameName
+                        </span>
+                        <span class="col-xs-6 col-sm-3 jackpotAmount">
+                            EUR&nbsp;&nbsp; @game.Jackpot.ToString("0,0")
+                        </span>
+                        <div class="col-xs6 col-sm-3 jackpotTimer">
+                            <div id="server4" class="countdown hasCountdown">
+                                <div class="countdown_row countdown_amount"></div>
+                            </div>
+                        </div>
+                        <span class="col-sm-1 pull-right hidden-xs aff-hide">
+                            <span data-icon="a" class="open"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="lottoWrapper">
+                @{ Html.RenderPartial("_TicketsTable"); }
+            </div>
+        </div>
+    }
+}

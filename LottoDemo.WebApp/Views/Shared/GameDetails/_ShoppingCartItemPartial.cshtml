@@ -3,8 +3,9 @@
 
 <div id="entry_23">
     <span id="entry_str_23_standard">
-        @Model.Tickets.Count x @Model.LottoGameName entries
+        @Model.Tickets.Count x @Model.LottoGameName - лотариини билети
     </span>
+
     <div class="viewnumberright">
         @using (Html.BeginUmbracoForm("DeleteAllTickets", "GameDetails", FormMethod.Post))
         {
@@ -19,8 +20,8 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <td>Lotto Numbers</td>
-                    <td>Draw date</td>
+                    <td>Лотариини числа</td>
+                    <td>Дата на теглене</td>
                     <td></td>
                 </tr>
             </thead>

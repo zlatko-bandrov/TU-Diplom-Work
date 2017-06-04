@@ -142,7 +142,7 @@ namespace LottoDemo.BusinessLogic.Games
         {
             var lastDraw =
                 this.GameUnitOfWork.DrawRepository
-                    .AsQuery(g => g.LotteryGameID == gameId && g.DrawTime >= DateTime.Now && !g.WasExecuted)
+                    .AsQuery(g => g.LotteryGameID == gameId && g.DrawTime >= DateTime.Now)
                     .OrderByDescending(d => d.DrawTime)
                     .FirstOrDefault();
             return lastDraw;

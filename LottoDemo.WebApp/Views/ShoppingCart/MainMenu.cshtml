@@ -56,14 +56,14 @@
                                             </div>
                                             <div class="col-sm-3 center profile-block-wrap">
                                                 <div class="profile-block-wrap">
-                                                    <strong style="display: block;">Current balance</strong>
+                                                    <strong style="display: block;">@Umbraco.GetDictionaryValue("mainMenuBalance")</strong>
                                                     <a class="totalcost-nav" href="#" onclick="return false;">€ @ViewBag.UserBalance</a>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3 profile-block-wrap">
                                                 <div class="profile-block-wrap">
-                                                    <a href="/account-details/" style="display: block;">Account details</a>
-                                                    <a href="/user-tickets/" style="display: block;">Results and Entries</a>
+                                                    <a href="/account-details/" style="display: block;">@Umbraco.GetDictionaryValue("mainMenuAccountDetails")</a>
+                                                    <a href="/user-tickets/" style="display: block;">@Umbraco.GetDictionaryValue("mainMenuResults")</a>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
@@ -80,7 +80,7 @@
 
                     <li class="dropdown menu-large">
                         <span data-icon="n" class="nav-icon"></span>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @Umbraco.GetDictionaryValue("CartMenuItemText") ( <span class="cart_counter" id="cart_counter">@ShoppingCartItems.Count</span> )</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left: 20px;"> @Umbraco.GetDictionaryValue("CartMenuItemText") (<span class="cart_counter" id="cart_counter">@ShoppingCartItems.Count</span>)</a>
                         <ul class="dropdown-menu megamenu row">
                             <li>
                                 <div class="container">
@@ -99,7 +99,7 @@
                                                                 @Html.AntiForgeryToken()
                                                                 <span>
                                                                     <a href="@item.LotteryGameUrl" style="display: inline-block; width: 220px;" title="Open @item.LottoGameName game details">
-                                                                        @item.TicketsCount x @item.LottoGameName entries
+                                                                        @item.TicketsCount x @item.LottoGameName артикула
                                                                     </a>
                                                                 </span>
                                                                 <button type="submit" class="remove-entries" style="background-color:transparent!important; padding:0px!important" title="Delete all @item.LottoGameName tickets">
@@ -117,7 +117,7 @@
 
                                             <div class="col-md-5">
                                                 <hr />
-                                                <div>Total outstanding</div>
+                                                <div>@Umbraco.GetDictionaryValue("mainMenuTotalPrice")</div>
                                                 <span class="total-bold">€ @ViewBag.TotalCartPrice</span>
                                                 <hr />
                                             </div>

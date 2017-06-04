@@ -4,7 +4,7 @@
 @{
     var gameDraws = (List<LottoDrawResult>)ViewBag.LottoDraws;
     var firstDraw = gameDraws.FirstOrDefault();
-    var formatProvider = System.Globalization.CultureInfo.InvariantCulture;
+    var formatProvider = System.Globalization.CultureInfo.CurrentCulture;
 }
 <div class="row">
     <div class="ng-scope">
@@ -79,6 +79,12 @@
                     </div>
                     <div class="col-lg-12">
                         <div style="padding-bottom: 10px"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        @using (Html.BeginUmbracoForm("BackToList","ResultsAndWinnings", FormMethod.Post))
+                        {
+                            <button>@Umbraco.GetDictionaryValue("drawResultsBackToList")</button>
+                        }
                     </div>
                 </div>
             </div>

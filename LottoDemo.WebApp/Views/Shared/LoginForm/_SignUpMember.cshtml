@@ -45,15 +45,17 @@
                 </div>
 
                 <div id="message_element_id"></div>
-                <input type="submit" name="commit" value="Login" id="login_button" alt="Login" title="Login" tabindex="11" class="btn btn-block btn-lg">
+                <input type="submit" name="commit" value="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")" 
+                       id="login_button" alt="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")" title="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")"
+                       tabindex="11" class="btn btn-block btn-lg" />
                 <br class="Hide">
                 <br class="Hide">
-                <p><a href="https://www.playusalotteries.com/en/forgot/password.html">Forgot password?</a></p>
+                <p><a href="/forgot-password">@Umbraco.GetDictionaryValue("loginForgottenPassword")</a></p>
             }
             <div class="registrationTeaser gradient-blue-radial center-block">
                 <img class="registrationWinners centered img-responsive" src="~/images/signup_hero_image.png">
                 <p class="teaserText">
-                    <span class="teaserTextDark">542,368 players have cashed out <br> over €31,000,000  <br> at Playhugelottos so far!</span>
+                    <span class="teaserTextDark"></span>
                 </p>
             </div>
         </div>

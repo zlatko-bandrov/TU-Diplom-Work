@@ -9,7 +9,7 @@ namespace LottoDemo.Entities.Models
 {
     public class LottoGameModel
     {
-        public LottoGameModel(IPublishedContent contentItem = null, DateTime? previousDraw = null, DateTime? nextDraw = null)
+        public LottoGameModel(IPublishedContent contentItem = null)
         {
             if (contentItem != null)
             {
@@ -17,11 +17,11 @@ namespace LottoDemo.Entities.Models
                 this.LottoGameName = contentItem.Name;
                 this.LottoGameUrl = contentItem.Url;
             }
-            this.GameSettings = new LottoGameSettings(contentItem, previousDraw, nextDraw);
+            this.GameSettings = new LottoGameSettings(contentItem);
             this.TicketBoxSettings = new TicketBoxSettings(this.GameSettings);
 
-            this.PreviousDrawingTime = previousDraw.HasValue ? previousDraw.Value : DateTime.MinValue;
-            this.NextDrawingTime = nextDraw.HasValue ? nextDraw.Value : DateTime.MaxValue;
+            //this.PreviousDrawingTime = previousDraw.HasValue ? previousDraw.Value : DateTime.MinValue;
+            //this.NextDrawingTime = nextDraw.HasValue ? nextDraw.Value : DateTime.MaxValue;
         }
 
         public int Id { get; set; }

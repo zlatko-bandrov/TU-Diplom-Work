@@ -274,6 +274,8 @@
     <Compile Include="Models\TicketBoxSettings.cs" />
     <Compile Include="Models\CustomerProfileModel.cs" />
     <Compile Include="Models\MemberPasswordChangeModel.cs" />
+    <Compile Include="Models\User\UserGameHistory.cs" />
+    <Compile Include="Models\User\UserTicketHistory.cs" />
     <Compile Include="Models\WebAPI\AutoGenerateNumbersResult.cs" />
     <Compile Include="Models\WebAPI\DrawingTimerModel.cs" />
     <Compile Include="Models\WebAPI\GameDrawSettings.cs" />
