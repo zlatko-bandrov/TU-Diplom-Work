@@ -4,6 +4,7 @@ using LottoDemo.Common.Services;
 using LottoDemo.DataAccess;
 using LottoDemo.Entities.Models;
 using LottoDemo.Entities.Models.Cart;
+using LottoDemo.Entities.Models.User;
 using LottoDemo.Repositories.UnitsOfWork;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Reflection;
 
 namespace LottoDemo.BusinessLogic.Services
 {
-    public class LottoUserService 
+    public class LottoUserService
     {
         private readonly decimal InitialUserBalance = Decimal.Parse(ConfigurationManager.AppSettings["InitialUserBalance"]);
 
@@ -140,7 +141,7 @@ namespace LottoDemo.BusinessLogic.Services
         public List<ShoppingCartItem> GetAllShoppingCartTickets(string username, out decimal userBalance, out decimal totalCartValue)
         {
             var cartItems = new List<ShoppingCartItem>();
-            var loggedUser = this.FindUser(username);
+            var loggedUser = FindUser(username);
 
             totalCartValue = 0;
             userBalance = 0;
@@ -181,6 +182,50 @@ namespace LottoDemo.BusinessLogic.Services
                 }
             }
             return cartItems;
+        }
+
+        public List<UserGameHistory> GetUserHistory(string username)
+        {
+            var userHistory = new Dictionary<Guid, UserGameHistory>();
+            var loggedUser = FindUser(username);
+            if (loggedUser != null)
+            {
+                UserGameHistory gameHistory = null;
+                var userTickets = UnitOfWork.TicketsRepository.AsQuery(t => t.UserID == loggedUser.ID && t.IsCalculated).OrderByDescending(t => t.LottoDrawing.DrawTime).ToList();
+                foreach (var ticket in userTickets)
+                {
+                    var gameKey = ticket.LottoDrawing.LotteryGame.GameKey;
+                    if (userHistory.TryGetValue(gameKey, out gameHistory))
+                    {
+                        var ticketHistory = GetNewTicketHistory(ticket);
+                        gameHistory.Tickets.Add(ticketHistory);
+                    }
+                    else
+                    {
+                        gameHistory = new UserGameHistory();
+                        gameHistory.GameKey = gameKey;
+                        userHistory.Add(gameKey, gameHistory);
+
+                        var ticketHistory = GetNewTicketHistory(ticket);
+                        gameHistory.Tickets.Add(ticketHistory);
+                    }
+                }
+            }
+
+            return userHistory.Values.ToList();
+        }
+
+        private UserTicketHistory GetNewTicketHistory(LottoTicket ticket)
+        {
+            UserTicketHistory ticketHistory = new UserTicketHistory()
+            {
+                BallNumbers = ticket.LottoTicketBalls.Where(c => !c.LotteryBall.IsBonusBall).Select(b => b.LotteryBall.BallNumber).ToList(),
+                BonusBallNumbers = ticket.LottoTicketBalls.Where(c => c.LotteryBall.IsBonusBall).Select(b => b.LotteryBall.BallNumber).ToList(),
+                DrawTime = ticket.LottoDrawing.DrawTime,
+                IsWinning = ticket.WinningTickets.Any(),
+                ProfitLost = ticket.WinningTickets.Any() ? ticket.WinningTickets.FirstOrDefault().DrawStatistic.WinningPerPerson : 0
+            };
+            return ticketHistory;
         }
 
         public void DeleteAllTicketsByGame(string username, int lottoGameId)

@@ -1,6 +1,4 @@
-﻿
-
-@using ContentModels = Umbraco.Web.PublishedContentModels;
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
 @using LottoDemo.Entities.Models.User;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserEntriesPage>
 @{
@@ -11,8 +9,9 @@
         <thead>
             <tr>
                 <td>Лотариини числа</td>
-                <td>Дата на теглене</td>
-                <td></td>
+                <td style="text-align: center;">Дата на теглене</td>
+                <td style="text-align: center;">Печеливш</td>
+                <td style="text-align: center;">Печалба</td>
             </tr>
         </thead>
         <tbody>
@@ -31,16 +30,14 @@
                             }
                         </div>
                     </td>
-                    <td>
-                        @ticket.DrawTime.ToString("dd MMM yyyy (dddd)")
+                    <td style="text-align: center; vertical-align: middle;">
+                        @ticket.DrawTime.ToString("dd MMM yyyy HH:mm")
                     </td>
-                    <td>
-                        <div class="entryRemove">
-                            <button type="submit" title="Delete the ticket" style="background-color: transparent !important; padding: 0 !important;">
-                                <span data-icon="o" class="icon ng-click-active delete-entry" style="cursor: pointer;"></span>
-                            </button>
-
-                        </div>
+                    <td style="text-align: center; vertical-align: middle;">
+                        @(ticket.IsWinning ? "Да" : "Не")
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        @ticket.ProfitLost EUR
                     </td>
                 </tr>
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LottoDemo.Entities.Models.User
 {
@@ -10,7 +11,7 @@ namespace LottoDemo.Entities.Models.User
         }
 
         public string GameName { get; set; }
-        public decimal Jackpot { get; set; }
+        public Guid GameKey { get; set; }
         public List<UserTicketHistory> Tickets { get; set; }
     }
 }
