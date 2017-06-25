@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LottoDemo.Repositories.Generic.GenericRepository&lt;T&gt;">
+    <Position X="4.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAgAAAABAAAAARAAAAAQAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Repositories\Generic\GenericRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LottoDemo.Repositories.Repositories.LotteryGameRepository">
+    <Position X="4.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\LotteryGameRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Repositories.UnitsOfWork.Base.BaseUnitOfWork">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAiAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitsOfWork\Base\BaseUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LottoDemo.Repositories.UnitsOfWork.LottoGameUnitOfWork">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAQAAABEAAQAAAAgQAAAACAAAAIAAAAIQAAAEAAQA=</HashCode>
+      <FileName>UnitsOfWork\LottoGameUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Repositories.UnitsOfWork.UserUnitOfWork">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggAAIAAAAAAAAAAAAAECIAQgAAAQABAAAABAQAAAAAA=</HashCode>
+      <FileName>UnitsOfWork\UserUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="LottoDemo.Repositories.Generic.IGenericRepository&lt;T&gt;">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAABAAAAAQAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Repositories\Generic\IGenericRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LottoDemo.Repositories.UnitsOfWork.Base.IUnitOfWork">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitsOfWork\Base\IUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="7.8" />
+</ClassDiagram>

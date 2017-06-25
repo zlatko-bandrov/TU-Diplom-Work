@@ -1,6 +1,7 @@
 ﻿using LottoDemo.BusinessLogic.Services;
 using LottoDemo.WebApp.Models.Membership;
 using System;
+using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Mvc;
@@ -103,6 +104,35 @@ namespace LottoDemo.WebApp.Controllers
             this.Members.Logout();
 
             return Redirect("/");
+        }
+
+        public ActionResult ForgottenPassword(string userEmail)
+        {
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return CurrentUmbracoPage();
+            }
+
+            MembershipUser member = Membership.GetUser(userEmail);
+            if (member == null)
+            {
+                return CurrentUmbracoPage();
+            }
+            string newPassword = member.ResetPassword();
+            MailMessage email = new MailMessage("bravehart_1985@abv.bg", userEmail, "LottoDemo Password Recovery Email", string.Format("Your temporary password is: {0}", newPassword));
+
+            try
+            {
+                SmtpClient smtp = new SmtpClient();
+                smtp.Send(email);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(typeof(MemberLoginController), ex.ToString(), ex);
+                throw ex;
+            }
+
+            return CurrentUmbracoPage();
         }
 
         private bool ValidateNewMemberData(LoginFromViewModel model)

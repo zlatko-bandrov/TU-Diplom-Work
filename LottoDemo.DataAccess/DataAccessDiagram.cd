@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LottoDemo.DataAccess.LotteryDemoDBEntities">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhACEAAAQAAAgAAQAAggAEkAAAAAAAAAAAAgAAAAI=</HashCode>
+      <FileName>LottoDemoDBContext.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.Balance">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAgAIAAAAAAAAACAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Balance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.Currency">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAgAAAAAAgAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Currency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.DrawStatistic">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAiAAAAAAAAgAAAAEAQAAACQAAAAAAAAA=</HashCode>
+      <FileName>DrawStatistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.GameWinningsTier">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAgAAAAAAAAAAEAAAAAAAAAIQAAAAAAAA=</HashCode>
+      <FileName>GameWinningsTier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LotteryBall">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAgAAgAQAAAAAAAAAABAAAAAAAAgAAAAA=</HashCode>
+      <FileName>LotteryBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LotteryGame">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAAAAAgAAAAAAQAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>LotteryGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LottoDrawing">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAAAAAQAgAAAAQAEAAAEAACCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LottoDrawing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LottoDrawingBall">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAiAgAAAAAAAAAAAEAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>LottoDrawingBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LottoTicket">
+    <Position X="2.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAAgAAAAAAAAggAAAEABAAAAAAAAgAAIAQ=</HashCode>
+      <FileName>LottoTicket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.LottoTicketBall">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAgAAAAAAAAAAAAAAAIAAAAAAAAAAgA=</HashCode>
+      <FileName>LottoTicketBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.User">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAQgAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.DataAccess.WinningTicket">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAAAAAAAAAAAABAIAAAAAACAAAAA=</HashCode>
+      <FileName>WinningTicket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="7.8" />
+</ClassDiagram>

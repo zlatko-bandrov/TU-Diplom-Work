@@ -24,18 +24,6 @@ namespace LottoDemo.BusinessLogic.Games
 
         public static readonly TimeSpan DefaultDrawInterval = TimeSpan.FromMinutes(Constants.DefaultDrawInterval);
 
-        //public static TimeSpan GetGameDrawInterval(Guid gameKey)
-        //{
-        //    TimeSpan timeInterval = DefaultDrawInterval;
-        //    var gameSettings = Umbraco.Core.ApplicationContext.Current.Services.ContentService.GetById(gameKey);
-        //    if (gameSettings != null)
-        //    {
-        //        var value = gameSettings.GetValue<double>("DrawingTimeInterval");
-        //        timeInterval = TimeSpan.FromMinutes(value);
-        //    }
-        //    return timeInterval;
-        //}
-
 
         public LotteryGame GetLotteryGameByKey(Guid gameKey)
         {

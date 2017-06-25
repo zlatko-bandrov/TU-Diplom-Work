@@ -1,15 +1,9 @@
 ﻿using LottoDemo.BusinessLogic.Services;
-using LottoDemo.Common.Services;
-using LottoDemo.Entities.Models;
 using System;
 using System.Configuration;
-using System.Globalization;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
 using System.Threading;
 
-namespace TestConsoleApp
+namespace LottoDemo.LottoGameService
 {
     class Program : IDisposable
     {

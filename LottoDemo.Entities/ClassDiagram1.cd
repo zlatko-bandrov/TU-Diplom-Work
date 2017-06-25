@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LottoDemo.Entities.Models.Cart.AddToCartModel" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CwAAAAAAAAAAAAAAAAAQAEAAAIAAAAAABAAAAAAAAgA=</HashCode>
+      <FileName>Models\Cart\AddToCartModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.Cart.LotteryGameCartItem">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Cart\LotteryGameCartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.Cart.LotteryTicketCartItem" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAEAAAAAAgAAgAAACAAAAAAA=</HashCode>
+      <FileName>Models\Cart\LotteryTicketCartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.Cart.ShoppingCartItem">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cart\ShoppingCartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.CurrencyModel" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\CurrencyModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.CustomerProfileModel" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAACIIAAAAAQAAABQAEAAAAAAAAAYAAg=</HashCode>
+      <FileName>Models\CustomerProfileModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.DrawStatisticItem" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DrawStatisticItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.LotteryTicket" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAIAAAAAAAAAQ=</HashCode>
+      <FileName>Models\LotteryTicket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.LottoDrawModel" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAgAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LottoDrawModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.LottoDrawStatistic" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LottoDrawStatistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.LottoGameModel" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAqAAAQAAAAAkAAAAAAAAAAAAAAAAAAAAgAEAAAQgA=</HashCode>
+      <FileName>Models\LottoGameModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.LottoGameSettings" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAABUCAQAIAAAAAACggAAAAAAIAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\LottoGameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.MemberPasswordChangeModel" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAABAAAAIAA=</HashCode>
+      <FileName>Models\MemberPasswordChangeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.TicketBoxSettings" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAECAQAAEAAAAAAAgAAAAgAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\TicketBoxSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.WinningTier" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAACIQAAAAAAAA=</HashCode>
+      <FileName>Models\WinningTier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.ResultsAndWinnings.DrawWinningTier" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\ResultsAndWinnings\DrawWinningTier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.ResultsAndWinnings.LotteryGameTeaser" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAABCAAAAIgAAAIAIgAAAAAAAAAAAAAAAAAQAAAE=</HashCode>
+      <FileName>Models\ResultsAndWinnings\LotteryGameTeaser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.ResultsAndWinnings.LottoDrawResult" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAABAAACAAAAAAAQAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ResultsAndWinnings\LottoDrawResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.ResultsAndWinnings.UpdateDrawResultsModel" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ResultsAndWinnings\UpdateDrawResultsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.User.UserGameHistory" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\User\UserGameHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.User.UserTicketHistory" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAQAAAAAAAACAAAAAIAAAAAAAAAQ=</HashCode>
+      <FileName>Models\User\UserTicketHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.WebAPI.AutoGenerateNumbersResult" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\WebAPI\AutoGenerateNumbersResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.WebAPI.DrawingTimerModel" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAQAABAAAAAAA=</HashCode>
+      <FileName>Models\WebAPI\DrawingTimerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.WebAPI.GameDrawSettings" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACAAAAAAAAAAAAAAAAIACAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\WebAPI\GameDrawSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LottoDemo.Entities.Models.WebAPI.NextDrawTimeLeftModel" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\WebAPI\NextDrawTimeLeftModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="7.8" />
+</ClassDiagram>

@@ -57,10 +57,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
-          <Property Name="JackpotID" Type="int" Nullable="false" />
           <Property Name="GameKey" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LottoDrawing">
           <Key>
@@ -475,12 +472,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <Property Name="JackpotID" Type="Int32" Nullable="false" />
           <Property Name="GameKey" Type="Guid" Nullable="false" />
           <NavigationProperty Name="LottoDrawings" Relationship="LotteryDemoEFModel.FK_LottoDrawing_LotteryGame" FromRole="LotteryGame" ToRole="LottoDrawing" />
           <NavigationProperty Name="GameWinningsTiers" Relationship="LotteryDemoEFModel.FK_GameWinningsTier_LotteryGame" FromRole="LotteryGame" ToRole="GameWinningsTier" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="LottoDrawing">
           <Key>
@@ -782,10 +776,7 @@
           <EntitySetMapping Name="LotteryGames">
             <EntityTypeMapping TypeName="LotteryDemoEFModel.LotteryGame">
               <MappingFragment StoreEntitySet="LotteryGame">
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="GameKey" ColumnName="GameKey" />
-                <ScalarProperty Name="JackpotID" ColumnName="JackpotID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

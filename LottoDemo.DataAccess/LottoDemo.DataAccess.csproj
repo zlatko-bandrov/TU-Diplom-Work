@@ -111,6 +111,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LottoDemoDBContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="DataAccessDiagram.cd" />
     <None Include="LottoDemoDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LottoDemoDBContext.edmx</DependentUpon>

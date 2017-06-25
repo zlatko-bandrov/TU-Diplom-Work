@@ -87,7 +87,8 @@ namespace LottoDemo.WebApp.Controllers
 
         private void UpdatePassword(MemberPasswordChangeModel profile)
         {
-
+            var member = Services.MemberService.GetByUsername("username");
+            Services.MemberService.SavePassword(member, "new password");
         }
 
         private void UpdateProfile(CustomerProfileModel model)
