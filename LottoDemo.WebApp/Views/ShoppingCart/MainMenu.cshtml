@@ -32,11 +32,11 @@
                 {
                     <li class="nodrop">
                         <span data-icon="y" class="nav-icon"></span>
-                        <a id="Login" data-toggle="modal" data-target="#myModal" href="#"> @Umbraco.GetDictionaryValue("LoginMenuItemText")</a>
+                        <a id="Login" data-toggle="modal" data-target="#myModal" href="#myModal"> @Umbraco.GetDictionaryValue("LoginMenuItemText")</a>
                     </li>
                     <li class="nodrop">
                         <span data-icon="D" class="nav-icon"></span>
-                        <a class="access" data-toggle="modal" data-target="#myModal" href="#"> @Umbraco.GetDictionaryValue("RegisterMenuItemText")</a>
+                        <a class="access" data-toggle="modal" data-target="#myModal" href="#myModal"> @Umbraco.GetDictionaryValue("RegisterMenuItemText")</a>
                     </li>
                 }
 
@@ -135,4 +135,10 @@
             </ul>
         </div>
     </div>
-</div>   
+</div>
+
+<input type="hidden" id="showTheLoging" value="false" />
+
+<script type="text/javascript">
+
+</script>
