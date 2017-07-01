@@ -8,7 +8,7 @@
     @using (Html.BeginUmbracoForm("MemberRegistration", "MemberLogin", null, new { id = "memberRegistrationForm" }))
     {
         @Html.AntiForgeryToken()
-
+        <input type="hidden" id="showTheLoging1" value="@ViewBag.ShowErrors" />
         <input type="hidden" name="customer_registration_lead[modal]" id="customer_registration_lead_modal" value="true" />
         <input type="hidden" name="customer_registration_lead[terms_accepted]" id="customer_registration_lead_terms_accepted" value="true" />
         <input type="hidden" name="customer_registration_lead[preferred_language]" id="customer_registration_lead_preferred_language" value="en" />
@@ -21,15 +21,14 @@
                 @Umbraco.GetDictionaryValue("loginFormSignUpHeadline")
             </div>
             <div class="regModal-body">
-
                 <label>@Umbraco.GetDictionaryValue("loginFormPersonalInformationLabel")</label>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-4 col-sm-3 selector-inline">
                             <select name="Title" id="customer_registration_lead_title" class="form-control" tabindex="1" style="">
                                 <option value="">@Umbraco.GetDictionaryValue("loginFormUserTitleDefaultText")</option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
+                                <option value="Г-н">Г-н</option>
+                                <option value="Г-жа">Г-жа</option>
                             </select>
                         </div>
                         <div class="col-xs-8 col-sm-9">
@@ -42,6 +41,12 @@
                             </div>
                         </div>
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDNAME_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDNAME_KEY)
+                        </div>
+                    }
                 </div>
 
                 <div class="form-group">
@@ -52,6 +57,12 @@
                         <input type="text" name="LastName" id="customer_registration_lead_last_name" value="" size="50" maxlength="50" tabindex="3"
                                class="form-control-l247" style="" placeholder="*@Umbraco.GetDictionaryValue("loginFormLastNameHint")" />
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDFAMILY_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDFAMILY_KEY)
+                        </div>
+                    }
                 </div>
 
                 <div class="form-group">
@@ -62,36 +73,56 @@
                         <input type="text" name="MemberEmail" id="customer_registration_lead_email" value="" size="50" maxlength="100" tabindex="4"
                                class="form-control-l247" style="" placeholder="*@Umbraco.GetDictionaryValue("loginFormEmailHint")" />
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDEMAIL_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_REQUIREDEMAIL_KEY)
+                        </div>
+                    }
                 </div>
 
                 <label>@Umbraco.GetDictionaryValue("loginFormDateOfBirthLabel")</label>
                 <div class="form-group">
-                    <select name="BirthDateYear" id="customer_registration_lead_dob_year">
-                        @for (int year = 1990; year <= DateTime.Now.Year; year++)
-                        {
-                            <option value="@year" selected="@(year == DateTime.Now.Year ? "selected" : null)">@year</option>
-                        }
-                    </select>-
-                    <select name="BirthDateMonth" id="customer_registration_lead_dob_month">
-                        <option value="1">January</option>
-                        <option value="2" selected="selected">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>-
-                    <select name="BirthDateDay" id="customer_registration_lead_dob_day">
-                        @for (int day = 1; day <= 31; day++)
-                        {
-                            <option value="@day">@day</option>
-                        }
-                    </select>
+                    <div>
+                        <select name="BirthDateYear" id="customer_registration_lead_dob_year">
+                            @for (int year = 1990; year <= DateTime.Now.Year; year++)
+                            {
+                                <option value="@year" selected="@(year == DateTime.Now.Year ? " selected" : null)">@year</option>
+                            }
+                        </select>-
+                        <select name="BirthDateMonth" id="customer_registration_lead_dob_month">
+                            <option value="1">Януари</option>
+                            <option value="2">Февруари</option>
+                            <option value="3">Март</option>
+                            <option value="4">Април</option>
+                            <option value="5">Май</option>
+                            <option value="6">Юни</option>
+                            <option value="7">Юли</option>
+                            <option value="8">Август</option>
+                            <option value="9">Септември</option>
+                            <option value="10">Октомври</option>
+                            <option value="11">Ноември</option>
+                            <option value="12">Декември</option>
+                        </select>-
+                        <select name="BirthDateDay" id="customer_registration_lead_dob_day">
+                            @for (int day = 1; day <= 31; day++)
+                            {
+                                <option value="@day">@day</option>
+                            }
+                        </select>
+                    </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_NONEVALIDDATE_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_NONEVALIDDATE_KEY)
+                        </div>
+                    }
+                    else if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_DATE18YEARS_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_DATE18YEARS_KEY)
+                        </div>
+                    }
                 </div>
 
                 <label>@Umbraco.GetDictionaryValue("loginFormYourPasswordLabel")</label>
@@ -111,6 +142,12 @@
                             </button>
                         </div>
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_PASSREQUIRED_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_PASSREQUIRED_KEY)
+                        </div>
+                    }
                 </div>
 
                 <label>@Umbraco.GetDictionaryValue("loginFormContactNumberLabel")</label>
@@ -369,10 +406,15 @@
                             </div>
                         </div>
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERREG_PHONEREQUIRED_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERREG_PHONEREQUIRED_KEY)
+                        </div>
+                    }
                 </div>
-
                 <div id="spinning" class="spinning" style="display:none"></div>
-                <button tabindex="8" id="register_button" type="submit" class="btn btn-block btn-lg">@Umbraco.GetDictionaryValue("loginFormCreateUserButtonText")</button>                
+                <button tabindex="8" id="register_button" type="submit" class="btn btn-block btn-lg">@Umbraco.GetDictionaryValue("loginFormCreateUserButtonText")</button>
             </div>
         </section>
     }
@@ -380,7 +422,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function () {
             setTimeout(function () { jQuery('.formError').fadeOut('slow'); }, 1600);
-         });
+        });
     </script>
 
 </div>

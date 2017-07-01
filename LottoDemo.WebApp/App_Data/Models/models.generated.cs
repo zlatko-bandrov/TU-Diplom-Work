@@ -19,7 +19,7 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8c66ad2a48c41ebd")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "d36c8f4c79b66698")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedContentModels
@@ -1778,15 +1778,6 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Gender
-		///</summary>
-		[ImplementPropertyType("gender")]
-		public object Gender
-		{
-			get { return this.GetPropertyValue("gender"); }
-		}
-
-		///<summary>
 		/// Last Name
 		///</summary>
 		[ImplementPropertyType("lastName")]
@@ -1802,6 +1793,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MobilePhone
 		{
 			get { return this.GetPropertyValue<string>("mobilePhone"); }
+		}
+
+		///<summary>
+		/// Person Title
+		///</summary>
+		[ImplementPropertyType("personTitle")]
+		public object PersonTitle
+		{
+			get { return this.GetPropertyValue("personTitle"); }
 		}
 
 		///<summary>

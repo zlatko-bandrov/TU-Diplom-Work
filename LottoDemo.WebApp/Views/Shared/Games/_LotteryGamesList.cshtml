@@ -19,7 +19,10 @@
                                     <div class="col-lg-3 col-sm-4 col-md-3 col-xs-6 lottery-fullbox">
                                         <div class="pb-holder">
                                             <div class="pb-logo">
-                                                <a href="@lotteryGame.GameUrl" title="@lotteryGame.GameDisplayName">
+                                                @{ 
+                                                    string gameUrl = User.Identity.IsAuthenticated ? lotteryGame.GameUrl : "/login";
+                                                }
+                                                <a href="@gameUrl" title="@lotteryGame.GameDisplayName">
                                                     <span class="pending">
                                                         <img src="@lotteryGame.GameLogoUrl" alt="Lottery Logo" class="lottery-logo-img" style="width: 150px;" />
                                                     </span>
@@ -54,7 +57,7 @@
                                             </div>
                                             <div class="pb-btn">
                                                 <div>
-                                                    <a href="@lotteryGame.GameUrl" title="@lotteryGame.GameDisplayName" class="single">
+                                                    <a href="@gameUrl" title="@lotteryGame.GameDisplayName" class="single">
                                                         @Umbraco.GetDictionaryValue("lotteryGamesGameDetailLinkText")
                                                     </a>
                                                 </div>

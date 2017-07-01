@@ -1,4 +1,5 @@
 ﻿using LottoDemo.BusinessLogic.Services;
+using LottoDemo.Common;
 using LottoDemo.WebApp.Models.Membership;
 using System;
 using System.Net.Mail;
@@ -19,6 +20,11 @@ namespace LottoDemo.WebApp.Controllers
         {
             var model = new LoginFromViewModel();
 
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowErrors = true;
+            }
+
             return PartialView("LoginForm/_LoginFormDialog", model);
         }
 
@@ -28,12 +34,12 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                if (!this.ValidateNewMemberData(model))
+                if (!ValidateNewMemberData(model))
                 {
-                    return RedirectToCurrentUmbracoPage();
+                    return CurrentUmbracoPage();
                 }
 
-                var memberService = this.Services.MemberService;
+                var memberService = Services.MemberService;
 
                 if (!memberService.Exists(model.MemberEmail))
                 {
@@ -66,7 +72,7 @@ namespace LottoDemo.WebApp.Controllers
                 }
                 else
                 {
-                    //member exists
+                    AddModelError(Constants.ERR_USERREG_USEREXISTS_KEY);
                 }
             }
             catch (Exception ex)
@@ -74,7 +80,7 @@ namespace LottoDemo.WebApp.Controllers
                 this.Logger.Error(typeof(MemberLoginController), ex.ToString(), ex);
             }
 
-            return RedirectToCurrentUmbracoPage();
+            return CurrentUmbracoPage();
         }
 
         [HttpPost]
@@ -83,18 +89,32 @@ namespace LottoDemo.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.MemberEmail, model.MemberPassword))
+                if (String.IsNullOrEmpty(model.MemberEmail))
                 {
-                    //FormsAuthentication.SetAuthCookie(model.MemberEmail, true);
-                    this.Members.Login(model.MemberEmail, model.MemberPassword);
+                    AddModelError(Constants.ERR_USERLOG_REQUIREDEMAIL_KEY);
                 }
-                else
+                if (String.IsNullOrEmpty(model.MemberPassword))
                 {
-                    ModelState.AddModelError("", "The username or password provided is incorrect.");
+                    AddModelError(Constants.ERR_USERLOG_PASSREQUIRED_KEY);
+                }
+
+                if (!String.IsNullOrEmpty(model.MemberEmail) && !String.IsNullOrEmpty(model.MemberPassword))
+                {
+                    if (Membership.ValidateUser(model.MemberEmail, model.MemberPassword))
+                    {
+                        //FormsAuthentication.SetAuthCookie(model.MemberEmail, true);
+                        this.Members.Login(model.MemberEmail, model.MemberPassword);
+                        return RedirectToUmbracoPage(1050);
+                    }
+                    else
+                    {
+                        ModelState.Clear();
+                        AddModelError(Constants.ERR_USERLOG_NOTVALIDCRED_KEY);
+                    }
                 }
             }
 
-            return RedirectToCurrentUmbracoPage();
+            return CurrentUmbracoPage();
         }
 
         public ActionResult Logout()
@@ -137,14 +157,54 @@ namespace LottoDemo.WebApp.Controllers
 
         private bool ValidateNewMemberData(LoginFromViewModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.FirstName)
-                || string.IsNullOrWhiteSpace(model.LastName)
-                || string.IsNullOrWhiteSpace(model.MemberEmail)
-                || string.IsNullOrWhiteSpace(model.MobilePhone))
+            bool result = true;
+            if (string.IsNullOrWhiteSpace(model.FirstName))
             {
-                return false;
+                AddModelError(Constants.ERR_USERREG_REQUIREDNAME_KEY);
+                result = false;
             }
-            return true;
+            if (string.IsNullOrWhiteSpace(model.LastName))
+            {
+                AddModelError(Constants.ERR_USERREG_REQUIREDFAMILY_KEY);
+                result = false;
+            }
+            if (string.IsNullOrWhiteSpace(model.MemberEmail))
+            {
+                AddModelError(Constants.ERR_USERREG_REQUIREDEMAIL_KEY);
+                result = false;
+            }
+            if (string.IsNullOrWhiteSpace(model.MemberPassword))
+            {
+                AddModelError(Constants.ERR_USERREG_PASSREQUIRED_KEY);
+                result = false;
+            }
+            if (string.IsNullOrWhiteSpace(model.MobilePhone))
+            {
+                AddModelError(Constants.ERR_USERREG_PHONEREQUIRED_KEY);
+                result = false;
+            }
+
+            try
+            {
+                DateTime date = new DateTime(model.BirthDateYear, model.BirthDateMonth, model.BirthDateDay);
+                if (date.AddYears(18) > DateTime.Now.Date)
+                {
+                    AddModelError(Constants.ERR_USERREG_DATE18YEARS_KEY);
+                    result = false;
+                }
+            }
+            catch
+            {
+                AddModelError(Constants.ERR_USERREG_NONEVALIDDATE_KEY);
+                result = false;
+            }
+
+            return result;
+        }
+
+        private void AddModelError(string errorCode)
+        {
+            ModelState.AddModelError(errorCode, Umbraco.GetDictionaryValue(errorCode));
         }
     }
 }

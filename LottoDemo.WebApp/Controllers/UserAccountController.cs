@@ -1,4 +1,5 @@
-﻿using LottoDemo.Entities.Models;
+﻿using LottoDemo.Common;
+using LottoDemo.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace LottoDemo.WebApp.Controllers
             {
                 if (!User.Identity.IsAuthenticated)
                 {
-                    return RedirectToUmbracoPage(1050);
+                    return RedirectToUmbracoPage(Constants.HOME_PAGE_ID);
                 }
 
                 ViewBag.MemberProfile = this.GetMemberProfile();
@@ -88,7 +89,7 @@ namespace LottoDemo.WebApp.Controllers
         private void UpdatePassword(MemberPasswordChangeModel profile)
         {
             var member = Services.MemberService.GetByUsername("username");
-            Services.MemberService.SavePassword(member, "new password");
+            Services.MemberService.SavePassword(member, profile.NewPassword);
         }
 
         private void UpdateProfile(CustomerProfileModel model)

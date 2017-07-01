@@ -25,6 +25,18 @@
                         <input type="email" name="MemberEmail" id="login_email" value="" maxlength="80" tabindex="9"
                                placeholder="@Umbraco.GetDictionaryValue("loginFormEmailHint")" class="form-control" style="">
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERLOG_REQUIREDEMAIL_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERLOG_REQUIREDEMAIL_KEY)
+                        </div>
+                    }
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERLOG_NOTVALIDCRED_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERLOG_NOTVALIDCRED_KEY)
+                        </div>
+                    }
                 </div>
 
                 <label>@Umbraco.GetDictionaryValue("loginFormYourPasswordLabel")</label>
@@ -42,15 +54,20 @@
                             </button>
                         </div>
                     </div>
+                    @if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_USERLOG_PASSREQUIRED_KEY))
+                    {
+                        <div class="formError">
+                            @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_USERLOG_PASSREQUIRED_KEY)
+                        </div>
+                    }
                 </div>
-
                 <div id="message_element_id"></div>
-                <input type="submit" name="commit" value="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")" 
+                <input type="submit" name="commit" value="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")"
                        id="login_button" alt="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")" title="@Umbraco.GetDictionaryValue("loginFormLoginButtonText")"
                        tabindex="11" class="btn btn-block btn-lg" />
-                <br class="Hide">
-                <br class="Hide">
-                <p><a href="/forgot-password">@Umbraco.GetDictionaryValue("loginForgottenPassword")</a></p>
+                    <br class="Hide" />
+                        <br class="Hide" />
+                        <p><a href="/forgot-password">@Umbraco.GetDictionaryValue("loginForgottenPassword")</a></p>
             }
             <div class="registrationTeaser gradient-blue-radial center-block">
                 <img class="registrationWinners centered img-responsive" src="~/images/signup_hero_image.png">

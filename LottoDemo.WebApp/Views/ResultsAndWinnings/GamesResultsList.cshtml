@@ -19,7 +19,8 @@
                         </div>
                         <div class="col-md-5">
                             <div class="pb-btn">
-                                <a class="lname single l247-btn-primary btn-block" title="@game.GameDisplayName" href="@game.GameUrl">@Umbraco.GetDictionaryValue("drawResutsButton")</a>
+                                @{ string gameUrl = User.Identity.IsAuthenticated ? game.GameUrl : "/login"; }
+                                <a class="lname single l247-btn-primary btn-block" title="@game.GameDisplayName" href="@gameUrl">@Umbraco.GetDictionaryValue("drawResutsButton")</a>
                             </div>
                         </div>
                     </div>
