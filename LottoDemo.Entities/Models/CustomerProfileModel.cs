@@ -27,17 +27,17 @@ namespace LottoDemo.Entities.Models
         {
             if (member != null)
             {
-                this.FirstName = member.GetValue("FirstName").ToString();
-                this.LastName = member.GetValue("LastName").ToString();
-                this.PersonTitle = member.GetValue("PersonTitle").ToString();
+                this.FirstName = member.GetValue<string>("FirstName");
+                this.LastName = member.GetValue<string>("LastName");
+                this.PersonTitle = member.GetValue<string>("PersonTitle");
                 this.DateOfBirth = (DateTime)member.GetValue("DateOfBirth");
-                this.AddressLine1 = member.GetValue("AddressLine1").ToString();
-                this.AddressLine2 = member.GetValue("AddressLine2").ToString();
-                this.City = member.GetValue("City").ToString();
-                this.County = member.GetValue("County").ToString();
-                this.PostalCode = member.GetValue("PostalCode").ToString();
-                this.MobilePhone = member.GetValue("MobilePhone").ToString();
-                this.WorkPhone = member.GetValue("WorkPhone").ToString();
+                this.AddressLine1 = member.GetValue<string>("AddressLine1");
+                this.AddressLine2 = member.GetValue<string>("AddressLine2");
+                this.City = member.GetValue<string>("City");
+                this.County = member.GetValue<string>("County");
+                this.PostalCode = member.GetValue<string>("PostalCode");
+                this.MobilePhone = member.GetValue<string>("MobilePhone");
+                this.WorkPhone = member.GetValue<string>("WorkPhone");
                 this.Email = member.Email;
             }
         }

@@ -55,10 +55,11 @@
                             <div class="col-md-6">
                                 <strong><label>@Umbraco.GetDictionaryValue("customerDetailsGender")</label></strong>
                                 <div>
-                                    <select name="Gender" class="form-control">
-                                        <option value="not selected" selected="@(memberProfile.Gender.Equals("not selected", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Not Selected</option>
-                                        <option value="female" selected="@(memberProfile.Gender.Equals("female", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Female</option>
-                                        <option value="male" selected="@(memberProfile.Gender.Equals("male", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Male</option>
+                                    @{ string selectedGender = string.IsNullOrEmpty(memberProfile.PersonTitle) ? "" : memberProfile.PersonTitle; }
+                                    <select name="PersonTitle" class="form-control">
+                                        <option value="" selected="@(selectedGender.Equals("", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)"></option>
+                                        <option value="169" selected="@(selectedGender.Equals("169", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Г-н</option>
+                                        <option value="170" selected="@(selectedGender.Equals("170", StringComparison.InvariantCultureIgnoreCase) ? "selected" : null)">Г-жа</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,9 +145,37 @@
                         @using (Html.BeginUmbracoForm("UpdateCustomerPassword", "UserAccount", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken();
+
                             <input type="password" name="CurrentPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsCurrentPassHint")" />
+                            if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_ACCOUNT_OLDPASSREQUIRED_KEY))
+                            {
+                                <div class="formError">
+                                    @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_ACCOUNT_OLDPASSREQUIRED_KEY)
+                                </div>
+                            }
+
                             <input type="password" name="NewPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsNewPassHint")" />
+                            if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_ACCOUNT_NEWPASSREQUIRED_KEY))
+                            {
+                                <div class="formError">
+                                    @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_ACCOUNT_NEWPASSREQUIRED_KEY)
+                                </div>
+                            }
+                            if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_ACCOUNT_PASSNOTMATCH_KEY))
+                            {
+                                <div class="formError">
+                                    @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_ACCOUNT_PASSNOTMATCH_KEY)
+                                </div>
+                            }
+
                             <input type="password" name="ConfirmPassword" placeholder="@Umbraco.GetDictionaryValue("customerDetailsNewPassHint")" />
+                            if (ViewData.ModelState.Keys.Contains(LottoDemo.Common.Constants.ERR_ACCOUNT_CONFIRMPASSREQUIRED_KEY))
+                            {
+                                <div class="formError">
+                                    @Umbraco.GetDictionaryValue(LottoDemo.Common.Constants.ERR_ACCOUNT_CONFIRMPASSREQUIRED_KEY)
+                                </div>
+                            }
+
                             <div class="buttons">
                                 <input type="submit" name="commit" value="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" class="fullbtn"
                                        alt="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" title="@Umbraco.GetDictionaryValue("customerUpdatePasswordButton")" />

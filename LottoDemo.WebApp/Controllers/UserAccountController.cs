@@ -1,12 +1,8 @@
 ﻿using LottoDemo.Common;
 using LottoDemo.Entities.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Umbraco.Web.Mvc;
 
 namespace LottoDemo.WebApp.Controllers
 {
@@ -22,15 +18,13 @@ namespace LottoDemo.WebApp.Controllers
                 }
 
                 ViewBag.MemberProfile = this.GetMemberProfile();
-
-                return View("RenderDetailsForm", this.CurrentPage);
             }
             catch (Exception ex)
             {
                 this.WriteErrorMessage(ex);
             }
 
-            return RedirectToCurrentUmbracoPage();
+            return View("RenderDetailsForm", CurrentPage);
         }
 
         [HttpPost]
@@ -39,11 +33,11 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                this.UpdateProfile(model);
+                UpdateProfile(model);
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
 
             return CurrentUmbracoPage();
@@ -55,12 +49,11 @@ namespace LottoDemo.WebApp.Controllers
         {
             try
             {
-                this.UpdatePassword(model);
-                ViewBag.ErrorsList = new List<string> { "Test Transfer 1", "Test Transfer 2" };
+                UpdatePassword(model);
             }
             catch (Exception ex)
             {
-                this.WriteErrorMessage(ex);
+                WriteErrorMessage(ex);
             }
 
             return CurrentUmbracoPage();
@@ -68,7 +61,7 @@ namespace LottoDemo.WebApp.Controllers
 
         private MembershipUser GetCurrentUser()
         {
-            var user = System.Web.Security.Membership.GetUser();
+            var user = Membership.GetUser();
             return user;
         }
 
@@ -76,7 +69,7 @@ namespace LottoDemo.WebApp.Controllers
         {
             CustomerProfileModel model = new CustomerProfileModel();
 
-            var user = this.GetCurrentUser();
+            var user = GetCurrentUser();
             if (user != null)
             {
                 var member = Services.MemberService.GetByEmail(user.Email);
@@ -88,13 +81,66 @@ namespace LottoDemo.WebApp.Controllers
 
         private void UpdatePassword(MemberPasswordChangeModel profile)
         {
-            var member = Services.MemberService.GetByUsername("username");
-            Services.MemberService.SavePassword(member, profile.NewPassword);
+            if (String.IsNullOrWhiteSpace(profile.CurrentPassword))
+            {
+                AddModelError(Constants.ERR_ACCOUNT_OLDPASSREQUIRED_KEY);
+            }
+            if (String.IsNullOrWhiteSpace(profile.NewPassword))
+            {
+                AddModelError(Constants.ERR_ACCOUNT_NEWPASSREQUIRED_KEY);
+            }
+            if (String.IsNullOrWhiteSpace(profile.ConfirmPassword))
+            {
+                AddModelError(Constants.ERR_ACCOUNT_CONFIRMPASSREQUIRED_KEY);
+            }
+
+            if (!String.IsNullOrEmpty(profile.CurrentPassword)
+                && !String.IsNullOrEmpty(profile.NewPassword)
+                && String.Compare(profile.ConfirmPassword, profile.NewPassword) == 0)
+            {
+                var currentUser = GetCurrentUser();
+                currentUser.ChangePassword(profile.CurrentPassword, profile.NewPassword);
+            }
+            else
+            {
+                ModelState.Clear();
+                AddModelError(Constants.ERR_ACCOUNT_PASSNOTMATCH_KEY);
+            }
         }
 
         private void UpdateProfile(CustomerProfileModel model)
         {
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+            {
+                return;
+            }
 
+            var memberService = Services.MemberService;
+            if (memberService != null)
+            {
+                var newMember = memberService.GetByEmail(currentUser.Email);
+
+                // Set the new member data
+                newMember.SetValue("firstName", model.FirstName);
+                newMember.SetValue("lastName", model.LastName);
+                newMember.SetValue("mobilePhone", model.MobilePhone);
+                newMember.SetValue("personTitle", model.PersonTitle);
+
+                newMember.SetValue("city", model.City);
+                newMember.SetValue("county", model.County);
+                newMember.SetValue("postalCode", model.PostalCode);
+                newMember.SetValue("addressLine1", model.AddressLine1);
+                newMember.SetValue("addressLine2", model.AddressLine2);
+                newMember.SetValue("workPhone", model.WorkPhone);
+
+                memberService.Save(newMember);
+            }
+        }
+
+        private void AddModelError(string errorCode)
+        {
+            ModelState.AddModelError(errorCode, Umbraco.GetDictionaryValue(errorCode));
         }
     }
 }

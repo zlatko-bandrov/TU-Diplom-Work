@@ -43,8 +43,8 @@ namespace LottoDemo.WebApp.Controllers
 
                 if (!memberService.Exists(model.MemberEmail))
                 {
-                    var newMember = memberService.CreateWithIdentity(model.MemberEmail, model.MemberEmail, model.MemberPassword, this.NewMemberType);
-                    memberService.AssignRole(model.MemberEmail, this.NewMemberGroupName);
+                    var newMember = memberService.CreateWithIdentity(model.MemberEmail, model.MemberEmail, model.MemberPassword, NewMemberType);
+                    memberService.AssignRole(model.MemberEmail, NewMemberGroupName);
 
                     // Set the new member data
                     newMember.SetValue("firstName", model.FirstName);
@@ -103,7 +103,7 @@ namespace LottoDemo.WebApp.Controllers
                     if (Membership.ValidateUser(model.MemberEmail, model.MemberPassword))
                     {
                         //FormsAuthentication.SetAuthCookie(model.MemberEmail, true);
-                        this.Members.Login(model.MemberEmail, model.MemberPassword);
+                        Members.Login(model.MemberEmail, model.MemberPassword);
                         return RedirectToUmbracoPage(1050);
                     }
                     else
@@ -121,7 +121,7 @@ namespace LottoDemo.WebApp.Controllers
         {
             Session.Clear();
             //FormsAuthentication.SignOut();
-            this.Members.Logout();
+            Members.Logout();
 
             return Redirect("/");
         }

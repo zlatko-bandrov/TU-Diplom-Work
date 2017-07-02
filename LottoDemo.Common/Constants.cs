@@ -30,6 +30,11 @@ namespace LottoDemo.Common
         public static readonly string ERR_USERLOG_PASSREQUIRED_KEY = "LOG_PASSREQUIRED";
         public static readonly string ERR_USERLOG_NOTVALIDCRED_KEY = "LOG_NOTVALIDCRED";
 
+        public static readonly string ERR_ACCOUNT_OLDPASSREQUIRED_KEY = "ACCOUNT_OLDPASSREQUIRED";
+        public static readonly string ERR_ACCOUNT_NEWPASSREQUIRED_KEY = "ACCOUNT_NEWPASSREQUIRED";
+        public static readonly string ERR_ACCOUNT_CONFIRMPASSREQUIRED_KEY = "ACCOUNT_CONFIRMPASSREQUIRED";
+        public static readonly string ERR_ACCOUNT_PASSNOTMATCH_KEY = "ACCOUNT_PASSNOTMATCH";
+
         #endregion
 
         #region Constants
