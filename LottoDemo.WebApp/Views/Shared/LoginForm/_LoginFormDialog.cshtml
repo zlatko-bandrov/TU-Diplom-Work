@@ -6,10 +6,7 @@
 <div id="simplemodal-container" class="simplemodal-container" style="position: fixed; z-index: 1002; height: 927px; width: 700px; left: 601.5px; top: 488px;">
     <a class="modalCloseImg simplemodal-close" title="Close"></a>
     <div tabindex="-1" class="simplemodal-wrap" style="height: 100%; outline: 0px; width: 100%; overflow: auto;">
-        @{
-            string displayMode = (ViewData.ModelState.IsValid ? "none" : "block");
-        }
-        <div class="modal fade simplemodal-data" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: @displayMode;">
+        <div class="modal fade simplemodal-data" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

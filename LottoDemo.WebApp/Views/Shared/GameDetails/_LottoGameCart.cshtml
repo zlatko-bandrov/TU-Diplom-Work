@@ -5,6 +5,16 @@
     var ShoppingCartItems = (List<LotteryGameCartItem>)ViewBag.ShoppinCartItems;
     double totalPrice = (double)ViewBag.CartTotalPrice;
 }
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#DrawBallsTicket1").val("");
+        jQuery("#DrawBallsTicket2").val("");
+        jQuery("#DrawBallsTicket3").val("");
+        jQuery("#BonusBallsTicket1").val("");
+        jQuery("#BonusBallsTicket2").val("");
+        jQuery("#BonusBallsTicket3").val("");
+    });
+</script>
 <div>
     <div class="col-lg-12 lastcontentsection">
         <div id="confirm" style="margin-bottom:40px;"></div>
@@ -57,12 +67,12 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.Hidden("LottoDrawId", (int)ViewBag.LottoDrawId)
-                                    @Html.Hidden("DrawBallsTicket1")
-                                    @Html.Hidden("DrawBallsTicket2")
-                                    @Html.Hidden("DrawBallsTicket3")
-                                    @Html.Hidden("BonusBallsTicket1")
-                                    @Html.Hidden("BonusBallsTicket2")
-                                    @Html.Hidden("BonusBallsTicket3")
+                                    @Html.Hidden("DrawBallsTicket1", null)
+                                    @Html.Hidden("DrawBallsTicket2", null)
+                                    @Html.Hidden("DrawBallsTicket3", null)
+                                    @Html.Hidden("BonusBallsTicket1", null)
+                                    @Html.Hidden("BonusBallsTicket2", null)
+                                    @Html.Hidden("BonusBallsTicket3", null)
                                     <button id="addTicketsToCart" type="submit" class="btn btn-default">
                                         Добави в кошницата
                                     </button>
