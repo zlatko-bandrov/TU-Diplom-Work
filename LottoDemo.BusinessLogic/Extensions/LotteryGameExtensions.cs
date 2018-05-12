@@ -1,11 +1,4 @@
-﻿using LottoDemo.DataAccess;
-using LottoDemo.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LottoDemo.BusinessLogic.Extensions.Currency;
+﻿using LottoDemo.Entities.Models;
 using Umbraco.Core.Models;
 
 namespace LottoDemo.BusinessLogic.Extensions.LotteryGame

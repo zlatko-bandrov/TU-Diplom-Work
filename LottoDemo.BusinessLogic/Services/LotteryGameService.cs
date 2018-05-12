@@ -2,16 +2,13 @@
 using LottoDemo.BusinessLogic.Extensions.LotteryGame;
 using LottoDemo.BusinessLogic.Services;
 using LottoDemo.Common;
-using LottoDemo.Common.Services;
 using LottoDemo.DataAccess;
 using LottoDemo.Entities.Models;
 using LottoDemo.Entities.Models.ResultsAndWinnings;
 using LottoDemo.Repositories.UnitsOfWork;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Reflection;
 using Umbraco.Core.Models;
 
 namespace LottoDemo.BusinessLogic.Games
